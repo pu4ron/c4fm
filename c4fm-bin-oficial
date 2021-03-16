@@ -1,0 +1,64 @@
+#!/bin/bash
+
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+
+mount -o remount,rw /
+
+# Check we are root
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+if [ -z "$1" ]
+then
+      relink=never
+else
+      relink=${1}
+fi
+
+case ${1} in
+*off)
+  sudo pistar-ysflink unlink >/dev/null 2>&1 &
+  echo "* C4FM Desligado - Em espera."
+  exit 0
+;;
+*reset)
+  sudo systemctl stop ysfgateway.service >/dev/null 2>&1 &
+  sudo systemctl stop dmr2ysf.service >/dev/null 2>&1 &
+  sleep 2
+  sudo systemctl start ysfgateway.service >/dev/null 2>&1 &
+  sudo systemctl start dmr2ysf.service >/dev/null 2>&1 &
+  echo "* Retornando as configuracoes definidas pelo usuario."
+  exit 0
+;;
+
+*)
+  
+valor=$relink
+
+  sudo systemctl stop ysfgateway.service >/dev/null 2>&1 &
+  sudo systemctl stop dmr2ysf.service >/dev/null 2>&1 &
+
+  sleep 2
+
+  sudo systemctl start ysfgateway.service >/dev/null 2>&1 &
+  sudo systemctl start dmr2ysf.service >/dev/null 2>&1 &
+
+  sleep 2
+  echo "* Link solicitado DG-ID:"$valor
+  sudo pistar-ysflink fcs724${valor} >/dev/null 2>&1 &
+  #printf DG-ID:"$valor \n"
+  echo "* DG-ID:"$valor aceito.
+  exit 0
+;;
+esac
+
+exit 0

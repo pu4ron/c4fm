@@ -1,0 +1,1190 @@
+#!/usr/bin/python
+
+###############################################################################
+#                                                                             #
+#                        Pi-Star Auto Remote Control                          #
+#                                                                             #
+#    Version 1.8, Code, Design and Development by Andy Taylor (MW0MWZ).       #
+#                                                                             #
+#  This Python script is desiged to look for specific things in the logs for  #
+#       MMDVMHost and act on those to give RF control over the repeater.      #
+#                                                                             #
+###############################################################################
+
+import datetime
+import time
+import linecache
+import os
+import subprocess
+import ConfigParser
+import random
+
+# Read the config;
+config = ConfigParser.RawConfigParser()
+config.read('/etc/pistar-remote')
+
+# Read the MMDVMHost config;
+mmdvmConfig = ConfigParser.RawConfigParser()
+mmdvmConfig.read('/etc/mmdvmhost')
+
+# Read the YSFGateway config;
+ysfGatewayConfig = ConfigParser.RawConfigParser()
+ysfGatewayConfig.read('/etc/ysfgateway')
+
+# If not enabled, die;
+isEnabled = config.get('enable', 'enabled')
+if (isEnabled != 'true'):
+	quit()
+
+# Substitute variables from config
+mmdvmLogPath = mmdvmConfig.get('Log', 'FilePath')
+mmdvmFileRoot = mmdvmConfig.get('Log', 'FileRoot')
+ysfGatewayLogPath = ysfGatewayConfig.get('Log', 'FilePath')
+ysfGatewayFileRoot = ysfGatewayConfig.get('Log', 'FileRoot')
+keeperCall = config.get('keeper', 'callsign')
+
+# DMR Control Options
+
+if config.has_option('dmr', 'svckill'):
+	dmrstop = config.get('dmr', 'svckill')
+else:
+	dmrstop = str(999999999999)
+
+if config.has_option('dmr', 'svcrestart'):
+	dmrrestart = config.get('dmr', 'svcrestart')
+else:
+	dmrrestart = str(999999999999)
+
+if config.has_option('dmr', 'reboot'):
+	dmrreboot = config.get('dmr', 'reboot')
+else:
+	dmrreboot = str(999999999999)
+
+if config.has_option('dmr', 'shutdown'):
+	dmrshutdown = config.get('dmr', 'shutdown')
+else:
+	dmrshutdown = str(999999999999)
+
+if config.has_option('dmr', 'hostfiles'):
+	dmrhostfiles = config.get('dmr', 'hostfiles')
+else:
+	dmrhostfiles = str(999999999999)
+
+
+#YSF DG-ID
+if config.has_option('dmr', 'dgidOFF'):
+	dmrdgidOFF = config.get('dmr', 'dgidOFF')
+else:
+	dmrdgidOFF = str(999999999999)
+
+if config.has_option('dmr', 'dgidRST'):
+	dmrdgidRST = config.get('dmr', 'dgidRST')
+else:
+	dmrdgidRST = str(999999999999)
+
+if config.has_option('dmr', 'dgid01'):
+	dmrdgid01 = config.get('dmr', 'dgid01')
+else:
+	dmrdgid01 = str(999999999999)
+
+if config.has_option('dmr', 'dgid02'):
+	dmrdgid02 = config.get('dmr', 'dgid02')
+else:
+	dmrdgid02 = str(999999999999)
+
+if config.has_option('dmr', 'dgid03'):
+	dmrdgid03 = config.get('dmr', 'dgid03')
+else:
+	dmrdgid03 = str(999999999999)
+
+if config.has_option('dmr', 'dgid04'):
+	dmrdgid04 = config.get('dmr', 'dgid04')
+else:
+	dmrdgid04 = str(999999999999)
+
+if config.has_option('dmr', 'dgid05'):
+	dmrdgid05 = config.get('dmr', 'dgid05')
+else:
+	dmrdgid05 = str(999999999999)
+
+if config.has_option('dmr', 'dgid06'):
+	dmrdgid06 = config.get('dmr', 'dgid06')
+else:
+	dmrdgid06 = str(999999999999)
+
+if config.has_option('dmr', 'dgid07'):
+	dmrdgid07 = config.get('dmr', 'dgid07')
+else:
+	dmrdgid07 = str(999999999999)
+
+if config.has_option('dmr', 'dgid08'):
+	dmrdgid08 = config.get('dmr', 'dgid08')
+else:
+	dmrdgid08 = str(999999999999)
+
+if config.has_option('dmr', 'dgid09'):
+	dmrdgid09 = config.get('dmr', 'dgid09')
+else:
+	dmrdgid09 = str(999999999999)
+
+if config.has_option('dmr', 'dgid10'):
+	dmrdgid10 = config.get('dmr', 'dgid10')
+else:
+	dmrdgid10 = str(999999999999)
+
+if config.has_option('dmr', 'dgid11'):
+	dmrdgid11 = config.get('dmr', 'dgid11')
+else:
+	dmrdgid11 = str(999999999999)
+
+if config.has_option('dmr', 'dgid12'):
+	dmrdgid12 = config.get('dmr', 'dgid12')
+else:
+	dmrdgid12 = str(999999999999)
+
+if config.has_option('dmr', 'dgid13'):
+	dmrdgid13 = config.get('dmr', 'dgid13')
+else:
+	dmrdgid13 = str(999999999999)
+
+if config.has_option('dmr', 'dgid14'):
+	dmrdgid14 = config.get('dmr', 'dgid14')
+else:
+	dmrdgid14 = str(999999999999)
+
+if config.has_option('dmr', 'dgid15'):
+	dmrdgid15 = config.get('dmr', 'dgid15')
+else:
+	dmrdgid15 = str(999999999999)
+
+if config.has_option('dmr', 'dgid16'):
+	dmrdgid16 = config.get('dmr', 'dgid16')
+else:
+	dmrdgid16 = str(999999999999)
+
+if config.has_option('dmr', 'dgid17'):
+	dmrdgid17 = config.get('dmr', 'dgid17')
+else:
+	dmrdgid17 = str(999999999999)
+
+if config.has_option('dmr', 'dgid18'):
+	dmrdgid18 = config.get('dmr', 'dgid18')
+else:
+	dmrdgid18 = str(999999999999)
+
+if config.has_option('dmr', 'dgid19'):
+	dmrdgid19 = config.get('dmr', 'dgid19')
+else:
+	dmrdgid19 = str(999999999999)
+
+if config.has_option('dmr', 'dgid20'):
+	dmrdgid20 = config.get('dmr', 'dgid20')
+else:
+	dmrdgid20 = str(999999999999)
+
+if config.has_option('dmr', 'dgid21'):
+	dmrdgid21 = config.get('dmr', 'dgid21')
+else:
+	dmrdgid21 = str(999999999999)
+
+if config.has_option('dmr', 'dgid22'):
+	dmrdgid22 = config.get('dmr', 'dgid22')
+else:
+	dmrdgid22 = str(999999999999)
+
+if config.has_option('dmr', 'dgid23'):
+	dmrdgid23 = config.get('dmr', 'dgid23')
+else:
+	dmrdgid23 = str(999999999999)
+
+if config.has_option('dmr', 'dgid24'):
+	dmrdgid24 = config.get('dmr', 'dgid24')
+else:
+	dmrdgid24 = str(999999999999)
+
+if config.has_option('dmr', 'dgid25'):
+	dmrdgid25 = config.get('dmr', 'dgid25')
+else:
+	dmrdgid25 = str(999999999999)
+
+if config.has_option('dmr', 'dgid26'):
+	dmrdgid26 = config.get('dmr', 'dgid26')
+else:
+	dmrdgid26 = str(999999999999)
+
+if config.has_option('dmr', 'dgid27'):
+	dmrdgid27 = config.get('dmr', 'dgid27')
+else:
+	dmrdgid27 = str(999999999999)
+
+if config.has_option('dmr', 'dgid28'):
+	dmrdgid28 = config.get('dmr', 'dgid28')
+else:
+	dmrdgid28 = str(999999999999)
+
+if config.has_option('dmr', 'dgid29'):
+	dmrdgid29 = config.get('dmr', 'dgid29')
+else:
+	dmrdgid29 = str(999999999999)
+
+if config.has_option('dmr', 'dgid30'):
+	dmrdgid30 = config.get('dmr', 'dgid30')
+else:
+	dmrdgid30 = str(999999999999)
+
+if config.has_option('dmr', 'dgid31'):
+	dmrdgid31 = config.get('dmr', 'dgid31')
+else:
+	dmrdgid31 = str(999999999999)
+
+if config.has_option('dmr', 'dgid32'):
+	dmrdgid32 = config.get('dmr', 'dgid32')
+else:
+	dmrdgid32 = str(999999999999)
+
+if config.has_option('dmr', 'dgid33'):
+	dmrdgid33 = config.get('dmr', 'dgid33')
+else:
+	dmrdgid33 = str(999999999999)
+
+if config.has_option('dmr', 'dgid34'):
+	dmrdgid34 = config.get('dmr', 'dgid34')
+else:
+	dmrdgid34 = str(999999999999)
+
+if config.has_option('dmr', 'dgid35'):
+	dmrdgid35 = config.get('dmr', 'dgid35')
+else:
+	dmrdgid35 = str(999999999999)
+
+if config.has_option('dmr', 'dgid36'):
+	dmrdgid36 = config.get('dmr', 'dgid36')
+else:
+	dmrdgid36 = str(999999999999)
+
+if config.has_option('dmr', 'dgid37'):
+	dmrdgid37 = config.get('dmr', 'dgid37')
+else:
+	dmrdgid37 = str(999999999999)
+
+if config.has_option('dmr', 'dgid38'):
+	dmrdgid38 = config.get('dmr', 'dgid38')
+else:
+	dmrdgid38 = str(999999999999)
+
+if config.has_option('dmr', 'dgid39'):
+	dmrdgid39 = config.get('dmr', 'dgid39')
+else:
+	dmrdgid39 = str(999999999999)
+
+if config.has_option('dmr', 'dgid40'):
+	dmrdgid40 = config.get('dmr', 'dgid40')
+else:
+	dmrdgid40 = str(999999999999)
+
+if config.has_option('dmr', 'dgid41'):
+	dmrdgid41 = config.get('dmr', 'dgid41')
+else:
+	dmrdgid41 = str(999999999999)
+
+if config.has_option('dmr', 'dgid42'):
+	dmrdgid42 = config.get('dmr', 'dgid42')
+else:
+	dmrdgid42 = str(999999999999)
+
+if config.has_option('dmr', 'dgid43'):
+	dmrdgid43 = config.get('dmr', 'dgid43')
+else:
+	dmrdgid43 = str(999999999999)
+
+if config.has_option('dmr', 'dgid44'):
+	dmrdgid44 = config.get('dmr', 'dgid44')
+else:
+	dmrdgid44 = str(999999999999)
+
+if config.has_option('dmr', 'dgid45'):
+	dmrdgid45 = config.get('dmr', 'dgid45')
+else:
+	dmrdgid45 = str(999999999999)
+
+if config.has_option('dmr', 'dgid46'):
+	dmrdgid46 = config.get('dmr', 'dgid46')
+else:
+	dmrdgid46 = str(999999999999)
+
+if config.has_option('dmr', 'dgid47'):
+	dmrdgid47 = config.get('dmr', 'dgid47')
+else:
+	dmrdgid47 = str(999999999999)
+
+if config.has_option('dmr', 'dgid48'):
+	dmrdgid48 = config.get('dmr', 'dgid48')
+else:
+	dmrdgid48 = str(999999999999)
+
+if config.has_option('dmr', 'dgid49'):
+	dmrdgid49 = config.get('dmr', 'dgid49')
+else:
+	dmrdgid49 = str(999999999999)
+
+if config.has_option('dmr', 'dgid50'):
+	dmrdgid50 = config.get('dmr', 'dgid50')
+else:
+	dmrdgid50 = str(999999999999)
+
+if config.has_option('dmr', 'dgid51'):
+	dmrdgid51 = config.get('dmr', 'dgid51')
+else:
+	dmrdgid51 = str(999999999999)
+
+if config.has_option('dmr', 'dgid52'):
+	dmrdgid52 = config.get('dmr', 'dgid52')
+else:
+	dmrdgid52 = str(999999999999)
+
+if config.has_option('dmr', 'dgid53'):
+	dmrdgid53 = config.get('dmr', 'dgid53')
+else:
+	dmrdgid53 = str(999999999999)
+
+if config.has_option('dmr', 'dgid54'):
+	dmrdgid54 = config.get('dmr', 'dgid54')
+else:
+	dmrdgid54 = str(999999999999)
+
+if config.has_option('dmr', 'dgid55'):
+	dmrdgid55 = config.get('dmr', 'dgid55')
+else:
+	dmrdgid55 = str(999999999999)
+
+if config.has_option('dmr', 'dgid56'):
+	dmrdgid56 = config.get('dmr', 'dgid56')
+else:
+	dmrdgid56 = str(999999999999)
+
+if config.has_option('dmr', 'dgid57'):
+	dmrdgid57 = config.get('dmr', 'dgid57')
+else:
+	dmrdgid57 = str(999999999999)
+
+if config.has_option('dmr', 'dgid58'):
+	dmrdgid58 = config.get('dmr', 'dgid58')
+else:
+	dmrdgid58 = str(999999999999)
+
+if config.has_option('dmr', 'dgid59'):
+	dmrdgid59 = config.get('dmr', 'dgid59')
+else:
+	dmrdgid59 = str(999999999999)
+
+if config.has_option('dmr', 'dgid60'):
+	dmrdgid60 = config.get('dmr', 'dgid60')
+else:
+	dmrdgid60 = str(999999999999)
+
+if config.has_option('dmr', 'dgid61'):
+	dmrdgid61 = config.get('dmr', 'dgid61')
+else:
+	dmrdgid61 = str(999999999999)
+
+if config.has_option('dmr', 'dgid62'):
+	dmrdgid62 = config.get('dmr', 'dgid62')
+else:
+	dmrdgid62 = str(999999999999)
+
+if config.has_option('dmr', 'dgid63'):
+	dmrdgid63 = config.get('dmr', 'dgid63')
+else:
+	dmrdgid63 = str(999999999999)
+
+if config.has_option('dmr', 'dgid64'):
+	dmrdgid64 = config.get('dmr', 'dgid64')
+else:
+	dmrdgid64 = str(999999999999)
+
+if config.has_option('dmr', 'dgid65'):
+	dmrdgid65 = config.get('dmr', 'dgid65')
+else:
+	dmrdgid65 = str(999999999999)
+
+if config.has_option('dmr', 'dgid66'):
+	dmrdgid66 = config.get('dmr', 'dgid66')
+else:
+	dmrdgid66 = str(999999999999)
+
+if config.has_option('dmr', 'dgid67'):
+	dmrdgid67 = config.get('dmr', 'dgid67')
+else:
+	dmrdgid67 = str(999999999999)
+
+if config.has_option('dmr', 'dgid68'):
+	dmrdgid68 = config.get('dmr', 'dgid68')
+else:
+	dmrdgid68 = str(999999999999)
+
+if config.has_option('dmr', 'dgid69'):
+	dmrdgid69 = config.get('dmr', 'dgid69')
+else:
+	dmrdgid69 = str(999999999999)
+
+if config.has_option('dmr', 'dgid70'):
+	dmrdgid70 = config.get('dmr', 'dgid70')
+else:
+	dmrdgid70 = str(999999999999)
+
+if config.has_option('dmr', 'dgid71'):
+	dmrdgid71 = config.get('dmr', 'dgid71')
+else:
+	dmrdgid71 = str(999999999999)
+
+if config.has_option('dmr', 'dgid72'):
+	dmrdgid72 = config.get('dmr', 'dgid72')
+else:
+	dmrdgid72 = str(999999999999)
+
+if config.has_option('dmr', 'dgid73'):
+	dmrdgid73 = config.get('dmr', 'dgid73')
+else:
+	dmrdgid73 = str(999999999999)
+
+if config.has_option('dmr', 'dgid74'):
+	dmrdgid74 = config.get('dmr', 'dgid74')
+else:
+	dmrdgid74 = str(999999999999)
+
+if config.has_option('dmr', 'dgid75'):
+	dmrdgid75 = config.get('dmr', 'dgid75')
+else:
+	dmrdgid75 = str(999999999999)
+
+if config.has_option('dmr', 'dgid76'):
+	dmrdgid76 = config.get('dmr', 'dgid76')
+else:
+	dmrdgid76 = str(999999999999)
+
+if config.has_option('dmr', 'dgid77'):
+	dmrdgid77 = config.get('dmr', 'dgid77')
+else:
+	dmrdgid77 = str(999999999999)
+
+if config.has_option('dmr', 'dgid78'):
+	dmrdgid78 = config.get('dmr', 'dgid78')
+else:
+	dmrdgid78 = str(999999999999)
+
+if config.has_option('dmr', 'dgid79'):
+	dmrdgid79 = config.get('dmr', 'dgid79')
+else:
+	dmrdgid79 = str(999999999999)
+
+if config.has_option('dmr', 'dgid80'):
+	dmrdgid80 = config.get('dmr', 'dgid80')
+else:
+	dmrdgid80 = str(999999999999)
+
+if config.has_option('dmr', 'dgid81'):
+	dmrdgid81 = config.get('dmr', 'dgid81')
+else:
+	dmrdgid81 = str(999999999999)
+
+if config.has_option('dmr', 'dgid82'):
+	dmrdgid82 = config.get('dmr', 'dgid82')
+else:
+	dmrdgid82 = str(999999999999)
+
+if config.has_option('dmr', 'dgid83'):
+	dmrdgid83 = config.get('dmr', 'dgid83')
+else:
+	dmrdgid83 = str(999999999999)
+
+if config.has_option('dmr', 'dgid84'):
+	dmrdgid84 = config.get('dmr', 'dgid84')
+else:
+	dmrdgid84 = str(999999999999)
+
+if config.has_option('dmr', 'dgid85'):
+	dmrdgid85 = config.get('dmr', 'dgid85')
+else:
+	dmrdgid85 = str(999999999999)
+
+if config.has_option('dmr', 'dgid86'):
+	dmrdgid86 = config.get('dmr', 'dgid86')
+else:
+	dmrdgid86 = str(999999999999)
+
+if config.has_option('dmr', 'dgid87'):
+	dmrdgid87 = config.get('dmr', 'dgid87')
+else:
+	dmrdgid87 = str(999999999999)
+
+if config.has_option('dmr', 'dgid88'):
+	dmrdgid88 = config.get('dmr', 'dgid88')
+else:
+	dmrdgid88 = str(999999999999)
+
+if config.has_option('dmr', 'dgid89'):
+	dmrdgid89 = config.get('dmr', 'dgid89')
+else:
+	dmrdgid89 = str(999999999999)
+
+if config.has_option('dmr', 'dgid90'):
+	dmrdgid90 = config.get('dmr', 'dgid90')
+else:
+	dmrdgid90 = str(999999999999)
+
+if config.has_option('dmr', 'dgid91'):
+	dmrdgid91 = config.get('dmr', 'dgid91')
+else:
+	dmrdgid91 = str(999999999999)
+
+if config.has_option('dmr', 'dgid92'):
+	dmrdgid92 = config.get('dmr', 'dgid92')
+else:
+	dmrdgid92 = str(999999999999)
+
+if config.has_option('dmr', 'dgid93'):
+	dmrdgid93 = config.get('dmr', 'dgid93')
+else:
+	dmrdgid93 = str(999999999999)
+
+if config.has_option('dmr', 'dgid94'):
+	dmrdgid94 = config.get('dmr', 'dgid94')
+else:
+	dmrdgid94 = str(999999999999)
+
+if config.has_option('dmr', 'dgid95'):
+	dmrdgid95 = config.get('dmr', 'dgid95')
+else:
+	dmrdgid95 = str(999999999999)
+
+if config.has_option('dmr', 'dgid96'):
+	dmrdgid96 = config.get('dmr', 'dgid96')
+else:
+	dmrdgid96 = str(999999999999)
+
+if config.has_option('dmr', 'dgid97'):
+	dmrdgid97 = config.get('dmr', 'dgid97')
+else:
+	dmrdgid97 = str(999999999999)
+
+if config.has_option('dmr', 'dgid98'):
+	dmrdgid98 = config.get('dmr', 'dgid98')
+else:
+	dmrdgid98 = str(999999999999)
+
+if config.has_option('dmr', 'dgid99'):
+	dmrdgid99 = config.get('dmr', 'dgid99')
+else:
+	dmrdgid99 = str(999999999999)
+
+# D-Star Control Options
+
+if config.has_option('d-star', 'svckill'):
+	dstarstop = config.get('d-star', 'svckill')
+else:
+	dstarstop = str(999999999999)
+if config.has_option('d-star', 'svcrestart'):
+	dstarrestart = config.get('d-star', 'svcrestart')
+else:
+	dstarrestart = str(999999999999)
+if config.has_option('d-star', 'reboot'):
+	dstarreboot = config.get('d-star', 'reboot')
+else:
+	dstarreboot = str(999999999999)
+if config.has_option('d-star', 'shutdown'):
+	dstarshutdown = config.get('d-star', 'shutdown')
+else:
+	dstarshutdown = str(999999999999)
+if config.has_option('d-star', 'hostfiles'):
+	dstarhostfiles = config.get('d-star', 'hostfiles')
+else:
+	dstarhostfiles = str(999999999999)
+if config.has_option('d-star', 'getip'):
+	dstargetip = config.get('d-star', 'getip')
+else:
+	dstargetip = str(999999999999)
+if config.has_option('d-star', '8Ball'):
+        dstar8ball = config.get('d-star', '8Ball')
+else:
+        dstar8ball = str(999999999999)
+dstarmodule = mmdvmConfig.get('General', 'Callsign').ljust(7) + mmdvmConfig.get('D-Star', 'Module')
+
+# YSF Control Options
+
+if config.has_option('ysf', 'svckill'):
+	ysfstop = config.get('ysf', 'svckill')
+else:
+	ysfstop = str(999999999999)
+if config.has_option('ysf', 'svcrestart'):
+	ysfrestart = config.get('ysf', 'svcrestart')
+else:
+	ysfrestart = str(999999999999)
+if config.has_option('ysf', 'reboot'):
+	ysfreboot = config.get('ysf', 'reboot')
+else:
+	ysfreboot = str(999999999999)
+if config.has_option('ysf', 'shutdown'):
+	ysfshutdown = config.get('ysf', 'shutdown')
+else:
+	ysfshutdown = str(999999999999)
+if config.has_option('ysf', 'hostfiles'):
+	ysfhostfiles = config.get('ysf', 'hostfiles')
+else:
+	ysfhostfiles = str(999999999999)
+
+# P25 Control Options
+
+if config.has_option('p25', 'svckill'):
+        p25stop = config.get('p25', 'svckill')
+else:
+        p25stop = str(999999999999)
+if config.has_option('p25', 'svcrestart'):
+        p25restart = config.get('p25', 'svcrestart')
+else:
+        p25restart = str(999999999999)
+if config.has_option('p25', 'reboot'):
+        p25reboot = config.get('p25', 'reboot')
+else:
+        p25reboot = str(999999999999)
+if config.has_option('p25', 'shutdown'):
+        p25shutdown = config.get('p25', 'shutdown')
+else:
+        p25shutdown = str(999999999999)
+if config.has_option('p25', 'hostfiles'):
+        p25hostfiles = config.get('p25', 'hostfiles')
+else:
+        p25hostfiles = str(999999999999)
+
+# 8-Ball answers
+magic8ball = [
+        'It is certain',
+        'It is decidedly so',
+        'Without a doubt',
+        'Yes definitely',
+        'You may rely on it',
+        'As I see it, yes',
+        'Most likely',
+        'Outlook good',
+        'Yes',
+        'Signs point to yes',
+        'Reply hazy try agn',
+        'Ask again later',
+        'Tell you later',
+        'Cannot predict now',
+        'Concentrate, ask agn',
+        'Dont count on it',
+        'My reply is no',
+        'My sources say no',
+        'Outlook not so good',
+        'Very doubtful'
+        ]
+
+# Some Variables that are important later
+txtTransmitOldBin = '/usr/local/bin/texttransmit'
+txtTransmitNewBin = '/usr/local/bin/texttransmitd'
+if os.path.isfile(txtTransmitOldBin):
+	txtTransmitBin = '/usr/local/bin/texttransmit'
+if os.path.isfile(txtTransmitNewBin):
+	txtTransmitBin = '/usr/local/bin/texttransmitd'
+
+# Now run the loop
+while True:
+	# Check that the process is running, if its not there is no point in trying to stop it.
+	checkproc = subprocess.Popen('pgrep' + ' MMDVMHost', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	if checkproc.stdout.readlines():
+
+		# This is the main loop that keeps waiting, we dont want to hammer the logs too often, every 30 secs should be enough.
+		utcnow = datetime.datetime.utcnow()
+		datenow = utcnow.strftime('%Y-%m-%d')
+		dateminus60sec = datetime.datetime.utcnow() - datetime.timedelta(seconds=30)
+		logstampnow = utcnow.strftime('%Y-%m-%d %H:%M:%S')
+		logstampnowminus60sec = dateminus60sec.strftime('%Y-%m-%d %H:%M:%S')
+		currentLog = mmdvmLogPath + '/' + mmdvmFileRoot + '-' + datenow + '.log'
+		currentLogYSF = ysfGatewayLogPath + '/' + ysfGatewayFileRoot + '-' + datenow + '.log'
+
+		# Open the MMDVMHost Log
+		logfile = open(currentLog, 'r')
+		loglist = logfile.readlines()
+		logfile.close()
+
+		# Parse the log lines
+		for line in loglist:
+			# We only care about logs in the last 60 secs
+			if line[3:22] >= logstampnowminus60sec and line[3:22] <= logstampnow:
+
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgidOFF) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgidRST) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm reset')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid01) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 01')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid02) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 02')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid03) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 03')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid04) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 04')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid05) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 05')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid06) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 06')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid07) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 07')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid08) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 08')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid09) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 09')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid10) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 10')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid11) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 11')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid12) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 12')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid13) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 13')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid14) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 14')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid15) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 15')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid16) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 16')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid17) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 17')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid18) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 18')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid19) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 19')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid20) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 20')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid21) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 21')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid22) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 22')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid23) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 23')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid24) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 24')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid25) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 25')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid26) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 26')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid27) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 27')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid28) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 28')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid29) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 29')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid30) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 30')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid31) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 31')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid32) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 32')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid33) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 33')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid34) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 34')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid35) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 35')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid36) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 36')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid37) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 37')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid38) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 38')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid39) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 39')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid40) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 40')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid41) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 41')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid42) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 42')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid43) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 43')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid44) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 44')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid45) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 45')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid46) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 46')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid47) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 47')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid48) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 48')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid49) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 49')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid50) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 50')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid51) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 51')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid52) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 52')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid53) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 53')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid54) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 54')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid55) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 55')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid56) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 56')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid57) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 57')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid58) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 58')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid59) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 59')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid60) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 60')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid61) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 61')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid62) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 62')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid63) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 63')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid64) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 64')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid65) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 65')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid66) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 66')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid67) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 67')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid68) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 68')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid69) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 69')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid70) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 70')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid71) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 71')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid72) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 72')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid73) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 73')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid74) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 74')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid75) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 75')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid76) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 76')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid77) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 77')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid78) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 78')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid79) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 79')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid80) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 80')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid81) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 81')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid82) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 82')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid83) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 83')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid84) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 84')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid85) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 85')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid86) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 86')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid87) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 87')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid88) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 88')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid89) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 89')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid90) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 90')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid91) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 91')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid92) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 92')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid93) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 93')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid94) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 94')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid95) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 95')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid96) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 96')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid97) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 97')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid98) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 98')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrdgid99) in line:
+				        os.system(r'sudo /usr/local/bin/c4fm 99')
+
+				# DMR Stop MMDVMHost
+				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrstop) in line:
+					# Kill the Services
+					os.system(r'systemctl stop mmdvmhost.timer')
+					os.system(r'systemctl stop pistar-watchdog.timer')
+					os.system(r'systemctl stop mmdvmhost.service')
+					os.system(r'systemctl stop pistar-watchdog.service')
+
+				# DMR Restart MMDVMHost
+				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrrestart) in line:
+					# Restart the Services
+					os.system(r'systemctl restart mmdvmhost.service')
+					os.system(r'systemctl restart dmrgateway.service')
+
+				# DMR Restart the OS
+				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrreboot) in line:
+					# Restart the OS
+					os.system(r'shutdown -r now')
+
+				# DMR Shutdown the OS
+				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrshutdown) in line:
+					# Shutdown the OS
+					os.system(r'shutdown -h now')
+
+				# DMR Update Hostfiles
+				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrhostfiles) in line:
+					# Update Host files
+					os.system(r'/bin/mount -o remount,rw /')
+					os.system(r'/usr/local/sbin/HostFilesUpdate.sh')
+
+				# P25 Stop MMDVMHost
+                                # M: 2017-08-08 08:02:43.352 P25, received RF transmission from M1ABC to TG 123456
+                                if str('P25, received RF transmission from ' + keeperCall + ' to TG ' + p25stop) in line:
+                                        # Kill the Services
+                                        os.system(r'systemctl stop mmdvmhost.timer')
+                                        os.system(r'systemctl stop pistar-watchdog.timer')
+                                        os.system(r'systemctl stop mmdvmhost.service')
+                                        os.system(r'systemctl stop pistar-watchdog.service')
+
+                                # P25 Restart MMDVMHost
+                                # M: 2017-08-08 08:02:43.352 P25, received RF transmission from M1ABC to TG 123456
+                                if str('P25, received RF transmission from ' + keeperCall + ' to TG ' + p25restart) in line:
+                                        # Restart the Services
+                                        os.system(r'systemctl restart mmdvmhost.service')
+                                        os.system(r'systemctl restart dmrgateway.service')
+
+                                # P25 Restart the OS
+                                # M: 2017-08-08 08:02:43.352 P25, received RF transmission from M1ABC to TG 123456
+                                if str('P25, received RF transmission from ' + keeperCall + ' to TG ' + p25reboot) in line:
+                                        # Restart the OS
+                                        os.system(r'shutdown -r now')
+
+                                # P25 Shutdown the OS
+                                # M: 2017-08-08 08:02:43.352 P25, received RF transmission from M1ABC to TG 123456
+                                if str('P25, received RF transmission from ' + keeperCall + ' to TG ' + p25shutdown) in line:
+                                        # Shutdown the OS
+                                        os.system(r'shutdown -h now')
+
+				# P25 Update Hostfiles
+				# M: 2017-08-08 08:02:43.352 P25, received RF transmission from M1ABC to TG 123456
+                                if str('P25, received RF transmission from ' + keeperCall + ' to TG ' + p25hostfiles) in line:
+					# Update Host Files
+					os.system(r'/bin/mount -o remount,rw /')
+					os.system(r'/usr/local/sbin/HostFilesUpdate.sh')
+
+				# D-Star Stop MMDVMHost
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstarstop) in line:
+					# Kill the Services
+					os.system(txtTransmitBin + ' -text "Shutting down at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+                                        os.system(r'systemctl stop mmdvmhost.timer')
+                                        os.system(r'systemctl stop pistar-watchdog.timer')
+                                        os.system(r'systemctl stop mmdvmhost.service')
+                                        os.system(r'systemctl stop pistar-watchdog.service')
+
+				# D-Star Restart MMDVMHost
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstarrestart) in line:
+					# Restart the Services
+					os.system(txtTransmitBin + ' -text "Restarting services at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+                                        os.system(r'systemctl restart ircddbgateway.service')
+                                        os.system(r'systemctl restart mmdvmhost.service')
+
+				# D-Star Reboot the OS
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstarreboot) in line:
+					# Kill the Services
+					os.system(txtTransmitBin + ' -text "Rebooting OS at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'shutdown -r now')
+
+				# D-Star Shutdown the OS
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstarshutdown) in line:
+					# Shutdown
+					os.system(txtTransmitBin + ' -text "Shutting down OS at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'shutdown -h now')
+
+				# D-Star Hostfiles Update
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstarhostfiles) in line:
+					# Update Host files
+					os.system(txtTransmitBin + ' -text "Updating Hostfiles at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'/bin/mount -o remount,rw /')
+					os.system(r'/usr/local/sbin/HostFilesUpdate.sh')
+
+				# D-Star Get the current IP
+				# M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+				if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstargetip) in line:
+					# Get the IP
+					myIP = os.popen('/bin/hostname -I | awk \'{print $1}\'').read()
+					os.system(txtTransmitBin + ' -text "IP: ' + myIP + '" "' + dstarmodule + '"')
+
+				# D-Star 8Ball
+                                # M: 2017-07-03 11:38:57.349 D-Star, received RF header from M1ABC  /1234 to COMMAND1
+                                if str('D-Star, received RF header from ' + keeperCall + ' ') and str(dstar8ball) in line:
+                                        # Ask the 8Ball
+                                        magic8ballanswer = random.choice(magic8ball)
+                                        os.system(txtTransmitBin + ' -text "' + magic8ballanswer + '" "' + dstarmodule + '"')
+
+				# YSF
+				# M: 2017-07-13 19:50:43.464 YSF, received RF header from M1ABC      to ALL
+				if str('YSF, received RF header from ' + keeperCall + ' ') in line:
+					# YSF Log Checking here
+					logfileysf = open(currentLogYSF, 'r')
+					loglistysf = logfileysf.readlines()
+					logfileysf.close()
+
+					checkproc = subprocess.Popen('pgrep' + ' YSFGateway', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+					if checkproc.stdout.readlines():
+
+						# Parse the log lines
+						for lineysf in loglistysf:
+
+							# We only care about logs in the last 60 secs
+							if lineysf[3:22] >= logstampnowminus60sec and lineysf[3:22] <= logstampnow:
+
+								# YSF Stop MMDVMHost
+								# M: 2017-07-13 19:24:59.704 Trying to find non existent reflector with an id of 12345
+								if str('Trying to find non existent reflector') and str(ysfstop) in lineysf:
+									# Kill the Services
+									os.system(r'systemctl stop mmdvmhost.timer')
+									os.system(r'systemctl stop pistar-watchdog.timer')
+									os.system(r'systemctl stop mmdvmhost.service')
+									os.system(r'systemctl stop pistar-watchdog.service')
+
+								# YSF Restart MMDVMHost
+								# M: 2017-07-13 19:24:59.704 Trying to find non existent reflector with an id of 12345
+								if str('Trying to find non existent reflector') and str(ysfrestart) in lineysf:
+									# Restart the Services
+									os.system(r'systemctl restart ysfgateway.service')
+									os.system(r'systemctl restart mmdvmhost.service')
+
+								# YSF Reboot the OS
+								# M: 2017-07-13 19:24:59.704 Trying to find non existent reflector with an id of 12345
+								if str('Trying to find non existent reflector') and str(ysfreboot) in lineysf:
+									# Reboot the OS
+									os.system(r'shutdown -r now')
+
+								# YSF Shutdown the OS
+								# M: 2017-07-13 19:24:59.704 Trying to find non existent reflector with an id of 12345
+								if str('Trying to find non existent reflector') and str(ysfshutdown) in lineysf:
+									# Shutdown the OS
+									os.system(r'shutdown -h now')
+
+								# YSF Update the Hostfiles
+								# M: 2017-07-13 19:24:59.704 Trying to find non existent reflector with an id of 12345
+								if str('Trying to find non existent reflector') and str(ysfhostfiles) in lineysf:
+									# Update the host files
+									os.system(r'/bin/mount -o remount,rw /')
+									os.system(r'/usr/local/sbin/HostFilesUpdate.sh')
+	
+		# This is the 30 second sleep before the next pass.
+		time.sleep(30)
+
+
+	# Check that the process is running, if its not there is no point in trying to stop it.
+        checkproc = subprocess.Popen('pgrep' + ' dstarrepeaterd', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if checkproc.stdout.readlines():
+
+		# This is the main loop that keeps waiting, we dont want to hammer the logs too often, every 30 secs should be enough.
+		utcnow = datetime.datetime.utcnow()
+		datenow = utcnow.strftime('%Y-%m-%d')
+		dateminus60sec = datetime.datetime.utcnow() - datetime.timedelta(minutes=1)
+		logstampnow = utcnow.strftime('%Y-%m-%d %H:%M:%S')
+		logstampnowminus60sec = dateminus60sec.strftime('%Y-%m-%d %H:%M:%S')
+		# Best figure out the log name now
+		currentLogDStarOld = '/var/log/pi-star/DStarRepeater-' + datenow + '.log'
+		currentLogDStarNew = '/var/log/pi-star/dstarrepeaterd-' + datenow + '.log'
+		if os.path.isfile(currentLogDStarOld):
+			currentLogDStar = currentLogDStarOld
+		if os.path.isfile(currentLogDStarNew):
+			currentLogDStar = currentLogDStarNew
+
+		# Open the DStarRepeater Log
+		logfile = open(currentLogDStar, 'r')
+		loglist = logfile.readlines()
+		logfile.close()
+
+		# Parse the log lines
+		for line in loglist:
+			# We only care about logs in the last 60 secs
+			if line[3:22] >= logstampnowminus60sec and line[3:22] <= logstampnow:
+				# D-Star Stop Services
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstarstop) in line:
+					# Kill the Services
+					os.system(txtTransmitBin + ' -text "Shutting down at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+                                        os.system(r'systemctl stop dstarrepeater.timer')
+                                        os.system(r'systemctl stop pistar-watchdog.timer')
+                                        os.system(r'systemctl stop dstarrepeater.service')
+                                        os.system(r'systemctl stop pistar-watchdog.service')
+
+				# D-Star Restart Services
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstarrestart) in line:
+					# Restart the Services
+					os.system(txtTransmitBin + ' -text "Restarting services at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+                                        os.system(r'systemctl restart ircddbgateway.service')
+                                        os.system(r'systemctl restart dstarrepeater.service')
+
+				# D-Star Reboot the OS
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstarreboot) in line:
+					# Reboot
+					os.system(txtTransmitBin + ' -text "Rebooting OS at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'shutdown -r now')
+
+				# D-Star Shutdown the OS
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstarshutdown) in line:
+					# Shutdown
+					os.system(txtTransmitBin + ' -text "Shutting down OS at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'shutdown -h now')
+				
+				# D-Star Update the host files
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstarhostfiles) in line:
+					# Update the host files
+					os.system(txtTransmitBin + ' -text "Updating Hostfiles at keeper request" "' + dstarmodule + '"')
+					time.sleep(5)
+					os.system(r'/bin/mount -o remount,rw /')
+					os.system(r'/usr/local/sbin/HostFilesUpdate.sh')
+
+				# D-Star Get the current IP
+				# M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstargetip) in line:
+					# Get the IP
+					myIP = os.popen('/bin/hostname -I | awk \'{print $1}\'').read()
+					os.system(txtTransmitBin + ' -text "My IP: ' + myIP + '" "' + dstarmodule + '"')
+
+				# D-Star 8Ball
+                                # M: 2017-12-24 20:40:15: Radio header decoded - My: M1ABC   /M     Your: COMMAND1  Rpt1: M1ABC  B  Rpt2: M1ABC G  Flags: 40 00 00
+				if str('Radio header decoded - My: ' + keeperCall + ' ') and str('Your: ' + dstar8ball) in line:
+                                        # Ask the 8Ball
+                                        magic8ballanswer = random.choice(magic8ball)
+                                        os.system(txtTransmitBin + ' -text "' + magic8ballanswer + '" "' + dstarmodule + '"')
+
+		# This is the 30 second sleep before the next pass.
+		time.sleep(30)
