@@ -3,7 +3,7 @@
 
 * Antes de qualquer procedimento faça um backup e atualize seu pi-star. 
 * Vale lembrar que o script foi baseado na versão oficial v4.1.4 e 4.1.3 EA7EE/Espanhol.
-* O servidor usado para base do projeto foi o "YSF72401-BR-C4FM-Brasil-YSC724" que deve ser ativado no seu pi-star para uso do script.
+* O servidor usado para base do projeto foi o "YSF72401-BR-C4FM-Brasil-YCS724" que deve ser ativado no seu pi-star para uso do script.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
 * Para uso em celular instale o app (SSH button) que irá criar botões e executar os comandos.
