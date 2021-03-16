@@ -532,7 +532,8 @@ sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
 echo ""
 echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
 echo ""
-sudo rm -R ${DIR}
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
     ;;
 
 * ) exit 0 ;;   
