@@ -42,7 +42,7 @@ Ex: 5555500    # reset: retorna as configurações definidas pelo usuário.
 #  git clone https://github.com/pu4ron/c4fm.git
 #  cd c4fm
 #  sudo chmod 777 install
-#  sudo chmod +X install
+#  sudo chmod +x install
 #  sudo ./install
 
 #  sudo reboot
