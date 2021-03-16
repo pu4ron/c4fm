@@ -35,15 +35,16 @@ Ex: 4444400    # disconnect
 Ex: 5555500    # reset: retorna as configurações definidas pelo usuário.
 
 
-# Instalação: ssh do pi-star
+# Instalação: 
+* Use o ssh do pi-star.
 
-rpi-rw
-git clone https://github.com/pu4ron/c4fm.git
-cd c4fm
-sudo chmod 777 install
-sudo chmod +X isnatll
-sudo ./install
+#  rpi-rw
+#  git clone https://github.com/pu4ron/c4fm.git
+#  cd c4fm
+#  sudo chmod 777 install
+#  sudo chmod +X isnatll
+#  sudo ./install
 
-sudo reboot
+#  sudo reboot
 
 
