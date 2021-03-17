@@ -6,14 +6,14 @@
 * O servidor usado para base do projeto foi o "YSF72401-BR-C4FM-Brasil-YCS724" que deve ser ativado no seu pi-star para uso do script.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
-* Para uso em celular instale o app (SSH button) que irá criar botões e executar os comandos.
-* Ative no seu pi-star o acesso ao ssh em "configurações" e mude a opção de ssh para "public" e click em "aplicar".
+* Para uso pelo celular instale o app (SSH button) que irá criar botões e executar os comandos.
+* Lembre-se de ativar o acesso ao ssh no seu pi-star em "configurações" e mude a opção do ssh para "public" e click em "aplicar".
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
-Ex: sudo c4fm 72          # dg-id 72
-Ex: sudo c4fm off         # disconnect 
-Ex: sudo c4fm reset       # reset: retorna as configurações definidas pelo usuário.
+* Ex: sudo c4fm 72          # dg-id 72
+* Ex: sudo c4fm off         # disconnect 
+* Ex: sudo c4fm reset       # reset: retorna as configurações definidas pelo usuário.
 
 * -> SSH hostname: ip do raspberry.
 * -> SSH usurname: usuario do pi-star. (pi-star)
