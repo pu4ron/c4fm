@@ -28,35 +28,35 @@ case ${1} in
 
 
 *off)
+
   mount -o remount,rw /
-  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
-  sleep 2
-  sudo pistar-ysflink unlink >/dev/null 2>&1 &
+  sudo /usr/local/bin/RemoteCommand 6073 UnLink
   mount -o remount,ro /
-  echo "* C4FM Desligado - Em espera."
+
   exit 0
 ;;
 
 
 *reset)
+
   mount -o remount,rw /
-  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
-  sleep 2	
+  sudo systemctl restart ysfgateway.service	
   mount -o remount,ro /
   echo "* Retornando as configuracoes definidas pelo usuario."
+
   exit 0
 ;;
 
 *)
   
 valor=$relink
+
   mount -o remount,rw /
-  sudo systemctl restart dmr2ysf.service
+  sudo /usr/local/bin/RemoteCommand 6073 UnLink
   sleep 1
-  echo "* Link solicitado DG-ID:"$valor
-  sudo pistar-ysflink fcs724${valor} >/dev/null 2>&1 &
+  sudo /usr/local/bin/RemoteCommand 6073 LinkFCS724${valor}
   mount -o remount,ro /
-  echo "* DG-ID:"$valor aceito.
+
   exit 0
 ;;
 esac
