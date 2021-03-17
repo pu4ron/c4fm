@@ -51,8 +51,8 @@ case ${1} in
   
 valor=$relink
   mount -o remount,rw /
-  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
-  sleep 3
+  sudo systemctl restart dmr2ysf.service
+  sleep 1
   echo "* Link solicitado DG-ID:"$valor
   sudo pistar-ysflink fcs724${valor} >/dev/null 2>&1 &
   mount -o remount,ro /
