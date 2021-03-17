@@ -25,14 +25,17 @@ Ex: sudo c4fm reset       # reset: retorna as configurações definidas pelo usu
 
 * -> Contato privado:  88888+(DG-ID)
 Ex: 
-Link dg-id 02 (8888802)
-Link dg-id 72 (8888872) 
-Link dg-id 96 (8888896)    
-Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.
+* Link dg-id 02 (8888802)
+* Link dg-id 72 (8888872) 
+* Link dg-id 96 (8888896)    
+* Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.
+
+# Sugestão:
+* Use o slot 1 para acionar e selecionar os DG-ID e o Slot 2 para QSO(s).
 
 # Comandos especiais:
-Ex: 4444400    # disconnect
-Ex: 5555500    # reset: retorna as configurações definidas pelo usuário.
+* Ex: 4444400    # disconnect
+* Ex: 5555500    # reset: retorna as configurações definidas pelo usuário.
 
 
 # Instalação: 
