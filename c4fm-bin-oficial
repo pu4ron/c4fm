@@ -25,17 +25,24 @@ else
 fi
 
 case ${1} in
+
+
 *off)
+  mount -o remount,rw /
+  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
+  sleep 2
   sudo pistar-ysflink unlink >/dev/null 2>&1 &
+  mount -o remount,ro /
   echo "* C4FM Desligado - Em espera."
   exit 0
 ;;
+
+
 *reset)
-  sudo systemctl stop ysfgateway.service >/dev/null 2>&1 &
-  sudo systemctl stop dmr2ysf.service >/dev/null 2>&1 &
-  sleep 2
-  sudo systemctl start ysfgateway.service >/dev/null 2>&1 &
-  sudo systemctl start dmr2ysf.service >/dev/null 2>&1 &
+  mount -o remount,rw /
+  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
+  sleep 2	
+  mount -o remount,ro /
   echo "* Retornando as configuracoes definidas pelo usuario."
   exit 0
 ;;
@@ -43,19 +50,13 @@ case ${1} in
 *)
   
 valor=$relink
-
-  sudo systemctl stop ysfgateway.service >/dev/null 2>&1 &
-  sudo systemctl stop dmr2ysf.service >/dev/null 2>&1 &
-
-  sleep 2
-
-  sudo systemctl start ysfgateway.service >/dev/null 2>&1 &
-  sudo systemctl start dmr2ysf.service >/dev/null 2>&1 &
-
+  mount -o remount,rw /
+  sudo systemctl restart ysfgateway.service >/dev/null 2>&1 &
+  #sudo systemctl restart dmr2ysf.service >/dev/null 2>&1 &
   sleep 2
   echo "* Link solicitado DG-ID:"$valor
   sudo pistar-ysflink fcs724${valor} >/dev/null 2>&1 &
-  #printf DG-ID:"$valor \n"
+  mount -o remount,ro /
   echo "* DG-ID:"$valor aceito.
   exit 0
 ;;
