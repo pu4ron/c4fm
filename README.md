@@ -1,5 +1,7 @@
 # c4fm
-* O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando a função de controle remota por rádios DMR e ofertando suporte para controle por aplicativos, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte também a distribuição EA7EE/Espanhol do pi-star.
+* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando a função de controle remota por rádios DMR e ofertando suporte para controle por aplicativos, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte também a distribuição EA7EE/Espanhol do pi-star.
+
+# 1º passo: update. Não continue sem atualizar.
 
 * Antes de qualquer procedimento faça um backup e atualize seu pi-star. 
 * Vale lembrar que o script foi baseado na versão oficial v4.1.4 e 4.1.3 EA7EE/Espanhol.
@@ -31,7 +33,7 @@ Ex:
 * Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.
 
 # Sugestão:
-* Use o slot 1 para acionar e selecionar os DG-ID e o Slot 2 para QSO(s).
+* Use o slot 1 para selecionar os DG-ID e o Slot 2 para QSO(s).
 
 # Comandos especiais:
 * Ex: 4444400    # disconnect
