@@ -30,7 +30,7 @@ case ${1} in
 *off)
 
   mount -o remount,rw /
-  sudo /usr/local/bin/RemoteCommand 6073 UnLink
+  (cd /var/log/pi-star/; sudo /usr/local/bin/RemoteCommand 6073 UnLink)
   mount -o remount,ro /
 
   exit 0
@@ -52,9 +52,9 @@ case ${1} in
 valor=$relink
 
   mount -o remount,rw /
-  sudo /usr/local/bin/RemoteCommand 6073 UnLink
+  (cd /var/log/pi-star/; sudo /usr/local/bin/RemoteCommand 6073 UnLink)
   sleep 1
-  sudo /usr/local/bin/RemoteCommand 6073 LinkFCS724${valor}
+  (cd /var/log/pi-star/; sudo /usr/local/bin/RemoteCommand 6073 LinkFCS724${valor})
   mount -o remount,ro /
 
   exit 0
