@@ -275,7 +275,7 @@ sudo chmod 777 ${DIREtc}/pistar-remote
 sudo chmod 777 ${DIRSbin}/pistar-remote
 
 sleep 1
-sudo /usr/local/sbin/HostFilesUpdate.sh
+sudo /usr/local/sbin/HostFilesUpdate.sh      >/dev/null 2>&1 &
 sleep 1
 
 echo "* Ativando servicos..."
@@ -525,7 +525,7 @@ sudo chmod 777 ${DIREtc}/pistar-remote
 sudo chmod 777 ${DIRSbin}/pistar-remote
 
 sleep 1
-sudo /usr/local/sbin/HostFilesUpdate.sh
+sudo /usr/local/sbin/HostFilesUpdate.sh      >/dev/null 2>&1 &
 sleep 1
 
 echo "* Ativando servicos..."
