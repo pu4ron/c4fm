@@ -273,6 +273,9 @@ sudo chmod 777 ${DIRBin}/MMDVMHost
 sudo chmod 777 ${DIRBin}/YSFGateway
 sudo chmod 777 ${DIREtc}/pistar-remote
 sudo chmod 777 ${DIRSbin}/pistar-remote
+
+sleep 1
+sudo /usr/local/sbin/HostFilesUpdate.sh
 sleep 1
 
 echo "* Ativando servicos..."
@@ -520,6 +523,9 @@ sudo chmod 777 ${DIRBin}/c4fm
 sudo chmod +x  ${DIRBin}/c4fm
 sudo chmod 777 ${DIREtc}/pistar-remote
 sudo chmod 777 ${DIRSbin}/pistar-remote
+
+sleep 1
+sudo /usr/local/sbin/HostFilesUpdate.sh
 sleep 1
 
 echo "* Ativando servicos..."
