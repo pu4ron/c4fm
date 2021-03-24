@@ -1,0 +1,57 @@
+#!/bin/bash
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+VGw=$(grep -m 1 'Startup=' /etc/ysfgateway | awk -F "=" '/Startup/ {print $2}')
+VHost=$(grep -m 1 ';'${VGw}'' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${VGw}'/ {print $1}'| sed 's/.//4' |  sed 's/.//4')
+SRV="${VHost}"
+
+COM="/usr/local/bin/RemoteCommand 6073"
+
+if [ -z "$1" ]
+then
+      relink=never
+else
+      relink=${1}
+fi
+
+case ${1} in
+
+
+*off)
+  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  exit 0
+;;
+
+
+*reset)
+  sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &	
+  echo "* Retornando as configuracoes definidas pelo usuario."
+  exit 0
+;;
+
+*)
+  
+VALOR=$relink
+  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  sleep 1
+  (cd /var/log/pi-star/; sudo ${COM} LinkFCS${SRV}${VALOR}) >/dev/null 2>&1 &
+  sudo systemctl restart dmr2ysf.service
+  
+  echo "Link ${SRV}${VALOR}"
+  exit 0
+;;
+esac
+
+exit 0

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+COM="/usr/local/bin/RemoteCommand 6073"
+
+if [ -z "$1" ]
+then
+      relink=never
+else
+      relink=${1}
+fi
+
+case ${1} in
+
+
+*off)
+  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  exit 0
+;;
+
+
+*reset)
+  sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &	
+  echo "* Retornando as configuracoes definidas pelo usuario."
+  exit 0
+;;
+
+*)
+  
+VALOR=$relink
+  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  sleep 1
+  (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
+  sudo systemctl restart dmr2ysf.service
+  
+  echo "Link YSF${VALOR}"
+  exit 0
+;;
+esac
+
+exit 0

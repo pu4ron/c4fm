@@ -1,0 +1,49 @@
+#!/bin/bash
+
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+
+mount -o remount,rw /
+
+# Check we are root
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+if [ -z "$1" ]
+then
+      relink=never
+else
+      relink=${1}
+fi
+
+case ${1} in
+*off)
+  sudo pistar-ysflink unlink
+  mount -o remount,ro /
+  exit 0
+;;
+*reset)
+  sudo systemctl restart ysfgateway.service
+  sudo systemctl restart dmr2ysf.service
+  mount -o remount,ro /
+  exit 0
+;;
+
+*)
+  
+valor=$relink
+  sudo systemctl restart dmr2ysf.service
+  sudo pistar-ysflink fcs724${valor}
+  mount -o remount,ro /
+;;
+esac
+
+exit 0
