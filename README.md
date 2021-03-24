@@ -1,5 +1,5 @@
 # c4fm
-* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando a função de controle remota por rádios DMR e ofertando suporte para controle por aplicativos, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte também a distribuição EA7EE/Espanhol do pi-star.
+* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando a função de controle remota por rádios DMR e ofertando suporte para controle por aplicativos, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte para algumas funções na distribuição EA7EE/Espanhol do pi-star.
 
 # 1º update. Não continue sem atualizar.
 
@@ -46,7 +46,7 @@ Ex:
 #  rpi-rw
 #  git clone https://github.com/pu4ron/c4fm.git
 #  cd c4fm
-#  sudo chmod 777 install
+#  sudo chmod 755 install
 #  sudo chmod +x install
 #  sudo ./install
 
