@@ -1,15 +1,15 @@
-# c4fm
-* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando a função de controle remota por rádios DMR e ofertando suporte para controle por aplicativos, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte para algumas funções na distribuição EA7EE/Espanhol do pi-star.
+# Script C4FM V2.0
+* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando funções de controle remota por rádios DMR e oferecer suporte para controle por aplicativo, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte para algumas funções na distribuição EA7EE/Espanhol do pi-star.
 
-# 1º update. Não continue sem atualizar.
+# 1º update. Não continue sem atualizar (UPDATE).
 
-* Antes de qualquer procedimento faça um backup e atualize seu pi-star. 
-* Vale lembrar que o script foi baseado na versão oficial v4.1.4 e 4.1.3 EA7EE/Espanhol.
-* O servidor usado para base do projeto foi o "YSF72401-BR-C4FM-Brasil-YCS724" que deve ser ativado no seu pi-star para uso do script.
+* Antes de qualquer procedimento faça um backup do seu pi-star e atualize. 
+* Vale lembrar que o script foi feito e baseado na versão oficial v4.1.4 e 4.1.3 EA7EE/Espanhol.
+* O servidor de referência que foi usado para o projeto é o "YSF72401-BR-C4FM-Brasil-YCS724" default, mas podendo ser atribuido outros pelo usuário.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
-* Para uso pelo celular instale o app (SSH button) que irá criar botões e executar os comandos.
-* Lembre-se de ativar o acesso ao ssh no seu pi-star em "configurações" e mude a opção do ssh para "public" e click em "aplicar".
+* Para uso por celular instale o app (SSH button) que irá criar botões e executar os comandos solicitados.
+* Lembre de ativar o acesso ao ssh no seu pi-star em "configurações" e mude a opção do ssh para "public" e click em "aplicar".
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
