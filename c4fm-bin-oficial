@@ -31,13 +31,14 @@ case ${1} in
 
 *off)
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  echo "* -> Desconectando."
   exit 0
 ;;
 
 
 *reset)
   sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &	
-  echo "* Retornando as configuracoes definidas pelo usuario."
+  echo "* -> Retornando as configuracoes do usuario."
   exit 0
 ;;
 
@@ -47,9 +48,7 @@ VALOR=$relink
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
   sleep 1
   (cd /var/log/pi-star/; sudo ${COM} LinkFCS${SRV}${VALOR}) >/dev/null 2>&1 &
-  sudo systemctl restart dmr2ysf.service
-  
-  echo "Link ${SRV}${VALOR}"
+  echo "* -> Link ${SRV}${VALOR}"
   exit 0
 ;;
 esac
