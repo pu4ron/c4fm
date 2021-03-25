@@ -20,9 +20,12 @@ ONysf="1"
 SUF=$(grep -m 1 'Suffix=' /etc/ysfgateway | awk -F "=" '/Suffix/ {print $2}')
 INDC=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
 IDuser=$(grep -m 1 'Id=' /etc/mmdvmhost | awk -F "=" '/Id/ {print $2}')
+CMDid="/usr/local/bin/RemoteCommand"
 VGw=$(grep -m 1 'Startup=' /etc/ysfgateway | awk -F "=" '/Startup/ {print $2}')
 VHost=$(grep -m 1 ';'${VGw}'' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${VGw}'/ {print $1}')
+VALid=$(grep -A1 'Link' /var/log/pi-star/RemoteCommand-*.log | tail -n 1 | awk -F "FCS" '{print $2}' | awk -F '" to port:' '{print $1}')
 TGDefault="${VHost}"
+ENd="LinkFCS"
 
 if [ -z "$1" ]
 then
@@ -95,8 +98,10 @@ echo "FileRoot=DMR2YSF"                              >> ${dmc}
 echo ""                                              >> ${dmc}
 echo "[Enabled]"                                     >> ${dmc}
 echo "Enabled=${ONysf}"                              >> ${dmc}
-
-sudo systemctl restart dmr2ysf.service
+sudo systemctl restart dmr2ysf.service               >/dev/null 2>&1 &
+sudo systemctl restart ysfgateway.service            >/dev/null 2>&1 &
+sleep 2
+sudo  ${CMDid} 6073 ${ENd}${VALid}                   >/dev/null 2>&1 &
 ;;
 esac
 exit 0
