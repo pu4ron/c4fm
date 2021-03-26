@@ -316,6 +316,11 @@ echo "dgid96=8888896"                                 >> ${Ap}
 echo "dgid97=8888897"                                 >> ${Ap}
 echo "dgid98=8888898"                                 >> ${Ap}
 echo "dgid99=8888899"                                 >> ${Ap}
+echo "svckill=9999999"                                >> ${Ap}
+echo "svcrestart=9999998"                             >> ${Ap}
+echo "reboot=9999997"                                 >> ${Ap}
+echo "#shutdown=9999996"                              >> ${Ap}
+echo "#hostfiles=9999995"                             >> ${Ap}
 echo ""                                               >> ${Ap}
 sleep 1
 
