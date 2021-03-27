@@ -118,45 +118,37 @@ sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
 sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
 sleep 1
 
-if [ -f "$Bp" ]
- then
+if [ -f "$Bp" ]; then
    sudo cp ${Bp} ${Bp}.$(date +%Y%m%d)
-fi
+ fi
 
-if [ -f "$Bpy" ]
- then
+if [ -f "$Bpy" ]; then
    sudo cp ${Bpy} ${Bpy}.$(date +%Y%m%d)
-fi
+ fi
 
-if [ -f "$Bpo" ]
- then
+if [ -f "$Bpo" ]; then
    sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)
-fi
+ fi
 
-if [ -f "${DIRBin}/net" ]
- then
+if [ -f "${DIRBin}/net" ]; then
    sudo cp ${DIRBin}/net ${DIRBin}/net.$(date +%Y%m%d)
-fi 
+ fi 
 
-if [ -f "${DIRBin}/DMR" ]
- then
-   sudo cp ${DIRBin}/DMR ${DIRBin}/DMR.$(date +%Y%m%d)
-fi 
+if [ -f "${DIRBin}/DMR" ]; then
+   sudo cp ${DIRBin}/DMR  ${DIRBin}/DMR.$(date +%Y%m%d)
+ fi 
 
-if [ -f "${DIRBin}/D-STAR" ]
- then
-   sudo cp ${DIRBin}/D-STAR ${DIRBin}/D-STAR.$(date +%Y%m%d)
-fi 
+if [ -f "${DIRBin}/DSTAR" ]; then
+   sudo cp ${DIRBin}/DSTAR ${DIRBin}/DSTAR.$(date +%Y%m%d)
+ fi 
 
-if [ -f "${DIRBin}/NXDN ]
- then
-   sudo cp ${DIRBin}/NXDN ${DIRBin}/NXDN.$(date +%Y%m%d)
-fi 
+if [ -f "${DIRBin}/NXDN" ]; then
+   sudo cp ${DIRBin}/NXDN  ${DIRBin}/NXDN.$(date +%Y%m%d)
+ fi 
 
-if [ -f "${DIRBin}/YSF" ]
- then
+if [ -f "${DIRBin}/YSF" ]; then
    sudo cp ${DIRBin}/YSF ${DIRBin}/YSF.$(date +%Y%m%d)
-fi 
+ fi 
 sleep 2
 
 echo "* Estruturando..."
@@ -166,46 +158,38 @@ sudo rm ${Cp}
 sudo rm ${Dp}
 sudo rm ${Ep}
 
-if [ -f "$Bp" ]
- then
+if [ -f "$Bp" ]; then
    sudo rm ${Bp}
-fi
+ fi
 
-if [ -f "$Bpy" ]
- then
+if [ -f "$Bpy" ]; then
    sudo rm ${Bpy}
-fi 
+ fi 
 
-if [ -f "$Bpo" ]
- then
+if [ -f "$Bpo" ]; then
    sudo rm ${Bpo}
-fi 
+ fi 
 
-if [ -f "${DIRBin}/net" ]
- then
+if [ -f "${DIRBin}/net" ]; then
    sudo rm ${DIRBin}/net
-fi
+ fi
 
-if [ -f "${DIRBin}/DMR" ]
- then
+if [ -f "${DIRBin}/DMR" ]; then
    sudo rm ${DIRBin}/DMR
-fi 
+ fi 
 
-if [ -f "${DIRBin}/D-STAR" ]
- then
-   sudo rm ${DIRBin}/D-STAR
-fi 
+if [ -f "${DIRBin}/DSTAR" ]; then
+   sudo rm ${DIRBin}/DSTAR
+ fi 
 
-if [ -f "${DIRBin}/NXDN" ]
- then
+if [ -f "${DIRBin}/NXDN" ]; then
    sudo rm ${DIRBin}/NXDN
-fi 
+ fi 
 
-if [ -f "${DIRBin}/YSF" ]
- then
+if [ -f "${DIRBin}/YSF" ]; then
    sudo rm ${DIRBin}/YSF
-fi 
-sleep 1
+ fi 
+sleep 2
 
 sudo touch ${Ap}
 sudo chmod 644 ${DIREtc}/pistar-remote
@@ -371,15 +355,15 @@ sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
 sleep 1
 
 sudo cp ${DIRSCP}/p1                ${DIRBin}/DMR
-sudo cp ${DIRSCP}/p2                ${DIRBin}/D-STAR
+sudo cp ${DIRSCP}/p2                ${DIRBin}/DSTAR
 sudo cp ${DIRSCP}/p3                ${DIRBin}/NXDN
 sudo cp ${DIRSCP}/p4                ${DIRBin}/YSF
 sleep 1
 
-sudo chmod 755 ${DIRBin}/dmr
-sudo chmod 755 ${DIRBin}/d-star
-sudo chmod 755 ${DIRBin}/nxdn
-sudo chmod 755 ${DIRBin}/ysf
+sudo chmod 755 ${DIRBin}/DMR
+sudo chmod 755 ${DIRBin}/DSTAR
+sudo chmod 755 ${DIRBin}/NXDN
+sudo chmod 755 ${DIRBin}/YSF
 sleep 1
 
 sudo chmod 755 ${DIRBin}/c4fm
@@ -388,7 +372,7 @@ sudo chmod 755 ${DIRBin}/out
 sleep 1
 
 sudo chmod +x  ${DIRBin}/DMR
-sudo chmod +x  ${DIRBin}/D-STAR
+sudo chmod +x  ${DIRBin}/DSTAR
 sudo chmod +x  ${DIRBin}/NXDN
 sudo chmod +x  ${DIRBin}/YSF
 sleep 1
@@ -446,11 +430,11 @@ echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
 echo ""
-echo -e "\033[01;37m\033[03;36m* Nova reescrita de TG(s) IPSC2 para uso com C4FM. *\033[00;37m"
+echo -e "\033[01;37m\033[03;36m* Nova reescrita de TG(s) IPSC2 para uso com C4FM *\033[00;37m"
 echo ""
-echo -e "\033[01;37m\033[03;37m-> Ex: TG 724,   2000724 [7 digitos: 2000+TG].\033[00;37m"
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 724,   2000724 [7 digitos: 2000+TG]\033[00;37m"
 echo ""
-echo -e "\033[01;37m\033[03;37m-> Ex: TG 72431, 2072431 [7 digitos: 20+TG].\033[00;37m"
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 72431, 2072431 [7 digitos: 20+TG]\033[00;37m"
 echo ""
 
 read -p "* Continuar? (S/N) " -n 1 -r
