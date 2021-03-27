@@ -138,24 +138,24 @@ if [ -f "${DIRBin}/net" ]
    sudo cp ${DIRBin}/net ${DIRBin}/net.$(date +%Y%m%d)
 fi 
 
-if [ -f "${DIRBin}/dmr" ]
+if [ -f "${DIRBin}/DMR" ]
  then
-   sudo cp ${DIRBin}/dmr ${DIRBin}/dmr.$(date +%Y%m%d)
+   sudo cp ${DIRBin}/DMR ${DIRBin}/DMR.$(date +%Y%m%d)
 fi 
 
-if [ -f "${DIRBin}/d-star" ]
+if [ -f "${DIRBin}/D-STAR" ]
  then
-   sudo cp ${DIRBin}/d-star ${DIRBin}/d-star.$(date +%Y%m%d)
+   sudo cp ${DIRBin}/D-STAR ${DIRBin}/D-STAR.$(date +%Y%m%d)
 fi 
 
-if [ -f "${DIRBin}/nxdn" ]
+if [ -f "${DIRBin}/NXDN ]
  then
-   sudo cp ${DIRBin}/nxdn ${DIRBin}/nxdn.$(date +%Y%m%d)
+   sudo cp ${DIRBin}/NXDN ${DIRBin}/NXDN.$(date +%Y%m%d)
 fi 
 
-if [ -f "${DIRBin}/ysf" ]
+if [ -f "${DIRBin}/YSF" ]
  then
-   sudo cp ${DIRBin}/ysf ${DIRBin}/ysf.$(date +%Y%m%d)
+   sudo cp ${DIRBin}/YSF ${DIRBin}/YSF.$(date +%Y%m%d)
 fi 
 sleep 2
 
@@ -186,24 +186,24 @@ if [ -f "${DIRBin}/net" ]
    sudo rm ${DIRBin}/net
 fi
 
-if [ -f "${DIRBin}/dmr" ]
+if [ -f "${DIRBin}/DMR" ]
  then
-   sudo rm ${DIRBin}/dmr
+   sudo rm ${DIRBin}/DMR
 fi 
 
-if [ -f "${DIRBin}/d-star" ]
+if [ -f "${DIRBin}/D-STAR" ]
  then
-   sudo rm ${DIRBin}/d-star
+   sudo rm ${DIRBin}/D-STAR
 fi 
 
-if [ -f "${DIRBin}/nxdn" ]
+if [ -f "${DIRBin}/NXDN" ]
  then
-   sudo rm ${DIRBin}/nxdn
+   sudo rm ${DIRBin}/NXDN
 fi 
 
-if [ -f "${DIRBin}/ysf" ]
+if [ -f "${DIRBin}/YSF" ]
  then
-   sudo rm ${DIRBin}/ysf
+   sudo rm ${DIRBin}/YSF
 fi 
 sleep 1
 
@@ -481,7 +481,7 @@ if [ -f "$GATW" ]; then
     sudo chmod 644 ${GATW}
     sleep 1
     echo ""
-    echo "* -> No pi-star configure DMRGateway e clik em aplicar! <- *"
+    echo "* -> No pi-star configure DMRGateway e clik em aplicar <- *"
     echo ""
     echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
     echo ""
