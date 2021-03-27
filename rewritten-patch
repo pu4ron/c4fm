@@ -65,25 +65,24 @@ Id=123456
 Name=BM_2001_Europe_HAMNET
 
 [DMR Network 2]
-Enabled=0
-Address=43.245.72.66
+Enabled=1
+Address=201.62.48.62
 Port=55555
 #TGRewrite0=2,8,2,9,1
 #TGRewrite1=2,9990,2,9990,1
 #PCRewrite0=2,84000,2,4000,1001
-TGRewrite0=1,2000001,1,1,999999   
+TGRewrite0=1,2000001,1,1,999999
 TGRewrite1=2,2000001,2,1,999999
-PCRewrite0=1,2000001,1,1,999999   
-PCRewrite1=2,2000001,2,1,999999 
-SrcRewrite0=1,1,1,2000001,999999  
-SrcRewrite1=2,1,2,2000001,999999 
-Password=PASSWORD
+PCRewrite0=1,2000001,1,1,999999
+PCRewrite1=2,2000001,2,1,999999
+Password="PASSWORD"
 Debug=0
 Id=1234567
-Name=DMR+_IPSC2-Australia
+Name=DMR+_IPSC2-BRAZIL
+Options="TS1_1=724;TS2_1=72416"
 
 [DMR Network 3]
-Enabled=0
+Enabled=1
 Name=DMR2YSF_Cross-over
 Id=1234567
 Address=127.0.0.1
