@@ -387,10 +387,10 @@ sudo chmod 755 ${DIRBin}/ysf
 sudo chmod 755 ${DIRBin}/out
 sleep 1
 
-sudo chmod +x  ${DIRBin}/dmr
-sudo chmod +x  ${DIRBin}/d-star
-sudo chmod +x  ${DIRBin}/nxdn
-sudo chmod +x  ${DIRBin}/ysf
+sudo chmod +x  ${DIRBin}/DMR
+sudo chmod +x  ${DIRBin}/D-STAR
+sudo chmod +x  ${DIRBin}/NXDN
+sudo chmod +x  ${DIRBin}/YSF
 sleep 1
 
 sudo chmod +x  ${DIRBin}/c4fm
