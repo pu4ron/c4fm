@@ -146,8 +146,8 @@ if [ -f "${DIRBin}/nxdn" ]; then
    sudo cp ${DIRBin}/nxdn  ${DIRBin}/nxdn.$(date +%Y%m%d)
  fi 
 
-if [ -f "${DIRBin}/ysf" ]; then
-   # sudo cp ${DIRBin}/YSF ${DIRBin}/ysf.$(date +%Y%m%d)
+if [ -f "${DIRBin}/p25" ]; then
+   sudo cp ${DIRBin}/p25 ${DIRBin}/p25.$(date +%Y%m%d)
  fi 
 sleep 2
 
@@ -186,8 +186,8 @@ if [ -f "${DIRBin}/nxdn" ]; then
    sudo rm ${DIRBin}/nxdn
  fi 
 
-if [ -f "${DIRBin}/ysf" ]; then
-   # sudo rm ${DIRBin}/ysf
+if [ -f "${DIRBin}/p25" ]; then
+   sudo rm ${DIRBin}/p25
  fi 
 sleep 2
 
@@ -357,13 +357,13 @@ sleep 1
 sudo cp ${DIRSCP}/p1                ${DIRBin}/dmr
 sudo cp ${DIRSCP}/p2                ${DIRBin}/d-star
 sudo cp ${DIRSCP}/p3                ${DIRBin}/nxdn
-# sudo cp ${DIRSCP}/p4              ${DIRBin}/ysf
+sudo cp ${DIRSCP}/p4                ${DIRBin}/p25
 sleep 1
 
 sudo chmod 755 ${DIRBin}/dmr
 sudo chmod 755 ${DIRBin}/d-star
 sudo chmod 755 ${DIRBin}/nxdn
-# sudo chmod 755 ${DIRBin}/ysf
+sudo chmod 755 ${DIRBin}/p25
 sleep 1
 
 sudo chmod 755 ${DIRBin}/c4fm
@@ -374,7 +374,7 @@ sleep 1
 sudo chmod +x  ${DIRBin}/dmr
 sudo chmod +x  ${DIRBin}/d-star
 sudo chmod +x  ${DIRBin}/nxdn
-# sudo chmod +x  ${DIRBin}/ysf
+sudo chmod +x  ${DIRBin}/p25
 sleep 1
 
 sudo chmod +x  ${DIRBin}/c4fm
