@@ -1,0 +1,36 @@
+#!/bin/bash
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+
+MODE="pistar-mmdvmhost-module Dmr"
+
+if [ -z "$1" ]
+then
+      REST=never
+else
+      REST=${1}
+fi
+
+case ${1} in
+
+*on|On|ON)
+  (cd /var/log/pi-star/; sudo ${MODE} Enable) >/dev/null 2>&1 &
+  echo "* -> Modalidade: DMR ${REST}"
+  exit 0
+;;
+*off|Off|OFF)
+  (cd /var/log/pi-star/; sudo ${MODE} Disable) >/dev/null 2>&1 &
+  echo "* -> Modalidade: DMR ${REST}"
+  exit 0
+;;
+
+esac
+
+exit 0
