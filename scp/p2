@@ -20,12 +20,12 @@ fi
 
 case ${1} in
 
-*on|On|ON)
+*lig|Lig|LIG|on|On|ON)
   (cd /var/log/pi-star/; sudo ${MODE} Enable) >/dev/null 2>&1 &
   echo "* -> Modalidade: D-STAR ${REST}"
   exit 0
 ;;
-*off|Off|OFF)
+*desl|Desl|DESL|off|Off|OFF)
   (cd /var/log/pi-star/; sudo ${MODE} Disable) >/dev/null 2>&1 &
   echo "* -> Modalidade: D-STAR ${REST}"
   exit 0
