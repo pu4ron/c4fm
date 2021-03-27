@@ -134,20 +134,20 @@ if [ -f "${DIRBin}/net" ]; then
    sudo cp ${DIRBin}/net ${DIRBin}/net.$(date +%Y%m%d)
  fi 
 
-if [ -f "${DIRBin}/DMR" ]; then
-   sudo cp ${DIRBin}/DMR  ${DIRBin}/DMR.$(date +%Y%m%d)
+if [ -f "${DIRBin}/dmr" ]; then
+   sudo cp ${DIRBin}/dmr  ${DIRBin}/dmr.$(date +%Y%m%d)
  fi 
 
-if [ -f "${DIRBin}/DSTAR" ]; then
-   sudo cp ${DIRBin}/DSTAR ${DIRBin}/DSTAR.$(date +%Y%m%d)
+if [ -f "${DIRBin}/d-star" ]; then
+   sudo cp ${DIRBin}/d-star ${DIRBin}/d-star.$(date +%Y%m%d)
  fi 
 
-if [ -f "${DIRBin}/NXDN" ]; then
-   sudo cp ${DIRBin}/NXDN  ${DIRBin}/NXDN.$(date +%Y%m%d)
+if [ -f "${DIRBin}/nxdn" ]; then
+   sudo cp ${DIRBin}/nxdn  ${DIRBin}/nxdn.$(date +%Y%m%d)
  fi 
 
-if [ -f "${DIRBin}/YSF" ]; then
-   sudo cp ${DIRBin}/YSF ${DIRBin}/YSF.$(date +%Y%m%d)
+if [ -f "${DIRBin}/ysf" ]; then
+   # sudo cp ${DIRBin}/YSF ${DIRBin}/ysf.$(date +%Y%m%d)
  fi 
 sleep 2
 
@@ -174,20 +174,20 @@ if [ -f "${DIRBin}/net" ]; then
    sudo rm ${DIRBin}/net
  fi
 
-if [ -f "${DIRBin}/DMR" ]; then
-   sudo rm ${DIRBin}/DMR
+if [ -f "${DIRBin}/dmr" ]; then
+   sudo rm ${DIRBin}/dmr
  fi 
 
-if [ -f "${DIRBin}/DSTAR" ]; then
-   sudo rm ${DIRBin}/DSTAR
+if [ -f "${DIRBin}/d-star" ]; then
+   sudo rm ${DIRBin}/d-star
  fi 
 
-if [ -f "${DIRBin}/NXDN" ]; then
-   sudo rm ${DIRBin}/NXDN
+if [ -f "${DIRBin}/nxdn" ]; then
+   sudo rm ${DIRBin}/nxdn
  fi 
 
-if [ -f "${DIRBin}/YSF" ]; then
-   sudo rm ${DIRBin}/YSF
+if [ -f "${DIRBin}/ysf" ]; then
+   # sudo rm ${DIRBin}/ysf
  fi 
 sleep 2
 
@@ -354,16 +354,16 @@ sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
 sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
 sleep 1
 
-sudo cp ${DIRSCP}/p1                ${DIRBin}/DMR
-sudo cp ${DIRSCP}/p2                ${DIRBin}/DSTAR
-sudo cp ${DIRSCP}/p3                ${DIRBin}/NXDN
-sudo cp ${DIRSCP}/p4                ${DIRBin}/YSF
+sudo cp ${DIRSCP}/p1                ${DIRBin}/dmr
+sudo cp ${DIRSCP}/p2                ${DIRBin}/d-star
+sudo cp ${DIRSCP}/p3                ${DIRBin}/nxdn
+# sudo cp ${DIRSCP}/p4              ${DIRBin}/ysf
 sleep 1
 
-sudo chmod 755 ${DIRBin}/DMR
-sudo chmod 755 ${DIRBin}/DSTAR
-sudo chmod 755 ${DIRBin}/NXDN
-sudo chmod 755 ${DIRBin}/YSF
+sudo chmod 755 ${DIRBin}/dmr
+sudo chmod 755 ${DIRBin}/d-star
+sudo chmod 755 ${DIRBin}/nxdn
+# sudo chmod 755 ${DIRBin}/ysf
 sleep 1
 
 sudo chmod 755 ${DIRBin}/c4fm
@@ -371,10 +371,10 @@ sudo chmod 755 ${DIRBin}/ysf
 sudo chmod 755 ${DIRBin}/out
 sleep 1
 
-sudo chmod +x  ${DIRBin}/DMR
-sudo chmod +x  ${DIRBin}/DSTAR
-sudo chmod +x  ${DIRBin}/NXDN
-sudo chmod +x  ${DIRBin}/YSF
+sudo chmod +x  ${DIRBin}/dmr
+sudo chmod +x  ${DIRBin}/d-star
+sudo chmod +x  ${DIRBin}/nxdn
+# sudo chmod +x  ${DIRBin}/ysf
 sleep 1
 
 sudo chmod +x  ${DIRBin}/c4fm
