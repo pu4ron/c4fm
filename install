@@ -370,10 +370,10 @@ sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
 sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
 sleep 1
 
-sudo cp ${DIRSCP}/p1                ${DIRBin}/dmr
-sudo cp ${DIRSCP}/p2                ${DIRBin}/d-star
-sudo cp ${DIRSCP}/p3                ${DIRBin}/nxdn
-sudo cp ${DIRSCP}/p4                ${DIRBin}/ysf
+sudo cp ${DIRSCP}/p1                ${DIRBin}/DMR
+sudo cp ${DIRSCP}/p2                ${DIRBin}/D-STAR
+sudo cp ${DIRSCP}/p3                ${DIRBin}/NXDN
+sudo cp ${DIRSCP}/p4                ${DIRBin}/YSF
 sleep 1
 
 sudo chmod 755 ${DIRBin}/dmr
