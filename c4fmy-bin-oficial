@@ -14,6 +14,7 @@ if [ "$(id -u)" != "0" ];then
 fi
 
 COM="/usr/local/bin/RemoteCommand 6073"
+MODE="pistar-mmdvmhost-module Ysf"
 
 if [ -z "$1" ]
 then
@@ -24,8 +25,19 @@ fi
 
 case ${1} in
 
+*lig|Lig|LIG)
+  (cd /var/log/pi-star/; sudo ${MODE} Enable) >/dev/null 2>&1 &
+  echo "* -> Modalidade: YSF ${REST}"
+  exit 0
+;;
 
-*off)
+*desl|Desl|DESL)
+  (cd /var/log/pi-star/; sudo ${MODE} Disable) >/dev/null 2>&1 &
+  echo "* -> Modalidade: YSF ${REST}"
+  exit 0
+;;
+
+*off|Off|OFF)
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
   exit 0
 ;;
