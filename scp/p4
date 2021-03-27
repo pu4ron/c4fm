@@ -9,7 +9,7 @@
 ################################################
 #
 
-MODE="pistar-mmdvmhost-module Ysf"
+MODE="pistar-mmdvmhost-module P25"
 
 if [ -z "$1" ]
 then
@@ -22,12 +22,12 @@ case ${1} in
 
 *lig|Lig|LIG|on|On|ON)
   (cd /var/log/pi-star/; sudo ${MODE} Enable) >/dev/null 2>&1 &
-  echo "* -> Modalidade: YSF ${REST}"
+  echo "* -> Modalidade: P25 ${REST}"
   exit 0
 ;;
 *desl|Desl|DESL|off|Off|OFF)
   (cd /var/log/pi-star/; sudo ${MODE} Disable) >/dev/null 2>&1 &
-  echo "* -> Modalidade: YSF ${REST}"
+  echo "* -> Modalidade: P25 ${REST}"
   exit 0
 ;;
 
