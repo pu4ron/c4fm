@@ -1,17 +1,23 @@
-# Script C4FM V2.0
-* Nota: O presente script tem a função de ativar e possibilitar o modo DG-ID em DMR2YSF na distribuição oficial do pi-star, bem como ativando funções de controle remota por rádios DMR e oferecer suporte para controle por aplicativo, app de celular. Possibilitando os equipamentos DMR uso e controle dos DG-ID do C4FM. Suporte para algumas funções na distribuição EA7EE/Espanhol do pi-star.
+# Script C4FM V2.1
 
-# 1º update. Não continue sem atualizar (UPDATE).
-# 1.1 - Ative "DMR2YSF" no pi-star.
-# 1.2 - Selecione o servidor com suporte DG-ID.
-# 1.3 - Backup do seu pi-star.
+* Nota: O presente script tem um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR em crossover (DMR2YSF) no pi-star e foi aproveitado recursos existentes para controle dos dg-id(s) via rádio e por aplicativo (app)... e foi pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário em outras modalidades digitais.
 
-* Vale lembrar que o script foi feito e baseado na versão oficial v4.1.4 e 4.1.3 EA7EE/Espanhol.
-* O servidor de referência que foi usado para o projeto é o "YSF72401-BR-C4FM-Brasil-YCS724" default, mas podendo ser atribuido outros pelo usuário.
+# Importante: 
+
+* -> 1º update. Não continue sem atualizar (UPDATE).
+* -> 1.1 - Ative "DMR2YSF" no pi-star.
+* -> 1.2 - Selecione o servidor com suporte DG-ID.
+* -> 1.3 - Backup do seu pi-star.
+* -> 1.4 - Ative o ssh no seu pi-star.
+
+* Lembrando que o script foi baseado na versão oficial do pi-star v4.1.4
+* O servidor de base e referência foi "YSF72401-BR-C4FM-Brasil-YCS724" (default). Outros servidores podem ser usados pelo usuário.
+* Suporte a servidores YSF, mas sem suporte a dg-id.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
-* Para uso por celular instale o app (SSH button) que irá criar botões e executar os comandos solicitados.
-* Lembre de ativar o acesso ao ssh no seu pi-star em "configurações" e mude a opção do ssh para "public" e click em "aplicar".
+* Para uso via celular instale o app (SSH button) que irá criar botões e executar os comandos solicitados. os mesmos comando podem ser executados pelo terminal do pi-star.
+
+# App SSH button:
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
