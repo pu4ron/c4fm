@@ -122,6 +122,3 @@
 #  sudo ./install
 
 #  sudo reboot
-
-* ---------------------------- *
-***QRZ: (PU4RON - Ronualdo)***
