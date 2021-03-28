@@ -1,14 +1,14 @@
-# Script C4FM V2.1
+# Script C4FM - V2.1
 
 ***Nota: O presente script tem um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR em crossover (DMR2YSF) no pi-star e foi aproveitado recursos existentes para controle dos dg-id(s) via rádio e por aplicativo (app)... e foi pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário em outras modalidades digitais.***
 
-# Importante: 
+# Leia-me: 
 
-* -> 1º update. Não continue sem atualizar (UPDATE).
-* -> 1.1 - Ative "DMR2YSF" no pi-star.
-* -> 1.2 - Selecione o servidor com suporte DG-ID.
-* -> 1.3 - Backup do seu pi-star.
-* -> 1.4 - Ative o ssh no seu pi-star.
+* -> 1.0 - Update. Não continue sem atualizar seu pi-star.
+* -> 1.1 - Ative "DMR2YSF".
+* -> 1.2 - Selecione um servidor com suporte DG-ID.
+* -> 1.3 - Faça backup do seu pi-star.
+* -> 1.4 - Ative o SSH.
 
 * Lembre-se que o script foi baseado na versão oficial do pi-star v4.1.4
 * O servidor de base e referência foi "YSF72401-BR-C4FM-Brasil-YCS724" (default). Outros servidores podem ser usados pelo usuário.
