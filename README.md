@@ -96,9 +96,9 @@
 
 ***'Configuração' + 'Expert' + Full edit: 'DMR GW'***
 
-* #TGRewrite0=2,8,2,9,1
-* #TGRewrite1=2,9990,2,9990,1
-* #PCRewrite0=2,84000,2,4000,1001
+* # TGRewrite0=2,8,2,9,1
+* # TGRewrite1=2,9990,2,9990,1
+* # PCRewrite0=2,84000,2,4000,1001
 
 * TGRewrite0=1,2000001,1,1,999999
 * TGRewrite1=2,2000001,2,1,999999
