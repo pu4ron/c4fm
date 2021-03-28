@@ -48,8 +48,8 @@
 
 # Comandos especiais: app 'SSH button' ou terminal shell.
 
-* Ex: 4444400    # Disconnect
-* Ex: 5555500    # Reset: retorna as configurações definidas pelo usuário.
+* Ex: 4444400    (Disconnect)
+* Ex: 5555500    (Reset: retorna as configurações definidas pelo usuário)
 
 # YSF GW
 * No pi-star para dg-id(s) estáticos declare no arquivo de configuração.
@@ -94,7 +94,7 @@
 
 * Também é possivel a reescrita dos TGs manualmente, para isso, desabilite as linhas de comando existentes (TGRewrite e PCRewrite) e adicione novos comandos ao arquivo de configuração do DMRGateway na função '[DMR Network 2]' - 
 
-***-> 'Configuração' + 'Expert' + Full edit: 'DMR GW' <-
+***-> 'Configuração' + 'Expert' + Full edit: 'DMR GW' <-***
 
 * TGRewrite0=1,2000001,1,1,999999
 * TGRewrite1=2,2000001,2,1,999999
