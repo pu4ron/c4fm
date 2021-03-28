@@ -60,15 +60,15 @@
 # Ativar e desligar modos digitais (App 'SSH button' ou modo terminal "shell" do pi-star):
 ***(sudo modo + Fn)***
 
-*Ex: sudo dmr lig (ON)
-*Ex: sudo dmr desl (OFF)
+* Ex: sudo dmr lig (ON)
+* Ex: sudo dmr desl (OFF)
 
-*Ex: sudo d-star lig (ON)
-*Ex: sudo d-star desl (OFF)
+* Ex: sudo d-star lig (ON)
+* Ex: sudo d-star desl (OFF)
 
-*Ex: sudo ysf lig (ON)
-*Ex: sudo ysf desl (on)
-Ex: sudo ysf reset (default)
+* Ex: sudo ysf lig (ON)
+* Ex: sudo ysf desl (on)
+* Ex: sudo ysf reset (default)
 
 # PATCH DMRGateway (Reescrita de TGs):
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
@@ -90,4 +90,5 @@ Ex: sudo ysf reset (default)
 
 #  sudo reboot
 
-
+#---------------------------------------
+* Contato: qrz.com  (PU4RON - Ronualdo)
