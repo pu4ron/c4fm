@@ -10,7 +10,7 @@
 * -> 1.3 - Backup do seu pi-star.
 * -> 1.4 - Ative o ssh no seu pi-star.
 
-* Lembrando que o script foi baseado na versão oficial do pi-star v4.1.4
+* Lembre-se que o script foi baseado na versão oficial do pi-star v4.1.4
 * O servidor de base e referência foi "YSF72401-BR-C4FM-Brasil-YCS724" (default). Outros servidores podem ser usados pelo usuário.
 * Suporte a servidores YSF, mas sem suporte a dg-id.
 * Painel: http://ycs724.amrase.org.br/ycs/
@@ -30,15 +30,16 @@
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
 
+# RF:
 
-* Já para uso via rádio faz-se necessário o envio de sete digitos como contato privado, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação dos DG-IDs, salvo os comandos especiais, reset e disconnect. Uma vez aceito o comando pelo pi-star, uso o ID do servidor "YSC724" como Talkgroup TG72401. Se estiver usando DMRGateway: 7072401.
+* Já para uso via rádio faz-se necessário o envio de ***sete digitos*** como ***contato privado***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando DMRGateway acrescente o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir um TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
 
 * -> Contato privado:  88888+(DG-ID)
-Ex: 
+* Exemplos:
 * Link dg-id 02 (8888802)
 * Link dg-id 72 (8888872) 
 * Link dg-id 96 (8888896)    
-* Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.
+* Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg. 
 
 # Sugestão:
 * Use o slot 1 para selecionar os DG-ID e o Slot 2 para QSO(s).
