@@ -87,12 +87,17 @@
 
 ***-> Obs: *Após aplicar o patch o modo dmrgateway deve ser configurado no pi-star.***
 
-***Exemplo: Server 72401***
-
 ***(7 Digitos: 20+TG)***
 
-* Ex: TG 724 -> TG 2000724
-* Ex: TG 72431 -> TG 2072431
+* Ex: TG 724 -> TG 2000724   (Tx/Rx)
+* Ex: TG 72431 -> TG 2072431 (Tx/Rx)
+
+# DMR2YSF + DMRGateway:
+
+***(7 Digitos: 70+'ID server')***
+
+* Ex: TG 72401 -> TG 7072401 (Tx/Rx)
+* Ex: TG 22201 -> TG 7022201 (Tx/Rx)
 
 ![7072401](https://user-images.githubusercontent.com/40077152/112756338-15a93880-8fbb-11eb-88c5-cc72d38b9cac.png)
 
