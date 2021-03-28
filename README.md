@@ -19,7 +19,7 @@
 * Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados... 
 * Os mesmos comando podem ser executados no terminal shell do pi-star.
 
-# App 'SSH button' ou terminal "shell":
+# App 'SSH button' ou terminal shell:
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
@@ -32,7 +32,7 @@
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
 
-# RF + (App 'SSH button' ou terminal "shell"):
+# RF + (App 'SSH button' ou terminal shell):
 
 * Já para uso via rádio faz-se necessário o envio de ***"sete digitos"*** como ***"contato privado"***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando ***DMRGateway acrescente*** o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
 
@@ -47,7 +47,7 @@
 # Sugestão:
 * ***Slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
 
-# Comandos especiais: app 'SSH button' ou terminal "shell".
+# Comandos especiais: app 'SSH button' ou terminal shell.
 
 * Ex: 4444400    # Disconnect
 * Ex: 5555500    # Reset: retorna as configurações definidas pelo usuário.
@@ -59,8 +59,9 @@
 ![Options](https://user-images.githubusercontent.com/40077152/112755822-cbbf5300-8fb8-11eb-8600-a852f1b1a61f.png)
 
 
-# Conectando servidores YSF ('SSH button' ou terminal "shell"):
-* ***(sudo ysf + ID)***
+# Conectando servidores YSF ('SSH button' ou terminal shell):
+
+***(sudo ysf + ID)***
 
 * Ex: sudo ysf 56691
 * Ex: sudo ysf 90558
@@ -84,10 +85,16 @@
 # PATCH DMRGateway (Reescrita de TGs):
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
 
+***-> Obs: *Após aplicar o patch o modo dmrgateway deve ser configurado no pi-star.***
+
+***Exemplo: Server 72401***
+
 ***(7 Digitos: 20+TG)***
 
 * Ex: TG 724 -> TG 2000724
 * Ex: TG 72431 -> TG 2072431
+
+![7072401](https://user-images.githubusercontent.com/40077152/112756338-15a93880-8fbb-11eb-88c5-cc72d38b9cac.png)
 
 # Instalação: 
 * Use o 'ssh do pi-star' ou 'putty'.
