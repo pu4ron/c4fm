@@ -93,7 +93,7 @@
 * Ex: TG 72431 -> TG 2072431 (Tx/Rx)
 
 # DMR2YSF + C4FM:
-**** Nesse modo o dmr2ysf só aceita conexões de servidores c4fm, vetando demais servidores digitais.***
+**** Neste modo o dmr2ysf só aceita conexões de servidores c4fm vetando os demais servidores digitais.***
 
 * Ex: TG 72401 -> TG 72401 (Tx/Rx)
 * Ex: TG 22201 -> TG 22201 (Tx/Rx)
@@ -123,5 +123,5 @@
 
 #  sudo reboot
 
-
+#___________________________________
 ***QRZ: (PU4RON - Ronualdo)***
