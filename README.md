@@ -105,6 +105,8 @@
 * #TGRewrite1=2,9990,2,9990,1
 * #PCRewrite0=2,84000,2,4000,1001
 
+![ipsc2_gw](https://user-images.githubusercontent.com/40077152/112769622-6e4af680-8ff8-11eb-87ce-128ffa206135.png)
+
 # DMR2YSF + C4FM:
 **** Neste modo o dmr2ysf só aceita conexões de servidores c4fm vetando os demais servidores digitais.***
 
