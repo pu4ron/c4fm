@@ -17,7 +17,7 @@
 
 * Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados. os mesmos comando podem ser executados pelo terminal do pi-star.
 
-# (App 'SSH button' ou modo terminal "shell" do pi-star)::
+# App 'SSH button' ou terminal "shell" do pi-star:
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
@@ -30,25 +30,27 @@
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
 
-# RF + (App 'SSH button' ou modo terminal "shell" do pi-star)::
+# RF + (App 'SSH button' ou terminal "shell" do pi-star):
 
 * Já para uso via rádio faz-se necessário o envio de ***"sete digitos"*** como ***"contato privado"***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando ***DMRGateway acrescente*** o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
 
 * ***-> Contato privado:  88888+(DG-ID)***
-* Exemplos:
+
 * Link dg-id 02 (8888802)
 * Link dg-id 72 (8888872) 
-* Link dg-id 96 (8888896)    
+* Link dg-id 96 (8888896)   
+ 
 * ***Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.***
 
 # Sugestão:
 * ***Use slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
 
-# Comandos especiais (App 'SSH button' ou modo terminal "shell" do pi-star):
+# Comandos especiais: app 'SSH button' ou terminal "shell" do pi-star.
+
 * Ex: 4444400    # Disconnect
 * Ex: 5555500    # Reset: retorna as configurações definidas pelo usuário.
 
-# Servidores YSF (App SSH button ou modo terminal "shell" do pi-star):
+# Conectando servidores YSF ('SSH button' ou terminal "shell" do pi-star):
 * ***(sudo ysf + ID)***
 
 * Ex: sudo ysf 56691
@@ -57,7 +59,7 @@
 * Ex: sudo ysf reset
 * Ex: sudo ysf off
 
-# Ativar e desligar modos digitais (App 'SSH button' ou modo terminal "shell" do pi-star):
+# Ativando ou desligando os modos digitais do pi-star (app 'SSH button' ou terminal "shell"):
 ***(sudo modo + Fn)***
 
 * Ex: sudo dmr lig (ON)
@@ -90,5 +92,5 @@
 
 #  sudo reboot
 
-#---------------------------------------
-* Contato: qrz.com  (PU4RON - Ronualdo)
+
+***QRZ: (PU4RON - Ronualdo)***
