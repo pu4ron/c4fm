@@ -10,12 +10,14 @@
 * -> 1.3 - Faça backup do seu pi-star.
 * -> 1.4 - Ative o SSH.
 
-* Lembre-se que o script foi baseado na versão oficial do pi-star v4.1.4
-* O servidor de base e referência foi "YSF72401-BR-C4FM-Brasil-YCS724" (default). Outros servidores podem ser usados pelo usuário.
-* Suporte a servidores YSF, mas sem suporte a dg-id.
+* Script baseado na versão 4.1.4 do pi-star.
+* Servidor de referência: "YSF72401-BR-C4FM-Brasil-YCS724" (Default). 
+* Outros servidores podem ser utilizados pelo usuário, com ou sem suporte a dg-id.
+* Suporte a servidores YSF.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
-* Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados. os mesmos comando podem ser executados pelo terminal do pi-star.
+* Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados... 
+* Os mesmos comando podem ser executados no terminal shell do pi-star.
 
 # App 'SSH button' ou terminal "shell" do pi-star:
 
