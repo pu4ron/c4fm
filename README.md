@@ -49,11 +49,11 @@
 # Comandos especiais: app 'SSH button' ou terminal shell.
 
 * Ex: 4444400    (Disconnect)
-* Ex: 5555500    (Reset: retorna as configurações definidas pelo usuário)
+* Ex: 5555500    (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options' )
 
 # YSF GW
-* No pi-star para dg-id(s) estáticos declare no arquivo de configuração.
-* 'Configuração' + 'Expert' + 'YSF GW' no campo 'Options' e declare os dg-id(s).
+* Para dg-id estático declare os dg-id(s) no arquivo de configuração no pi-star.
+* 'Configuração' + 'Expert' + 'YSF GW' e no campo 'Options' declare os dg-id(s).
 
 ![Options](https://user-images.githubusercontent.com/40077152/112755822-cbbf5300-8fb8-11eb-8600-a852f1b1a61f.png)
 
