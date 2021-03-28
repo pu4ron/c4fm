@@ -92,6 +92,16 @@
 * Ex: TG 724 -> TG 2000724   (Tx/Rx)
 * Ex: TG 72431 -> TG 2072431 (Tx/Rx)
 
+# DMR2YSF + C4FM:
+**** Nesse modo o dmr2ysf só aceita conexões de servidores c4fm, vetando demais servidores digitais.***
+
+* Ex: TG 72401 -> TG 72401 (Tx/Rx)
+* Ex: TG 22201 -> TG 22201 (Tx/Rx)
+
+
+![72401](https://user-images.githubusercontent.com/40077152/112757078-800fa800-8fbe-11eb-9ba1-270338caa0c0.png)
+
+
 # DMR2YSF + DMRGateway:
 
 ***(7 Digitos: 70+'ID server')***
