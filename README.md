@@ -75,8 +75,8 @@ Ex: sudo ysf reset (default)
 
 ***(7 Digitos: 20+TG)***
 
-*Ex: TG 724 -> TG 2000724
-*Ex: TG 72431 -> TG 2072431
+* Ex: TG 724 -> TG 2000724
+* Ex: TG 72431 -> TG 2072431
 
 # Instalação: 
 * Use o 'ssh do pi-star' ou 'putty'.
