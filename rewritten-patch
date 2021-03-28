@@ -44,7 +44,7 @@ TG=6
 Base=64000
 Relink=60
 Debug=0
-Id=1234567
+Id=1234560
 UserControl=1
 
 [DMR Network 1]
@@ -61,30 +61,30 @@ PassAllPC1=2
 PassAllTG1=2
 Password="passw0rd"
 Debug=0
-Id=123456
+Id=1234560
 Name=BM_2001_Europe_HAMNET
 
 [DMR Network 2]
 Enabled=1
-Address=201.62.48.62
+Address=34.95.198.98
 Port=55555
-#TGRewrite0=2,8,2,9,1
-#TGRewrite1=2,9990,2,9990,1
-#PCRewrite0=2,84000,2,4000,1001
+# TGRewrite0=2,8,2,9,1
+# TGRewrite1=2,9990,2,9990,1
+# PCRewrite0=2,84000,2,4000,1001
 TGRewrite0=1,2000001,1,1,999999
 TGRewrite1=2,2000001,2,1,999999
 PCRewrite0=1,2000001,1,1,999999
 PCRewrite1=2,2000001,2,1,999999
 Password="PASSWORD"
 Debug=0
-Id=1234567
-Name=DMR+_IPSC2-BRAZIL
+Id=1234560
+Name=DMR+_IPSC2-BRASIL-2
 Options="TS1_1=724;TS2_1=72416"
 
 [DMR Network 3]
 Enabled=1
 Name=DMR2YSF_Cross-over
-Id=1234567
+Id=1234560
 Address=127.0.0.1
 Port=62033
 Local=62034
