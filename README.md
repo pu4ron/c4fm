@@ -69,7 +69,7 @@
 * Ex: sudo ysf off
 
 # Ativando ou desligando os modos digitais do pi-star (app 'SSH button' ou terminal "shell"):
-***(sudo modo + Fn)***
+***(sudo modo + lig/desl)***
 
 * Ex: sudo dmr lig (ON)
 * Ex: sudo dmr desl (OFF)
@@ -92,9 +92,9 @@
 * Ex: TG 724 -> TG 2000724   (Tx/Rx)
 * Ex: TG 72431 -> TG 2072431 (Tx/Rx)
 
-* Também é possivel a reescrita dos TGs manualmente, para isso, desabilite as linhas de comando existentes (TGRewrite e PCRewrite) e adicione novos comandos ao arquivo de configuração do DMRGateway na função '[DMR Network 2]' - 
+* Também é possivel a reescrita dos TGs manualmente, para isso, desabilite as linhas de comando existentes (TGRewrite e PCRewrite) e adicione novos comandos ao arquivo de configuração do DMRGateway na função '[DMR Network 2]'
 
-***-> 'Configuração' + 'Expert' + Full edit: 'DMR GW' <-***
+***'Configuração' + 'Expert' + Full edit: 'DMR GW'***
 
 * TGRewrite0=1,2000001,1,1,999999
 * TGRewrite1=2,2000001,2,1,999999
