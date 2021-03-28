@@ -45,7 +45,7 @@
 * ***Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.***
 
 # Sugestão:
-* ***Use slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
+* ***Slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
 
 # Comandos especiais: app 'SSH button' ou terminal "shell" do pi-star.
 
