@@ -1,6 +1,6 @@
 # Script C4FM V2.1
 
-* Nota: O presente script tem um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR em crossover (DMR2YSF) no pi-star e foi aproveitado recursos existentes para controle dos dg-id(s) via rádio e por aplicativo (app)... e foi pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário em outras modalidades digitais.
+***Nota: O presente script tem um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR em crossover (DMR2YSF) no pi-star e foi aproveitado recursos existentes para controle dos dg-id(s) via rádio e por aplicativo (app)... e foi pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário em outras modalidades digitais.***
 
 # Importante: 
 
@@ -15,9 +15,9 @@
 * Suporte a servidores YSF, mas sem suporte a dg-id.
 * Painel: http://ycs724.amrase.org.br/ycs/
 
-* Para uso via celular instale o app (SSH button) que irá criar botões e executar os comandos solicitados. os mesmos comando podem ser executados pelo terminal do pi-star.
+* Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados. os mesmos comando podem ser executados pelo terminal do pi-star.
 
-# App SSH button:
+# (App 'SSH button' ou modo terminal "shell" do pi-star)::
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
@@ -30,23 +30,46 @@
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
 
-# RF:
+# RF + (App 'SSH button' ou modo terminal "shell" do pi-star)::
 
-* Já para uso via rádio faz-se necessário o envio de ***sete digitos*** como ***contato privado***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando DMRGateway acrescente o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir um TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
+* Já para uso via rádio faz-se necessário o envio de ***"sete digitos"*** como ***"contato privado"***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando ***DMRGateway acrescente*** o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
 
-* -> Contato privado:  88888+(DG-ID)
+* ***-> Contato privado:  88888+(DG-ID)***
 * Exemplos:
 * Link dg-id 02 (8888802)
 * Link dg-id 72 (8888872) 
 * Link dg-id 96 (8888896)    
-* Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg. 
+* ***Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.***
 
 # Sugestão:
-* Use o slot 1 para selecionar os DG-ID e o Slot 2 para QSO(s).
+* Use slot 1 para selecionar DG-ID e Slot 2 para QSO(s).
 
-# Comandos especiais:
-* Ex: 4444400    # disconnect
-* Ex: 5555500    # reset: retorna as configurações definidas pelo usuário.
+# Comandos especiais (App 'SSH button' ou modo terminal "shell" do pi-star):
+* Ex: 4444400    # Disconnect
+* Ex: 5555500    # Reset: retorna as configurações definidas pelo usuário.
+
+# Servidores YSF (App SSH button ou modo terminal "shell" do pi-star):
+* ***(sudo ysf + ID)***
+* 
+* Ex: sudo ysf 56691
+* Ex: sudo ysf 90558
+
+* Ex: sudo ysf reset
+* Ex: sudo ysf off
+
+# Ativar e desligar modos digitais (App 'SSH button' ou modo terminal "shell" do pi-star):
+***(sudo modo + Fn)***
+
+*Ex: sudo dmr Lig (ON)
+*Ex: sudo dmr Desl (OFF)
+
+*Ex: sudo d-star Lig (ON)
+*Ex: sudo d-star Desl (OFF)
+
+*Ex: sudo ysf Lig (ON)
+*Ex: sudo ysf Desl (on)
+
+
 
 
 # Instalação: 
