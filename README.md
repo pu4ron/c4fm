@@ -85,7 +85,7 @@
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
 
 ***-> Obs: *Após aplicar o patch no seu pi-star as configuraçoes de dmrgateway seram reconfiguradas.***
-***-> * Ao término de tudo configure o dmrgateway ou restaure o backup de suas configuraçoes pessoais.***
+***-> * Ao término de tudo configure o dmrgateway com suas configuraçoes pessoais.***
 
 ***(7 Digitos: 20+TG)***
 
