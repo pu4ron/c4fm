@@ -28,7 +28,7 @@
 * Ex: sudo c4fm off         (Disconnect) 
 * Ex: sudo c4fm reset       (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options')
 
-* -> SSH hostname: ip do raspberry.
+* -> SSH hostname: ip da raspberry.
 * -> SSH usurname: usuario do pi-star. (pi-star)
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
