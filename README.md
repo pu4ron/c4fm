@@ -24,9 +24,9 @@
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
 
-* Ex: sudo c4fm 72          # DG-ID 72
-* Ex: sudo c4fm off         # Disconnect 
-* Ex: sudo c4fm reset       # Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options'
+* Ex: sudo c4fm 72          (DG-ID 72)
+* Ex: sudo c4fm off         (Disconnect) 
+* Ex: sudo c4fm reset       (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options')
 
 * -> SSH hostname: ip do raspberry.
 * -> SSH usurname: usuario do pi-star. (pi-star)
