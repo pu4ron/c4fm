@@ -19,18 +19,22 @@
 * Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados... 
 * Os mesmos comando podem ser executados no terminal shell do pi-star.
 
-# App 'SSH button' ou terminal shell:
+# App 'SSH button':
 
 * -> Label: nome do comando ou DG-ID.
 * -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
-* Ex: sudo c4fm 72          # dg-id 72
-* Ex: sudo c4fm off         # disconnect 
-* Ex: sudo c4fm reset       # reset: retorna as configurações definidas pelo usuário.
+
+* Ex: sudo c4fm 72          # DG-ID 72
+* Ex: sudo c4fm off         # Disconnect 
+* Ex: sudo c4fm reset       # Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options'
 
 * -> SSH hostname: ip do raspberry.
 * -> SSH usurname: usuario do pi-star. (pi-star)
 * -> SSH password: senha do pi-star.
 * -> SSH port: 22
+
+![r2](https://user-images.githubusercontent.com/40077152/112875565-ba4e7780-909a-11eb-9c62-dea9d55db767.jpeg)
+
 
 # RF + (App 'SSH button' ou terminal shell):
 
