@@ -3,7 +3,7 @@
 ***Nota: O presente script tem um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR em cross-over (DMR2YSF) no pi-star e foi aproveitado recursos existentes que surge os controles de dg-id(s) via rádio e por aplicativo (app)... e foi pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário nas diversas modalidades digitais.***
 
 # ***UPDATE 01/04/2021***
-* Foi adicionado na opção de controle remoto a seleção de servidores C4FM via rádio. (***Somente do brasil***)
+* Seleção de servidores C4FM via rádio. (***Somente do brasil***)
 * Para selecionar, envie uma portatora de 3seg como contato privado: 80+ID do servidor  (7 digitos)
 
 * 8072400 (Brasil-Link)
