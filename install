@@ -1,0 +1,486 @@
+#!/bin/bash
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+
+ver=$(awk -F "= " '/Version/ {print $2}' /etc/pistar-release) 
+ALDG=`cat /etc/ysfgateway | grep Startup= | cut -f 1`
+
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+
+if [ `sed -n '/\[Enabled\]/{n;p;}' /etc/dmr2ysf | cut -c 9` != 1 ]; then
+        echo ""
+        echo "* [DMR2YSF -> "Desligado"] - Antes de continuar ative."
+        echo ""
+	exit 0
+fi
+
+if [ "$ALDG" = "" ]
+then
+   echo ""
+   echo "* ATENCAO!"
+   echo "* Nenhum servidor encontrado."
+   echo "* Selecione um servidor de conexao e tente novamente."
+   echo ""
+   exit 0
+fi
+
+echo "* Escolha a opcao?" 
+echo ""
+
+echo -e " -> [1] \033[01;37m*PI-STAR*\033[00;37m"
+echo ""
+echo -e " -> [2] \033[01;37m*PATCH DMRGateway*\033[00;37m"
+echo ""
+
+read -p "* Digite: " -n 1 -r
+case "$REPLY" in 
+    1) 
+     mount -o remount,rw /
+
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+read -p "*PI-STAR: Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+mount -o remount,rw /
+
+# Check we are root
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+DIR="/home/pi-star/c4fm"
+DIRL="/home/pi-star/c4fm/pistar-remote-etc"
+DIREtc="/etc"
+DIRBin="/usr/local/bin"
+DIRSbin="/usr/local/sbin"
+DIRSCP="/home/pi-star/c4fm/scp"
+
+Ap="/etc/pistar-remote"
+Bp="/usr/local/bin/c4fm"
+Bpy="/usr/local/bin/ysf"
+Bpo="/usr/local/bin/out"
+Cp="/usr/local/bin/YSFGateway"
+Dp="/usr/local/bin/MMDVMHost"
+Ep="/usr/local/sbin/pistar-remote"
+
+call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
+sudo chattr -i ${DIRBin}/YSFGateway
+sleep 1
+
+echo "* Desativando servicos..."
+echo ""
+sudo systemctl stop pistar-watchdog.timer      >/dev/null 2>&1 &
+sudo systemctl stop pistar-watchdog.service    >/dev/null 2>&1 &
+sudo systemctl stop mmdvmhost.timer            >/dev/null 2>&1 &
+sudo systemctl stop mmdvmhost.service          >/dev/null 2>&1 &
+sudo systemctl stop ysfgateway.service         >/dev/null 2>&1 &
+sudo systemctl stop dmr2ysf.service            >/dev/null 2>&1 &
+sleep 3
+sudo killall MMDVMHost                         >/dev/null 2>&1 &
+sleep 2
+
+echo "* Backup..."
+echo ""
+sudo cp -R ${Ap} ${Ap}.$(date +%Y%m%d)
+sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
+sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
+sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
+sleep 1
+
+if [ -f "$Bp" ]; then
+   sudo cp ${Bp} ${Bp}.$(date +%Y%m%d)
+ fi
+
+if [ -f "$Bpy" ]; then
+   sudo cp ${Bpy} ${Bpy}.$(date +%Y%m%d)
+ fi
+
+if [ -f "$Bpo" ]; then
+   sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)
+ fi
+
+if [ -f "${DIRBin}/net" ]; then
+   sudo cp ${DIRBin}/net ${DIRBin}/net.$(date +%Y%m%d)
+ fi 
+
+if [ -f "${DIRBin}/dmr" ]; then
+   sudo cp ${DIRBin}/dmr  ${DIRBin}/dmr.$(date +%Y%m%d)
+ fi 
+
+if [ -f "${DIRBin}/d-star" ]; then
+   sudo cp ${DIRBin}/d-star ${DIRBin}/d-star.$(date +%Y%m%d)
+ fi 
+
+if [ -f "${DIRBin}/nxdn" ]; then
+   sudo cp ${DIRBin}/nxdn  ${DIRBin}/nxdn.$(date +%Y%m%d)
+ fi 
+
+if [ -f "${DIRBin}/p25" ]; then
+   sudo cp ${DIRBin}/p25 ${DIRBin}/p25.$(date +%Y%m%d)
+ fi 
+sleep 2
+
+echo "* Estruturando..."
+echo ""
+sudo rm ${Ap}
+sudo rm ${Cp}
+sudo rm ${Dp}
+sudo rm ${Ep}
+
+if [ -f "$Bp" ]; then
+   sudo rm ${Bp}
+ fi
+
+if [ -f "$Bpy" ]; then
+   sudo rm ${Bpy}
+ fi 
+
+if [ -f "$Bpo" ]; then
+   sudo rm ${Bpo}
+ fi 
+
+if [ -f "${DIRBin}/net" ]; then
+   sudo rm ${DIRBin}/net
+ fi
+
+if [ -f "${DIRBin}/dmr" ]; then
+   sudo rm ${DIRBin}/dmr
+ fi 
+
+if [ -f "${DIRBin}/d-star" ]; then
+   sudo rm ${DIRBin}/d-star
+ fi 
+
+if [ -f "${DIRBin}/nxdn" ]; then
+   sudo rm ${DIRBin}/nxdn
+ fi 
+
+if [ -f "${DIRBin}/p25" ]; then
+   sudo rm ${DIRBin}/p25
+ fi 
+sleep 2
+
+sudo touch ${Ap}
+sudo chmod 644 ${DIREtc}/pistar-remote
+
+echo "[banner]"                                       >> ${Ap}
+echo "# Pi-Star config file"                          >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[enable]"                                       >> ${Ap}
+echo "enabled=true"                                   >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[keeper]"                                       >> ${Ap}
+echo "callsign=${call}"                               >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "#[dmr]"                                         >> ${Ap}
+echo "#svckill=9999999"                               >> ${Ap}
+echo "#svcrestart=9999998"                            >> ${Ap}
+echo "#reboot=9999997"                                >> ${Ap}
+echo "#shutdown=9999996"                              >> ${Ap}
+echo "#hostfiles=9999995"                             >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[d-star]"                                       >> ${Ap}
+echo "# UR fields"                                    >> ${Ap}
+echo "#svckill=SVCKILL"                               >> ${Ap}
+echo "#svcrestart=SVCRSTRT"                           >> ${Ap}
+echo "#reboot=REBOOTPI"                               >> ${Ap}
+echo "#shutdown=SHUTDOWN"                             >> ${Ap}
+echo "#getip=GETIP"                                   >> ${Ap}
+echo "#hostfiles=HOSTFILE"                            >> ${Ap}
+echo "#8Ball=8BALL"                                   >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[ysf]"                                          >> ${Ap}
+echo "# ROOM commands"                                >> ${Ap}
+echo "#svckill=99999"                                 >> ${Ap}
+echo "#svcrestart=99998"                              >> ${Ap}
+echo "#reboot=99997"                                  >> ${Ap}
+echo "#shutdown=99996"                                >> ${Ap}
+echo "#hostfiles=99995"                               >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[p25]"                                          >> ${Ap}
+echo "# P25 Talkgroups are limited to 1->65535"       >> ${Ap}
+echo "#svckill=65531"                                 >> ${Ap}
+echo "#svcrestart=65532"                              >> ${Ap}
+echo "#reboot=65533"                                  >> ${Ap}
+echo "#shutdown=65534"                                >> ${Ap}
+echo "#hostfiles=65530"                               >> ${Ap}
+echo ""                                               >> ${Ap}
+echo "[dmr]"                                          >> ${Ap}
+echo "dgidOFF=4444400"                                >> ${Ap}
+echo "dgidRST=5555500"                                >> ${Ap}
+echo "dgid01=8888801"                                 >> ${Ap}
+echo "dgid02=8888802"                                 >> ${Ap}
+echo "dgid03=8888803"                                 >> ${Ap}
+echo "dgid04=8888804"                                 >> ${Ap}
+echo "dgid05=8888805"                                 >> ${Ap}
+echo "dgid06=8888806"                                 >> ${Ap}
+echo "dgid07=8888807"                                 >> ${Ap}
+echo "dgid08=8888808"                                 >> ${Ap}
+echo "dgid09=8888809"                                 >> ${Ap}
+echo "dgid10=8888810"                                 >> ${Ap}
+echo "dgid11=8888811"                                 >> ${Ap}
+echo "dgid12=8888812"                                 >> ${Ap}
+echo "dgid13=8888813"                                 >> ${Ap}
+echo "dgid14=8888814"                                 >> ${Ap}
+echo "dgid15=8888815"                                 >> ${Ap}
+echo "dgid16=8888816"                                 >> ${Ap}
+echo "dgid17=8888817"                                 >> ${Ap}
+echo "dgid18=8888818"                                 >> ${Ap}
+echo "dgid19=8888819"                                 >> ${Ap}
+echo "dgid20=8888820"                                 >> ${Ap}
+echo "dgid21=8888821"                                 >> ${Ap}
+echo "dgid22=8888822"                                 >> ${Ap}
+echo "dgid23=8888823"                                 >> ${Ap}
+echo "dgid24=8888824"                                 >> ${Ap}
+echo "dgid25=8888825"                                 >> ${Ap}
+echo "dgid26=8888826"                                 >> ${Ap}
+echo "dgid27=8888827"                                 >> ${Ap}
+echo "dgid28=8888828"                                 >> ${Ap}
+echo "dgid29=8888829"                                 >> ${Ap}
+echo "dgid30=8888830"                                 >> ${Ap}
+echo "dgid31=8888831"                                 >> ${Ap}
+echo "dgid32=8888832"                                 >> ${Ap}
+echo "dgid33=8888833"                                 >> ${Ap}
+echo "dgid34=8888834"                                 >> ${Ap}
+echo "dgid35=8888835"                                 >> ${Ap}
+echo "dgid36=8888836"                                 >> ${Ap}
+echo "dgid37=8888837"                                 >> ${Ap}
+echo "dgid38=8888838"                                 >> ${Ap}
+echo "dgid39=8888839"                                 >> ${Ap}
+echo "dgid40=8888840"                                 >> ${Ap}
+echo "dgid41=8888841"                                 >> ${Ap}
+echo "dgid42=8888842"                                 >> ${Ap}
+echo "dgid43=8888843"                                 >> ${Ap}
+echo "dgid44=8888844"                                 >> ${Ap}
+echo "dgid45=8888845"                                 >> ${Ap}
+echo "dgid46=8888846"                                 >> ${Ap}
+echo "dgid47=8888847"                                 >> ${Ap}
+echo "dgid48=8888848"                                 >> ${Ap}
+echo "dgid49=8888849"                                 >> ${Ap}
+echo "dgid50=8888850"                                 >> ${Ap}
+echo "dgid51=8888851"                                 >> ${Ap}
+echo "dgid52=8888852"                                 >> ${Ap}
+echo "dgid53=8888853"                                 >> ${Ap}
+echo "dgid54=8888854"                                 >> ${Ap}
+echo "dgid55=8888855"                                 >> ${Ap}
+echo "dgid56=8888856"                                 >> ${Ap}
+echo "dgid57=8888857"                                 >> ${Ap}
+echo "dgid58=8888858"                                 >> ${Ap}
+echo "dgid59=8888859"                                 >> ${Ap}
+echo "dgid60=8888860"                                 >> ${Ap}
+echo "dgid61=8888861"                                 >> ${Ap}
+echo "dgid62=8888862"                                 >> ${Ap}
+echo "dgid63=8888863"                                 >> ${Ap}
+echo "dgid64=8888864"                                 >> ${Ap}
+echo "dgid65=8888865"                                 >> ${Ap}
+echo "dgid66=8888866"                                 >> ${Ap}
+echo "dgid67=8888867"                                 >> ${Ap}
+echo "dgid68=8888868"                                 >> ${Ap}
+echo "dgid69=8888869"                                 >> ${Ap}
+echo "dgid70=8888870"                                 >> ${Ap}
+echo "dgid71=8888871"                                 >> ${Ap}
+echo "dgid72=8888872"                                 >> ${Ap}
+echo "dgid73=8888873"                                 >> ${Ap}
+echo "dgid74=8888874"                                 >> ${Ap}
+echo "dgid75=8888875"                                 >> ${Ap}
+echo "dgid76=8888876"                                 >> ${Ap}
+echo "dgid77=8888877"                                 >> ${Ap}
+echo "dgid78=8888878"                                 >> ${Ap}
+echo "dgid79=8888879"                                 >> ${Ap}
+echo "dgid80=8888880"                                 >> ${Ap}
+echo "dgid81=8888881"                                 >> ${Ap}
+echo "dgid82=8888882"                                 >> ${Ap}
+echo "dgid83=8888883"                                 >> ${Ap}
+echo "dgid84=8888884"                                 >> ${Ap}
+echo "dgid85=8888885"                                 >> ${Ap}
+echo "dgid86=8888886"                                 >> ${Ap}
+echo "dgid87=8888887"                                 >> ${Ap}
+echo "dgid88=8888888"                                 >> ${Ap}
+echo "dgid89=8888889"                                 >> ${Ap}
+echo "dgid90=8888890"                                 >> ${Ap}
+echo "dgid91=8888891"                                 >> ${Ap}
+echo "dgid92=8888892"                                 >> ${Ap}
+echo "dgid93=8888893"                                 >> ${Ap}
+echo "dgid94=8888894"                                 >> ${Ap}
+echo "dgid95=8888895"                                 >> ${Ap}
+echo "dgid96=8888896"                                 >> ${Ap}
+echo "dgid97=8888897"                                 >> ${Ap}
+echo "dgid98=8888898"                                 >> ${Ap}
+echo "dgid99=8888899"                                 >> ${Ap}
+echo "svckill=9999999"                                >> ${Ap}
+echo "svcrestart=9999998"                             >> ${Ap}
+echo "reboot=9999997"                                 >> ${Ap}
+echo "#shutdown=9999996"                              >> ${Ap}
+echo "#hostfiles=9999995"                             >> ${Ap}
+echo "Brasil_Link=8072400"                            >> ${Ap}
+echo "Brazilnet=8077777"                              >> ${Ap}
+echo "C4FM_Brazil=8072401"                            >> ${Ap}
+echo "PU2LRZ=8090558"                                 >> ${Ap}
+echo "PU4ARR=8095973"                                 >> ${Ap}
+echo "YSF_BRASIL=8056691"                             >> ${Ap}
+echo "YSF_Minas=8001466"                              >> ${Ap}
+echo "BRAZIL_724=8072526"                             >> ${Ap}
+echo ""                                               >> ${Ap}
+sleep 1
+
+sudo cp ${DIR}/c4fm-bin-oficial     ${DIRBin}/c4fm
+sudo cp ${DIR}/c4fmy-bin-oficial    ${DIRBin}/ysf
+sudo cp ${DIR}/c4fmo-bin-oficial    ${DIRBin}/out
+sudo cp ${DIR}/MMDVMHost-bin        ${DIRBin}/MMDVMHost
+sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
+sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
+sleep 1
+
+sudo cp ${DIRSCP}/p1                ${DIRBin}/dmr
+sudo cp ${DIRSCP}/p2                ${DIRBin}/d-star
+sudo cp ${DIRSCP}/p3                ${DIRBin}/nxdn
+sudo cp ${DIRSCP}/p4                ${DIRBin}/p25
+sleep 1
+
+sudo chmod 755 ${DIRBin}/dmr
+sudo chmod 755 ${DIRBin}/d-star
+sudo chmod 755 ${DIRBin}/nxdn
+sudo chmod 755 ${DIRBin}/p25
+sleep 1
+
+sudo chmod 755 ${DIRBin}/c4fm
+sudo chmod 755 ${DIRBin}/ysf
+sudo chmod 755 ${DIRBin}/out
+sleep 1
+
+sudo chmod +x  ${DIRBin}/dmr
+sudo chmod +x  ${DIRBin}/d-star
+sudo chmod +x  ${DIRBin}/nxdn
+sudo chmod +x  ${DIRBin}/p25
+sleep 1
+
+sudo chmod +x  ${DIRBin}/c4fm
+sudo chmod +x  ${DIRBin}/ysf
+sudo chmod +x  ${DIRBin}/out
+sleep 1
+
+sudo chmod 755 ${DIRBin}/MMDVMHost
+sudo chmod 755 ${DIRBin}/YSFGateway
+sudo chmod 755 ${DIREtc}/pistar-remote
+sudo chmod 755 ${DIRSbin}/pistar-remote
+sleep 1
+
+sudo /usr/local/sbin/HostFilesUpdate.sh      >/dev/null 2>&1 &
+sleep 2
+
+echo "* Adicionando dg-id..."
+echo ""
+sudo cp ${DIR}/Network ${DIRBin}/net
+sudo chmod 755 ${DIRBin}/net
+sudo chmod +x  ${DIRBin}/net
+sudo ${DIRBin}/net start
+sleep 2
+
+echo "* Ativando servicos..."
+echo ""
+
+sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
+sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
+sudo systemctl start mmdvmhost.timer         >/dev/null 2>&1 &
+sudo systemctl start mmdvmhost               >/dev/null 2>&1 &
+sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
+sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
+sleep 2
+sudo chattr +i ${DIRBin}/YSFGateway
+
+echo ""
+echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
+echo ""
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+
+;;
+
+2) 
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+echo -e "\033[01;37m\033[03;36m* Nova reescrita de TG(s) IPSC2 para uso com C4FM *\033[00;37m"
+echo ""
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 724,   2000724 [7 digitos: 2000+TG]\033[00;37m"
+echo ""
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 72431, 2072431 [7 digitos: 20+TG]\033[00;37m"
+echo ""
+
+read -p "* Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+
+GATW="/etc/dmrgateway"
+DIRpat="/home/pi-star/c4fm/rewritten-patch"
+SERv="/usr/local/sbin/dmrgateway.service"
+ 
+if [ -f "$GATW" ]; then
+    
+    echo ""
+    echo "* Backup..."
+    sudo cp -p ${GATW}  ${GATW}.$(date +%d%m%Y_%H:%M:%S)
+    sleep 1
+    echo ""
+    echo "* Estruturando..."
+    sudo rm ${GATW}
+    sleep 1
+    sudo cp ${DIRpat} ${GATW}
+    sleep 1
+    sudo chmod 644 ${GATW}
+    sleep 1
+    echo ""
+    echo "* -> No pi-star configure DMRGateway e clik em aplicar <- *"
+    echo ""
+    echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
+    echo ""
+
+fi
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+    ;;
+
+* ) exit 0 ;;   
+esac
