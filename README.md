@@ -1,6 +1,6 @@
 # Script C4FM - V2.1
 
-***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR usando o modo cross-over (DMR2YSF) do pi-star e foi aproveitado esses e outros recursos que surgem os controles de dg-id(s) por rádio e aplicativo (app)... e pensando nas possibilidades do pi-star que outras aplicações foram adicionadas para ajudar o usuário nas diversas modalidades digitais.***
+***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR usando o modo cross-over (DMR2YSF) do pi-star e foi aproveitado esse e outros recursos que surgem os controles de dg-id(s) por rádio e aplicativo (app).***
 
 # ***UPDATE 01/04/2021***
 * Seleção de servidores C4FM via rádio. (***Somente do brasil***)
