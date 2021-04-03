@@ -69,9 +69,7 @@ if config.has_option('dmr', 'hostfiles'):
 	dmrhostfiles = config.get('dmr', 'hostfiles')
 else:
 	dmrhostfiles = str(999999999999)
-
-
-#YSF DG-ID
+	
 if config.has_option('dmr', 'dgidOFF'):
 	dmrdgidOFF = config.get('dmr', 'dgidOFF')
 else:
