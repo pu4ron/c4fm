@@ -21,20 +21,20 @@
 # ***UPDATE 03/04/2021***
 * Opção de ativar e desativar os modos digitais via rádio.
 
-* YSF OFF = 3333304
-* YSF ON  = 3333305
-
 * DMR OFF = 3333300 ***(Atenção: o uso dessa opção exige a ativaçao do modo manualmente, pelo terminal ou por aplicativo 'app')***
 * DMR ON  = 3333101
 
-* P25 OFF = 3333308
-* P25 ON  = 3333309
+* DSTAR OFF = 3333302
+* DSTAR ON  = 3333303
+
+* YSF OFF = 3333304
+* YSF ON  = 3333305
 
 * NXDN OFF = 3333306
 * NXDN ON  = 3333307
 
-* D-STAR OFF = 3333302
-* D-STAR ON  = 3333303
+* P25 OFF = 3333308
+* P25 ON  = 3333309
 
 
 # Leia-me: 
