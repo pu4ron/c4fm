@@ -350,6 +350,16 @@ echo "PU4ARR=8095973"                                 >> ${Ap}
 echo "YSF_BRASIL=8056691"                             >> ${Ap}
 echo "YSF_Minas=8001466"                              >> ${Ap}
 echo "BRAZIL_724=8072526"                             >> ${Ap}
+echo "dmrOFF=3333300"                                 >> ${Ap}
+echo "dmrON=3333101"                                  >> ${Ap}
+echo "dstarOFF=3333302"                               >> ${Ap}
+echo "dstarON=3333303"                                >> ${Ap}
+echo "ysfOFF=3333304"                                 >> ${Ap}
+echo "ysfON=3333305"                                  >> ${Ap}
+echo "nxdnOFF=3333306"                                >> ${Ap}
+echo "nxdnON=3333307"                                 >> ${Ap}
+echo "p25OFF=3333308"                                 >> ${Ap}
+echo "p25ON=3333309"                                  >> ${Ap}
 echo ""                                               >> ${Ap}
 sleep 1
 
