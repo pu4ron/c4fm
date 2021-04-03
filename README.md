@@ -21,7 +21,7 @@
 # ***UPDATE 03/04/2021***
 * Opção de ativar e desativar os modos digitais via rádio.
 
-* DMR OFF   (3333300) ***(Atenção: o uso dessa opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
+* DMR OFF   (3333300) ***(Atenção: o uso desta opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
 * DMR ON    (3333101)
 
 * DSTAR OFF (3333302)
