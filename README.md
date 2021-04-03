@@ -15,7 +15,7 @@
 * 8001466 (YSF-Minas)
 * 8072526 (BRAZIL-724)
 
-***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
+* ***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
 
 
 # ***UPDATE 03/04/2021***
