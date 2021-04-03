@@ -15,26 +15,26 @@
 * 8001466 (YSF-Minas)
 * 8072526 (BRAZIL-724)
 
-*** Para fala use o ID do servidor selecionado, se estiver usando DMRGateway, adicione o número 70 antes do ID.***
+***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
 
 
 # ***UPDATE 03/04/2021***
 * Opção de ativar e desativar os modos digitais via rádio.
 
-* DMR OFF   =>(3333300) ***(Atenção: o uso dessa opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
-* DMR ON    =>(3333101)
+* DMR OFF   (3333300) ***(Atenção: o uso dessa opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
+* DMR ON    (3333101)
 
-* DSTAR OFF =>(3333302)
-* DSTAR ON  =>(3333303)
+* DSTAR OFF (3333302)
+* DSTAR ON  (3333303)
 
-* YSF OFF   =>(3333304)
-* YSF ON    =>(3333305)
+* YSF OFF   (3333304)
+* YSF ON    (3333305)
 
-* NXDN OFF  =>(3333306)
-* NXDN ON   =>(3333307)
+* NXDN OFF  (3333306)
+* NXDN ON   (3333307)
 
-* P25 OFF   =>(3333308)
-* P25 ON    =>(3333309)
+* P25 OFF   (3333308)
+* P25 ON    (3333309)
 
 
 # Leia-me: 
