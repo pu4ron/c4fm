@@ -1,0 +1,74 @@
+#!/bin/bash
+
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+
+DIRgw="/etc/dmrgateway"
+
+if [[ $(egrep -h -i "1234567|M1ABC" ${DIRgw} | wc -l) -gt 0 ]]; then
+  exit 1;
+fi
+
+if [ `sed -n '/\[DMR Network\]/{n;p;}' /etc/mmdvmhost | cut -c 8` == 0 ]; then
+	exit 1;
+fi
+
+if [ `sed -n '/\[DMR Network\]/{n;p;n;p;}' /etc/mmdvmhost | sed '1d' | awk -F = '{print $2}'` != 127.0.0.1 ]; then
+	exit 1;
+fi
+
+sudo mount -o remount,rw /
+
+if [ -z "$1" ]; then
+      val=never
+else
+      val=${1}
+fi
+
+case ${1} in
+
+*off|Off|OFF)
+  sudo sed -i "s/\[DMR Network 3\]/\[DMR Network 3#\]/"  ${DIRgw}
+  sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
+  sudo systemctl restart dmrgateway.service > /dev/null 2>&1
+  sudo systemctl restart ysfgateway.service > /dev/null 2>&1
+  sudo systemctl restart p25gateway.service > /dev/null 2>&1
+  sudo systemctl restart nxdngateway.service > /dev/null 2>&1
+  sudo systemctl restart ysfparrot.service > /dev/null 2>&1
+  sudo systemctl restart ysf2dmr.service > /dev/null 2>&1
+  sudo systemctl restart ysf2p25.service > /dev/null 2>&1
+  sudo systemctl restart ysf2nxdn.service > /dev/null 2>&1
+  sudo systemctl restart dmr2ysf.service > /dev/null 2>&1
+  sudo systemctl restart dmr2nxdn.service > /dev/null 2>&1
+  exit 0
+;;
+
+
+*on|On|ON)
+  sudo sed -i "s/\[DMR Network 3#\]/\[DMR Network 3\]/"  ${DIRgw}
+  sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
+  sudo systemctl restart dmrgateway.service > /dev/null 2>&1
+  sudo systemctl restart ysfgateway.service > /dev/null 2>&1
+  sudo systemctl restart p25gateway.service > /dev/null 2>&1
+  sudo systemctl restart nxdngateway.service > /dev/null 2>&1
+  sudo systemctl restart ysfparrot.service > /dev/null 2>&1
+  sudo systemctl restart ysf2dmr.service > /dev/null 2>&1
+  sudo systemctl restart ysf2p25.service > /dev/null 2>&1
+  sudo systemctl restart ysf2nxdn.service > /dev/null 2>&1
+  sudo systemctl restart dmr2ysf.service > /dev/null 2>&1
+  sudo systemctl restart dmr2nxdn.service > /dev/null 2>&1
+  exit 0
+;;
+
+*)  
+   echo ""
+   exit 0;
+;;
+esac
+
+exit 0
