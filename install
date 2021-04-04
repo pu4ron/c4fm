@@ -401,6 +401,16 @@ echo "nxdnOFF=3333306"                                >> ${Ap}
 echo "nxdnON=3333307"                                 >> ${Ap}
 echo "p25OFF=3333308"                                 >> ${Ap}
 echo "p25ON=3333309"                                  >> ${Ap}
+echo "net0OFF=4444400"                                >> ${Ap}
+echo "net0RST=4444401"                                >> ${Ap}
+echo "xlxOFF=4444402"                                 >> ${Ap}
+echo "xlxON=4444403"                                  >> ${Ap}
+echo "net1OFF=4444404"                                >> ${Ap}
+echo "net1ON=4444405"                                 >> ${Ap}
+echo "net2OFF=4444406"                                >> ${Ap}
+echo "net2ON=4444407"                                 >> ${Ap}
+echo "net3OFF=4444408"                                >> ${Ap}
+echo "net3ON=4444409"                                 >> ${Ap}
 echo ""                                               >> ${Ap}
 sleep 1
 
