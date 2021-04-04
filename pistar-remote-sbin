@@ -665,6 +665,56 @@ if config.has_option('dmr', 'p25ON'):
 else:
 	dmrp25ON = str(999999999999)
 	
+if config.has_option('dmr', 'net0OFF'):
+	dmrnet0OFF = config.get('dmr', 'net0OFF')
+else:
+	dmrnet0OFF = str(999999999999)
+
+if config.has_option('dmr', 'net0RST'):
+	dmrnet0RST = config.get('dmr', 'net0RST')
+else:
+	dmrnet0RST = str(999999999999)
+
+if config.has_option('dmr', 'xlxOFF'):
+	dmrxlxOFF = config.get('dmr', 'xlxOFF')
+else:
+	dmrxlxOFF = str(999999999999)
+
+if config.has_option('dmr', 'xlxON'):
+	dmrxlxON = config.get('dmr', 'xlxON')
+else:
+	dmrxlxON = str(999999999999)
+
+if config.has_option('dmr', 'net1OFF'):
+	dmrnet1OFF = config.get('dmr', 'net1OFF')
+else:
+	dmrnet1OFF = str(999999999999)
+
+if config.has_option('dmr', 'net1ON'):
+	dmrnet1ON = config.get('dmr', 'net1ON')
+else:
+	dmrnet1ON = str(999999999999)
+
+if config.has_option('dmr', 'net2OFF'):
+	dmrnet2OFF = config.get('dmr', 'net2OFF')
+else:
+	dmrnet2OFF = str(999999999999)
+
+if config.has_option('dmr', 'net2ON'):
+	dmrnet2ON = config.get('dmr', 'net2ON')
+else:
+	dmrnet2ON = str(999999999999)
+
+if config.has_option('dmr', 'net3OFF'):
+	dmrnet3OFF = config.get('dmr', 'net3OFF')
+else:
+	dmrnet3OFF = str(999999999999)
+
+if config.has_option('dmr', 'net3ON'):
+	dmrnet3ON = config.get('dmr', 'net3ON')
+else:
+	dmrnet3ON = str(999999999999)
+	
 # D-Star Control Options
 
 if config.has_option('d-star', 'svckill'):
@@ -1038,6 +1088,26 @@ while True:
 				        os.system(r'sudo /usr/local/bin/p25 desl')
 				if str('received RF voice header from ' + keeperCall + ' to ' + dmrp25ON) in line:
 				        os.system(r'sudo /usr/local/bin/p25 lig')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet0OFF) in line:
+				        os.system(r'sudo /usr/local/bin/net0 off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet0RST) in line:
+				        os.system(r'sudo /usr/local/bin/net0 reset')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrxlxOFF) in line:
+				        os.system(r'sudo /usr/local/bin/xlx off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrxlxON) in line:
+				        os.system(r'sudo /usr/local/bin/xlx on')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet1OFF) in line:
+				        os.system(r'sudo /usr/local/bin/net1 off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet1ON) in line:
+				        os.system(r'sudo /usr/local/bin/net1 on')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet2OFF) in line:
+				        os.system(r'sudo /usr/local/bin/net2 off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet2ON) in line:
+				        os.system(r'sudo /usr/local/bin/net2 on')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet3OFF) in line:
+				        os.system(r'sudo /usr/local/bin/net3 off')
+				if str('received RF voice header from ' + keeperCall + ' to ' + dmrnet3ON) in line:
+				        os.system(r'sudo /usr/local/bin/net3 on')
 					
 				# DMR Stop MMDVMHost
 				# M: 2017-07-03 09:39:38.208 DMR Slot 2, received RF voice header from M1ABC to 123456
