@@ -9,19 +9,19 @@
 
 ***(Celular - 'SSH button' ou terminal shell)***
 
-* sudo net0 reset    (Retornas as configutações definidas pelo usuário)
-* sudo net0 off      (Desativa todas as rede)
+* sudo net0 reset    (retornas as configutações definidas pelo usuário)
+* sudo net0 off      (desativa todas as rede)
 
-* sudo net1 on       (Network 1 ativa)
+* sudo net1 on       (Network 1 ativo)
 * sudo net1 off      (Network 1 desativa)
 
-* sudo net2 on       (Network 2 ativa)
+* sudo net2 on       (Network 2 ativo)
 * sudo net2 off      (Network 2 desativa)
 
-* sudo net3 on       (Network 3 ativa)
+* sudo net3 on       (Network 3 ativo)
 * sudo net3 off      (Network 3 desativa)
 
-* sudo xlx on        (XLX ativa)
+* sudo xlx on        (XLX ativo)
 * sudo xlx off       (XLX desativa)
 
 ***(RF - Rádio)***
