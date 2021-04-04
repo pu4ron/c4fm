@@ -2,24 +2,50 @@
 
 ***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR usando o modo cross-over (DMR2YSF) do pi-star e foi aproveitado esse e outros recursos que surgem os controles de dg-id(s) por rádio e aplicativo (app).***
 
-# ***UPDATE 01/04/2021***
-* Seleção de servidores C4FM via rádio. (***Somente do brasil***)
-* Para selecionar, envie uma portatora de 3seg como contato privado: 80+ID do servidor  (7 digitos)
+# ***UPDATE 04/04/2021***
+* Opção de ativar e desativar "redes digitais" (Network 1,2,3,xlx) via rádio ou celular.
+* Obs: essa função só se aplica com DMRGateway.
 
-* 8072400 (Brasil-Link)
-* 8077777 (Brazilnet)
-* 8072401 (C4FM-Brazil)
-* 8090558 (PU2LRZ)
-* 8095973 (PU4ARR)
-* 8056691 (YSF-BRASIL)
-* 8001466 (YSF-Minas)
-* 8072526 (BRAZIL-724)
+***(Celular - 'SSH button' ou terminal shell)***
 
-* ***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
+* sudo net0 reset    (Retornas as configutações definidas pelo usuário)
+* sudo net0 off      (Desativa todas as rede)
+
+* sudo net1 on       (Network 1 ativa)
+* sudo net1 off      (Network 1 desativa)
+
+* sudo net2 on       (Network 2 ativa)
+* sudo net2 off      (Network 2 desativa)
+
+* sudo net3 on       (Network 3 ativa)
+* sudo net3 off      (Network 3 desativa)
+
+* sudo xlx on        (XLX ativa)
+* sudo xlx off       (XLX desativa)
+
+***(RF - Rádio)***
+* Para ativar ou desativas as redes, envie uma portatora de 3seg como contato privado "CP": 44444+(comando)  (7 digitos)
+
+* CP: 4444400 = (desativa as redes)
+* CP: 4444401 = (reset - retorna as configurações do usuário)
+
+* CP: 4444402 = (desativa rede xlx)
+* CP: 4444403 = (ativa rede xlx)
+
+* CP: 4444404 = (desativa network 1)
+* CP: 4444405 = (ativa network 1)
+
+* CP: 4444406 = (desativa network 2)
+* CP: 4444407 = (ativa network 2)
+
+* CP: 4444408 = (desativa network 3)
+* CP: 4444409 = (ativa network 3)
+
+***Obs: Normalmente as redes no pi-star em DMRGateway são organizadas da seguinte forma: "Network 1=BM", "Network 2=IPSC2" e "Network 3=cros-over/DMR2YSF"***
 
 
 # ***UPDATE 03/04/2021***
-* Opção de ativar e desativar os modos digitais via rádio.
+* Opção de ativar e desativar os "modos digitais" via rádio.
 
 * DMR OFF   (3333300) ***(Atenção: o uso desta opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
 * DMR ON    (3333101)
@@ -36,6 +62,20 @@
 * P25 OFF   (3333308)
 * P25 ON    (3333309)
 
+# ***UPDATE 01/04/2021***
+* Seleção de servidores C4FM via rádio. (***Somente do brasil***)
+* Para selecionar, envie uma portatora de 3seg como contato privado: 80+ID do servidor  (7 digitos)
+
+* 8072400 (Brasil-Link)
+* 8077777 (Brazilnet)
+* 8072401 (C4FM-Brazil)
+* 8090558 (PU2LRZ)
+* 8095973 (PU4ARR)
+* 8056691 (YSF-BRASIL)
+* 8001466 (YSF-Minas)
+* 8072526 (BRAZIL-724)
+
+* ***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
  
 # Leia-me: 
 
