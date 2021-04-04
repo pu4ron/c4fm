@@ -22,7 +22,8 @@ if [ `sed -n '/\[DMR Network\]/{n;p;n;p;}' /etc/mmdvmhost | sed '1d' | awk -F = 
 	exit 1;
 fi
 
-# sudo mount -o remount,rw /
+mount -o remount,rw / 2>&1
+mount -o remount,rw /boot 2>&1
 
 if [ -z "$1" ]; then
       val=never
@@ -45,6 +46,8 @@ case ${1} in
   sudo systemctl restart ysf2nxdn.service > /dev/null 2>&1
   sudo systemctl restart dmr2ysf.service > /dev/null 2>&1
   sudo systemctl restart dmr2nxdn.service > /dev/null 2>&1
+  mount -o remount,ro / 2>&1
+  mount -o remount,ro /boot 2>&1
   echo "* Network-3 desligado."
   exit 0
 ;;
@@ -63,6 +66,8 @@ case ${1} in
   sudo systemctl restart ysf2nxdn.service > /dev/null 2>&1
   sudo systemctl restart dmr2ysf.service > /dev/null 2>&1
   sudo systemctl restart dmr2nxdn.service > /dev/null 2>&1
+  mount -o remount,ro / 2>&1
+  mount -o remount,ro /boot 2>&1
   echo "* Network-3 ligado."
   exit 0
 ;;
