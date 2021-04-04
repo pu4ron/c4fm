@@ -84,6 +84,7 @@ DIREtc="/etc"
 DIRBin="/usr/local/bin"
 DIRSbin="/usr/local/sbin"
 DIRSCP="/home/pi-star/c4fm/scp"
+DIRSCG="/home/pi-star/c4fm/scg"
 
 Ap="/etc/pistar-remote"
 Bp="/usr/local/bin/c4fm"
@@ -147,6 +148,26 @@ if [ -f "${DIRBin}/nxdn" ]; then
 
 if [ -f "${DIRBin}/p25" ]; then
    sudo cp ${DIRBin}/p25 ${DIRBin}/p25.$(date +%Y%m%d)
+ fi
+ 
+if [ -f "${DIRBin}/net0" ]; then
+   sudo cp ${DIRBin}/net0 ${DIRBin}/net0.$(date +%Y%m%d)
+ fi
+
+if [ -f "${DIRBin}/net1" ]; then
+   sudo cp ${DIRBin}/net1 ${DIRBin}/net1.$(date +%Y%m%d)
+ fi 
+
+if [ -f "${DIRBin}/net2" ]; then
+   sudo cp ${DIRBin}/net2 ${DIRBin}/net2.$(date +%Y%m%d)
+ fi
+
+if [ -f "${DIRBin}/net3" ]; then
+   sudo cp ${DIRBin}/net3 ${DIRBin}/net3.$(date +%Y%m%d)
+ fi
+
+if [ -f "${DIRBin}/xlx" ]; then
+   sudo cp ${DIRBin}/xlx ${DIRBin}/xlx.$(date +%Y%m%d)
  fi 
 sleep 2
 
@@ -184,9 +205,29 @@ if [ -f "${DIRBin}/d-star" ]; then
 if [ -f "${DIRBin}/nxdn" ]; then
    sudo rm ${DIRBin}/nxdn
  fi 
-
+ 
 if [ -f "${DIRBin}/p25" ]; then
    sudo rm ${DIRBin}/p25
+ fi
+ 
+if [ -f "${DIRBin}/net0" ]; then
+   sudo rm ${DIRBin}/net0
+ fi
+
+if [ -f "${DIRBin}/net1" ]; then
+   sudo rm ${DIRBin}/net1
+ fi
+
+if [ -f "${DIRBin}/net2" ]; then
+   sudo rm ${DIRBin}/net2
+ fi
+
+if [ -f "${DIRBin}/net3" ]; then
+   sudo rm ${DIRBin}/net3
+ fi
+
+if [ -f "${DIRBin}/xlx" ]; then
+   sudo rm ${DIRBin}/xlx
  fi 
 sleep 2
 
@@ -377,6 +418,13 @@ sudo cp ${DIRSCP}/p3                ${DIRBin}/nxdn
 sudo cp ${DIRSCP}/p4                ${DIRBin}/p25
 sleep 1
 
+sudo cp ${DIRSCG}/gr                ${DIRBin}/net0
+sudo cp ${DIRSCG}/g1                ${DIRBin}/net1
+sudo cp ${DIRSCG}/g2                ${DIRBin}/net2
+sudo cp ${DIRSCG}/g3                ${DIRBin}/net3
+sudo cp ${DIRSCG}/g4                ${DIRBin}/xlx
+sleep 1
+
 sudo chmod 755 ${DIRBin}/dmr
 sudo chmod 755 ${DIRBin}/d-star
 sudo chmod 755 ${DIRBin}/nxdn
@@ -388,6 +436,13 @@ sudo chmod 755 ${DIRBin}/ysf
 sudo chmod 755 ${DIRBin}/out
 sleep 1
 
+sudo chmod 755 ${DIRBin}/net0
+sudo chmod 755 ${DIRBin}/net1
+sudo chmod 755 ${DIRBin}/net2
+sudo chmod 755 ${DIRBin}/net3
+sudo chmod 755 ${DIRBin}/xlx
+sleep 1
+
 sudo chmod +x  ${DIRBin}/dmr
 sudo chmod +x  ${DIRBin}/d-star
 sudo chmod +x  ${DIRBin}/nxdn
@@ -397,6 +452,13 @@ sleep 1
 sudo chmod +x  ${DIRBin}/c4fm
 sudo chmod +x  ${DIRBin}/ysf
 sudo chmod +x  ${DIRBin}/out
+sleep 1
+
+sudo chmod +x  ${DIRBin}/net0
+sudo chmod +x  ${DIRBin}/net1
+sudo chmod +x  ${DIRBin}/net2
+sudo chmod +x  ${DIRBin}/net3
+sudo chmod +x  ${DIRBin}/xlx
 sleep 1
 
 sudo chmod 755 ${DIRBin}/MMDVMHost
