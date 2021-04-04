@@ -4,7 +4,7 @@
 
 # ***UPDATE 04/04/2021***
 * -> * Foi adiconado a opção de ativar e desativar as "redes digitais" (Network 1,2,3,xlx) via rádio ou celular *
-* -> * Obs: função que só aplica em DMRGateway *
+* -> * Função que só se aplica em DMRGateway *
 
 
 ***(Celular - 'SSH button' ou terminal shell)***
