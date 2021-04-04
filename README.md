@@ -12,17 +12,17 @@
 * sudo net0 reset    (retornas as configutações definidas pelo usuário)
 * sudo net0 off      (desativa todas as rede)
 
-* sudo net1 on       (Network 1 ativo)
-* sudo net1 off      (Network 1 desativa)
+* sudo net1 on       (ativa Network 1)
+* sudo net1 off      (desativa Network 1)
 
-* sudo net2 on       (Network 2 ativo)
-* sudo net2 off      (Network 2 desativa)
+* sudo net2 on       (ativa Network 2)
+* sudo net2 off      (desativa Network 2)
 
-* sudo net3 on       (Network 3 ativo)
-* sudo net3 off      (Network 3 desativa)
+* sudo net3 on       (ativa Network 3)
+* sudo net3 off      (desativa Network 3)
 
-* sudo xlx on        (XLX ativo)
-* sudo xlx off       (XLX desativa)
+* sudo xlx on        (ativa XLX)
+* sudo xlx off       (desativa XLX)
 
 ***(RF - Rádio)***
 * Para ativar ou desativas as redes, envie uma portatora de 3seg como contato privado "CP": 44444+(comando)  (7 digitos)
