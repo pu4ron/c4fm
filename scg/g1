@@ -36,7 +36,7 @@ case ${1} in
   sudo sed -i "s/\[DMR Network 1\]/\[DMR Network 1#\]/"  ${DIRgw}
   sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
   sudo systemctl restart dmrgateway.service > /dev/null 2>&1
-  echo "* Network1 desligado."
+  echo "* Network-1 desligado."
   exit 0
 ;;
 
@@ -45,7 +45,7 @@ case ${1} in
   sudo sed -i "s/\[DMR Network 1#\]/\[DMR Network 1\]/"  ${DIRgw}
   sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
   sudo systemctl restart dmrgateway.service > /dev/null 2>&1
-  echo "* Network1 ligado."
+  echo "* Network-1 ligado."
   exit 0
 ;;
 
