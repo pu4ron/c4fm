@@ -3,8 +3,8 @@
 ***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR usando o modo cross-over (DMR2YSF) do pi-star e foi aproveitado esse e outros recursos que surgem os controles de dg-id(s) por rádio e aplicativo (app).***
 
 # ***UPDATE 04/04/2021***
-* -> *Foi adiconado a opção de ativar e desativar as "redes digitais" (Network 1,2,3,xlx) via rádio ou celular.
-* -> *Obs: função que só aplica em DMRGateway.
+* -> * Foi adiconado a opção de ativar e desativar as "redes digitais" (Network 1,2,3,xlx) via rádio ou celular *
+* -> * Obs: função que só aplica em DMRGateway *
 
 
 ***(Celular - 'SSH button' ou terminal shell)***
