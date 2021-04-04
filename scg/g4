@@ -22,7 +22,7 @@ if [ `sed -n '/\[DMR Network\]/{n;p;n;p;}' /etc/mmdvmhost | sed '1d' | awk -F = 
 	exit 1;
 fi
 
-sudo mount -o remount,rw /
+# sudo mount -o remount,rw /
 
 if [ -z "$1" ]; then
       val=never
@@ -36,6 +36,7 @@ case ${1} in
   sudo sed -i "s/\[XLX Network\]/\[XLX Network#\]/"  ${DIRgw}
   sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
   sudo systemctl restart dmrgateway.service > /dev/null 2>&1
+  echo "* Network XlX desligado."
   exit 0
 ;;
 
@@ -44,6 +45,7 @@ case ${1} in
   sudo sed -i "s/\[XLX Network#\]/\[XLX Network\]/"  ${DIRgw}
   sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
   sudo systemctl restart dmrgateway.service > /dev/null 2>&1
+  echo "* Network XLX ligado."
   exit 0
 ;;
 
