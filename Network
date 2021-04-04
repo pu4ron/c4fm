@@ -23,7 +23,7 @@ then
 fi
 sleep 2
 
-DGn='" "'
+DGn='"72,96,97"'
 ygw="/etc/ysfgateway"
 EndM="/etc/mmdvmhost"
 EndH="/usr/local/etc/YSFHosts.txt"
