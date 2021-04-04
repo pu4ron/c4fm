@@ -130,8 +130,8 @@ if [ -f "$Bpo" ]; then
    sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)
  fi
 
-if [ -f "${DIRBin}/net" ]; then
-   sudo cp ${DIRBin}/net ${DIRBin}/net.$(date +%Y%m%d)
+if [ -f "${DIRBin}/netwk" ]; then
+   sudo cp ${DIRBin}/netwk ${DIRBin}/netwk.$(date +%Y%m%d)
  fi 
 
 if [ -f "${DIRBin}/dmr" ]; then
@@ -190,8 +190,8 @@ if [ -f "$Bpo" ]; then
    sudo rm ${Bpo}
  fi 
 
-if [ -f "${DIRBin}/net" ]; then
-   sudo rm ${DIRBin}/net
+if [ -f "${DIRBin}/netwk" ]; then
+   sudo rm ${DIRBin}/netwk
  fi
 
 if [ -f "${DIRBin}/dmr" ]; then
@@ -472,10 +472,10 @@ sleep 2
 
 echo "* Adicionando dg-id..."
 echo ""
-sudo cp ${DIR}/Network ${DIRBin}/net
-sudo chmod 755 ${DIRBin}/net
-sudo chmod +x  ${DIRBin}/net
-sudo ${DIRBin}/net start
+sudo cp ${DIR}/Network ${DIRBin}/netwk
+sudo chmod 755 ${DIRBin}/netwk
+sudo chmod +x  ${DIRBin}/netwk
+sudo ${DIRBin}/netwk start
 sleep 2
 
 echo "* Ativando servicos..."
