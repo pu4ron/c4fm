@@ -63,7 +63,7 @@ case ${1} in
   sudo systemctl restart ysf2nxdn.service > /dev/null 2>&1
   sudo systemctl restart dmr2ysf.service > /dev/null 2>&1
   sudo systemctl restart dmr2nxdn.service > /dev/null 2>&1
-  echo "* Network3 desligado."
+  echo "* Network3 ligado."
   exit 0
 ;;
 
