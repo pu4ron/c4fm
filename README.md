@@ -25,7 +25,7 @@
 * sudo xlx off       (desativa XLX)
 
 ***(RF - Rádio)***
-* Para ativar ou desativas as redes, envie uma portatora de 3seg como contato privado "CP": 44444+(comando)  (7 digitos)
+* Para ativar ou desativas as redes, envie uma portatora de 3seg como contato privado "CP": 44444+(comando) / Total de 7 digitos.
 
 * CP: 4444400 = (desativa as redes)
 * CP: 4444401 = (reset - retorna as configurações do usuário)
