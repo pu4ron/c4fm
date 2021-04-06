@@ -8,6 +8,8 @@
 * Algumas informações são importates: Bluedv só trabalha com um slot (simplex) e obrigatoriamente deve está na mesma rede wifi ou cabeada do pi-star. 
 * Estando o bluedv ativo o pi-star fica inativo e o retono normal se dá desligando o bluedv e reiniciando o pi-star/raspberry. 
 * Em alguns casos faz-se necessário desabilitar o bluedv na opção 'Setup' e desmarcar 'enable ser2net' e o inverso para ativar.
+* Em alguns casos faz-se necessário desabilitar todos os serviços do pi-star, se for seu caso, use o comando (sudo stop) ou use o 'app ssh button' com um botão configurado com o comando.
+* Pensamento do dia: "Não queira de graça aquilo que você tem capacidade de obter adquirir!"  D. Mauro, cp.
 * Download: https://play.google.com/store/apps/details?id=com.pa7lim.BlueDV&hl=pt_BR&gl=US
 
 ![Rx-1](https://user-images.githubusercontent.com/40077152/113786152-f6bf4a80-970e-11eb-8f92-917b0893c799.jpeg)
