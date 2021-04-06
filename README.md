@@ -1,10 +1,10 @@
-# Script C4FM - V2.2
+# Script C4FM - V2.2 
 
 ***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso de dg-id(s) por equipamentos DMR usando o modo cross-over (DMR2YSF) do pi-star e foi aproveitado esse e outros recursos que surgem os controles de dg-id(s) por rádio e aplicativo (app).***
 
 # ***NEW UPDATE: BLUEDV-PISTAR 06/04/2021***
 * Opção 3 - Script C4FM - V2.2
-* Dando continuidade ao conjunto de ferramentas para uso no pi-star que foi adicionado suporte para o aplicativo Bluedv.
+* Para aqueles que gostam de brincar, divertir e ser feliz que foi adicionado ao conjunto de ferramentas do pi-star suporte para o aplicativo Bluedv.
 * Algumas informações são importates: Bluedv só trabalha com um slot (simplex) e obrigatoriamente deve está na mesma rede wifi ou cabeada do pi-star. 
 * Estando o bluedv ativo o pi-star fica inativo e o retono normal se dá desligando o bluedv e reiniciando o pi-star/raspberry.
 * Download: https://play.google.com/store/apps/details?id=com.pa7lim.BlueDV&hl=pt_BR&gl=US
@@ -18,6 +18,7 @@
 
 
 # ***UPDATE 04/04/2021***
+* Opção 1 - Script C4FM - V2.2
 * -> * Foi adiconado a opção de ativar e desativar as "redes digitais" (Network 1,2,3,xlx) via rádio ou celular *
 * -> * Função que só se aplica em DMRGateway *
 
@@ -177,6 +178,7 @@
 * Ex: sudo ysf reset (default)
 
 # PATCH DMRGateway (Reescrita de TGs):
+* Opção 2 - Script C4FM - V2.2
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
 
 ***-> Obs: *Após aplicar o patch no seu pi-star as configuraçoes de dmrgateway seram reconfiguradas.***
