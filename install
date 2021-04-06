@@ -16,7 +16,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.2    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -42,9 +42,11 @@ fi
 echo "* Escolha a opcao?" 
 echo ""
 
-echo -e " -> [1] \033[01;37m*PI-STAR*\033[00;37m"
+echo -e " -> [1] \033[01;37m*C4FM PI-STAR*\033[00;37m"
 echo ""
 echo -e " -> [2] \033[01;37m*PATCH DMRGateway*\033[00;37m"
+echo ""
+echo -e " -> [3] \033[01;37m*BlueDV PI-STAR*\033[00;37m"
 echo ""
 
 read -p "* Digite: " -n 1 -r
@@ -57,7 +59,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.2    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -515,7 +517,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.1    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.2    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -559,11 +561,183 @@ if [ -f "$GATW" ]; then
     echo ""
     echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
     echo ""
-
 fi
 cd /home/pi-star
 sudo rm -R /home/pi-star/c4fm
-    ;;
+;;
+
+ 3)
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*            \033[01;33mv2.2 BlueDV    \033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+read -p "* BlueDV PI-STAR: Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+
+DIR="/home/pi-star/c4fm"
+DIRT="/etc/ser2net.conf"
+DIRF="/root/ipv4.fw"
+STOP="/usr/local/bin/stop"
+
+echo ""
+echo "* Iniciando..."
+sleep 2
+echo ""
+echo "* Parando servicos..."
+sudo systemctl stop pistar-watchdog.timer 1> /dev/null 2> /dev/stdout
+sudo systemctl stop pistar-watchdog.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop mmdvmhost.timer 1> /dev/null 2> /dev/stdout
+sudo systemctl stop mmdvmhost.service 1> /dev/null 2> /dev/stdout
+sleep 1
+sudo killall MMDVMHost 1> /dev/null 2> /dev/stdout
+sudo killall MMDVMHost_NoOLED 1> /dev/null 2> /dev/stdout
+sudo killall MMDVMHost_Adafruit 1> /dev/null 2> /dev/stdout
+sleep 1
+sudo systemctl stop ysfgateway.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop dstarrepeater.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop ircddbgateway.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop dapnetgateway.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop p25gateway.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop p25parrot.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop nxdngateway.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop nxdnparrot.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop ysfparrot.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop ysf2dmr.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop ysf2p25.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop ysf2nxdn.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop dmr2ysf.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop dmr2nxdn.service 1> /dev/null 2> /dev/stdout
+sudo systemctl stop dmrgateway.service 1> /dev/null 2> /dev/stdout 
+sudo systemctl stop timeserver.service 1> /dev/null 2> /dev/stdout
+sleep 1
+sudo mount -o remount,ro / 2>&1
+sudo mount -o remount,ro /boot 2>&1 
+sleep 2
+sudo mount -o remount,rw / 2>&1
+sudo mount -o remount,rw /boot 2>&1 
+sleep 1
+if [ -f "$DIRT" ]; then
+   sudo cp ${DIRT} ${DIRT}.$(date +%Y%m%d)
+ fi
+
+if [ -f "$DIRF" ]; then
+   sudo cp ${DIRF} ${DIRF}.$(date +%Y%m%d)
+ fi
+
+if [ -f "$STOP" ]; then
+   sudo cp ${STOP} ${STOP}.$(date +%Y%m%d)
+ fi
+
+if [ -f "$DIRF" ]; then
+   sudo rm ${DIRF}
+ fi
+
+if [ -f "$STOP" ]; then
+   sudo rm ${STOP}
+ fi
+
+echo ""
+echo "* Estruturando..."
+echo ""
+sleep 2
+echo "* Aguarde... 10%"
+echo ""
+sudo apt purge ser2net -y 1> /dev/null 2> /dev/stdout
+echo "* Aguarde... 50%"
+echo "" 
+sudo apt-get install ser2net -y  1> /dev/null 2> /dev/stdout
+sleep 2
+
+if [ -f "$DIRT" ]; then
+   sudo rm ${DIRT}
+ fi
+
+if [ -f "$DIR/ipv4.fw" ]; then
+   sudo rm $DIR/ipv4.fw
+ fi
+
+sudo touch ${DIRT}
+sudo chmod 777 ${DIRT}
+echo "BANNER:banner:\r\nser2net port \p device \d [\s] (Debian GNU/Linux)\r\n\r\n"  >> ${DIRT}
+echo "2000:raw:600:/dev/ttyAMA0:115200 8DATABITS NONE 1STOPBIT"  >> ${DIRT}
+sleep 2
+
+sudo touch ${DIR}/ipv4.fw
+sudo chmod 777 ${DIR}/ipv4.fw
+echo "iptables -A INPUT   -p udp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+echo "iptables -A FORWARD -p udp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+echo "iptables -A OUTPUT  -p udp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+echo "iptables -A INPUT   -p tcp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+echo "iptables -A FORWARD -p tcp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+echo "iptables -A OUTPUT  -p tcp --dport 2000 -j ACCEPT"  >> ${DIR}/ipv4.fw
+
+if [ -f "$DIR/ipv4.fw" ]; then
+   sudo cp ${DIR}/ipv4.fw ${DIRF}
+   sudo chmod 777 ${DIRF}
+ fi
+
+echo "* Aguarde... 90%"
+echo ""
+sleep 2
+
+sudo touch ${STOP}
+sudo chmod 777 ${STOP}
+echo "#!/bin/bash" >> ${STOP}
+echo " " >> ${STOP}
+echo "sudo systemctl stop pistar-watchdog.timer 1> /dev/null 2> /dev/stdout"   >> ${STOP}
+echo "sudo systemctl stop pistar-watchdog.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop mmdvmhost.timer 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop mmdvmhost.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop ysfgateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop dstarrepeater.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop ircddbgateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop dapnetgateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop p25gateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop p25parrot.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop nxdngateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop nxdnparrot.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop ysfparrot.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop ysf2dmr.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop ysf2p25.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop ysf2nxdn.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop dmr2ysf.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop dmr2nxdn.service 1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo systemctl stop dmrgateway.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sudo systemctl stop timeserver.service 1> /dev/null 2> /dev/stdout" >> ${STOP} 
+echo "sleep 1" >> ${STOP}
+echo "sudo killall MMDVMHost  1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo killall MMDVMHost_NoOLED  1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "sudo killall MMDVMHost_Adafruit  1> /dev/null 2> /dev/stdout" >> ${STOP}
+echo "exit 0" >> ${STOP}
+sudo chmod +X ${STOP}
+sudo pistar-firewall 1> /dev/null 2> /dev/stdout
+sleep 2
+sudo systemctl restart ser2net 1> /dev/null 2> /dev/stdout
+sleep 2
+sudo systemctl restart ser2net 1> /dev/null 2> /dev/stdout
+echo "* Concluido. 100%"
+echo ""
+echo ""
+echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
+echo ""
+sudo mount -o remount,ro / 2>&1
+sudo mount -o remount,ro /boot 2>&1 
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+echo ""
+;;
 
 * ) exit 0 ;;   
 esac
