@@ -735,9 +735,8 @@ echo ""
 cd /home/pi-star
 sudo chmod 777 /home/pi-star/c4fm
 sudo rm -rf  /home/pi-star/c4fm
-#sudo mount -o remount,ro / 2>&1 1> /dev/null 2> /dev/stdout
-#sudo mount -o remount,ro /boot 2>&1 1> /dev/null 2> /dev/stdout
-rpi-ro
+sudo mount -o remount,ro / 2>&1 1> /dev/null 2> /dev/stdout
+sudo mount -o remount,ro /boot 2>&1 1> /dev/null 2> /dev/stdout
 ;;
 
 * ) exit 0 ;;   
