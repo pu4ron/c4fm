@@ -4,13 +4,13 @@
 
 # ***NEW UPDATE: BLUEDV-PISTAR 06/04/2021***
 * Opção 3 - Script C4FM - V2.2
-* Dando continuidade ao pensamento de agregar um conjunto de ferramentas para uso no pi-star que foi adicionado suporte para o aplicativo Bluedv.
-* Algumas informações são importates: Bluedv só trabalha com um slot e deve está na mesma rede wifi ou cabeada do pi-star. 
+* Dando continuidade ao conjunto de ferramentas para uso no pi-star que foi adicionado suporte para o aplicativo Bluedv.
+* Algumas informações são importates: Bluedv só trabalha com um slot (simplex) e obrigatoriamente deve está na mesma rede wifi ou cabeada do pi-star. 
 * Estando o bluedv ativo o pi-star fica inativo e o retono normal se dá desligando o bluedv e reiniciando o pi-star/raspberry.
 * Download: https://play.google.com/store/apps/details?id=com.pa7lim.BlueDV&hl=pt_BR&gl=US
 
 ![Tx-1](https://user-images.githubusercontent.com/40077152/113781542-384bf780-9707-11eb-8368-b9bb31fb2ddf.jpeg)
-![Tx-2](https://user-images.githubusercontent.com/40077152/113781549-3d10ab80-9707-11eb-99c2-81f40bcdc554.jpeg)
+![2](https://user-images.githubusercontent.com/40077152/113781959-d770ef00-9707-11eb-81ab-99e423e60791.jpeg)
 ![1](https://user-images.githubusercontent.com/40077152/113781563-426df600-9707-11eb-8267-978ca3fb591b.jpeg)
 ![2](https://user-images.githubusercontent.com/40077152/113781570-46017d00-9707-11eb-8289-51153e35947a.jpeg)
 ![3](https://user-images.githubusercontent.com/40077152/113781584-49950400-9707-11eb-9139-5e9c106ef0f0.jpeg)
