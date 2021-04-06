@@ -12,7 +12,6 @@
 ![Tx-1](https://user-images.githubusercontent.com/40077152/113781542-384bf780-9707-11eb-8368-b9bb31fb2ddf.jpeg)
 ![2](https://user-images.githubusercontent.com/40077152/113781959-d770ef00-9707-11eb-81ab-99e423e60791.jpeg)
 ![1](https://user-images.githubusercontent.com/40077152/113781563-426df600-9707-11eb-8267-978ca3fb591b.jpeg)
-![2](https://user-images.githubusercontent.com/40077152/113781570-46017d00-9707-11eb-8289-51153e35947a.jpeg)
 ![3](https://user-images.githubusercontent.com/40077152/113781584-49950400-9707-11eb-9139-5e9c106ef0f0.jpeg)
 ![4](https://user-images.githubusercontent.com/40077152/113781593-4d288b00-9707-11eb-8cfb-8d52e15ea3a6.jpeg)
 ![5](https://user-images.githubusercontent.com/40077152/113781608-50bc1200-9707-11eb-96c6-7114e237e999.jpeg)
