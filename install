@@ -735,7 +735,7 @@ echo ""
 sudo mount -o remount,ro / 2>&1
 sudo mount -o remount,ro /boot 2>&1 
 cd /home/pi-star
-sudo rm -R /home/pi-star/c4fm
+sudo rm -R c4fm
 echo ""
 ;;
 
