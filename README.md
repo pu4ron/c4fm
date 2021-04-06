@@ -9,7 +9,9 @@
 * Estando o bluedv ativo o pi-star fica inativo e o retono normal se dá desligando o bluedv e reiniciando o pi-star/raspberry.
 * Download: https://play.google.com/store/apps/details?id=com.pa7lim.BlueDV&hl=pt_BR&gl=US
 
+![Rx-1](https://user-images.githubusercontent.com/40077152/113786152-f6bf4a80-970e-11eb-8f92-917b0893c799.jpeg)
 ![Tx-1](https://user-images.githubusercontent.com/40077152/113781542-384bf780-9707-11eb-8368-b9bb31fb2ddf.jpeg)
+![Tx-3](https://user-images.githubusercontent.com/40077152/113785767-2883e180-970e-11eb-96dd-028ad51338bf.jpeg)
 ![2](https://user-images.githubusercontent.com/40077152/113781959-d770ef00-9707-11eb-81ab-99e423e60791.jpeg)
 ![1](https://user-images.githubusercontent.com/40077152/113781563-426df600-9707-11eb-8267-978ca3fb591b.jpeg)
 ![3](https://user-images.githubusercontent.com/40077152/113781584-49950400-9707-11eb-9139-5e9c106ef0f0.jpeg)
