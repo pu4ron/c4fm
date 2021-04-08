@@ -94,8 +94,8 @@ VALOR=${relink}
   sleep 2
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
 
-  echo "Link YSF${VALOR}"
-
+  echo "RJS: ${SERV} / ${VALOR}"
+  
   sudo mount -o remount,ro / 2>&1
   sudo mount -o remount,ro /boot 2>&1
   
