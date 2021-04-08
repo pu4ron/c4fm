@@ -72,7 +72,6 @@ case ${1} in
 *)
   
 VALOR=${relink}
-
   sudo mount -o remount,rw / 2>&1
   sudo mount -o remount,rw /boot 2>&1
 
