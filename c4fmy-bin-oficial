@@ -75,18 +75,25 @@ VALOR=${relink}
   sudo mount -o remount,rw / 2>&1
   sudo mount -o remount,rw /boot 2>&1
 
-  SERV=$(grep -m 1 ''${relink}';' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${relink}'/ {print $2}')
-  ALVO="Startup=${SERV}"
   DIRC="/etc/ysfgateway"
+  DIRYA="/etc/dmr2ysf"
 
-  sudo chmod 777 ${DIRC}
-  sudo sed -i "s/Startup=.*/${ALVO}/"  ${DIRC}
+  SERV=$(grep -m 1 ''${relink}';' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${relink}'/ {print $2}')
+  SERVY=$(grep -m 1 ''${relink}';' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${relink}'/ {print $1}')
+
+  sudo chmod 644 ${DIRC}
+  sudo chmod 644 ${DIRYA}
+
+  sudo sed -i "s/Startup=.*/Startup=${SERV}/"              ${DIRC}
+  sudo sed -i "s/DefaultDstTG=.*/DefaultDstTG=${SERVY}/"   ${DIRYA}
+
+  sudo systemctl restart dmr2ysf.service     >/dev/null 2>&1 & 
   sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &
-  sudo systemctl restart dmr2ysf.service >/dev/null 2>&1 &
-
+  
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
-  sleep 1
+  sleep 2
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
+
   echo "Link YSF${VALOR}"
 
   sudo mount -o remount,ro / 2>&1
