@@ -51,11 +51,28 @@ case ${1} in
 
 *)
   
-VALOR=$relink
+VALOR=${relink}
+
+  sudo mount -o remount,rw / 2>&1
+  sudo mount -o remount,rw /boot 2>&1
+
+  SERV=$(grep -m 1 ''${relink}';' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${relink}'/ {print $2}')
+  ALVO="Startup=${SERV}"
+  DIRC="/etc/ysfgateway"
+
+  sudo chmod 777 ${DIRC}
+  sudo sed -i "s/Startup=.*/${ALVO}/"  ${DIRC}
+  sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &
+  sudo systemctl restart dmr2ysf.service >/dev/null 2>&1 &
+
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
   sleep 1
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
   echo "Link YSF${VALOR}"
+
+  sudo mount -o remount,ro / 2>&1
+  sudo mount -o remount,ro /boot 2>&1
+  
   exit 0
 ;;
 esac
