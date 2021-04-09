@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 ################################################
 #                                              #
 #        Por: Ronualdo JSA - PU4RON            #
@@ -48,9 +48,11 @@ VALOR=$relink
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
   sleep 1
   (cd /var/log/pi-star/; sudo ${COM} LinkFCS${SRV}${VALOR}) >/dev/null 2>&1 &
-  echo "* -> Link ${SRV}${VALOR}"
+  
+  RESTD="FCS${SRV}${VALOR}"
+  NAMESERV=$(grep -m 1 ''${RESTD}';' /usr/local/etc/FCSHosts.txt | awk -F ";" '/'${RESTD}'/ {print $2}')
+  echo "RJS: SERVER:${SRV}01 DG-ID:${VALOR} - ${NAMESERV}"
   exit 0
 ;;
 esac
-
 exit 0
