@@ -85,8 +85,8 @@ VALOR=${relink}
   sudo systemctl restart dmr2ysf.service     1> /dev/null 2> /dev/stdout 
   
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
-
-  echo "RJS: ${SERV} / ${VALOR}"
+  
+  echo "RJS: (${SERV}) - ID:${VALOR}"
   exit 0
 ;;
 esac
