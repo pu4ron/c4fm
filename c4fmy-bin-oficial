@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 ################################################
 #                                              #
 #        Por: Ronualdo JSA - PU4RON            #
@@ -38,8 +38,6 @@ case ${1} in
 ;;
 
 *off|Off|OFF)
-  sudo mount -o remount,rw / 2>&1
-  sudo mount -o remount,rw /boot 2>&1
 
   ALVOFF="Startup="
   ALVOFY="DefaultDstTG="
@@ -56,9 +54,6 @@ case ${1} in
   sudo systemctl restart dmr2ysf.service >/dev/null 2>&1 &
 
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
-
-  sudo mount -o remount,ro / 2>&1
-  sudo mount -o remount,ro /boot 2>&1
   exit 0
 ;;
 
@@ -72,8 +67,8 @@ case ${1} in
 *)
   
 VALOR=${relink}
-  sudo mount -o remount,rw / 2>&1
-  sudo mount -o remount,rw /boot 2>&1
+
+  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
 
   DIRC="/etc/ysfgateway"
   DIRYA="/etc/dmr2ysf"
@@ -87,20 +82,12 @@ VALOR=${relink}
   sudo sed -i "s/Startup=.*/Startup=${SERV}/"              ${DIRC}
   sudo sed -i "s/DefaultDstTG=.*/DefaultDstTG=${SERVY}/"   ${DIRYA}
 
-  sudo systemctl restart dmr2ysf.service     >/dev/null 2>&1 & 
-  sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &
+  sudo systemctl restart dmr2ysf.service     1> /dev/null 2> /dev/stdout 
   
-  (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
-  sleep 2
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
 
   echo "RJS: ${SERV} / ${VALOR}"
-  
-  sudo mount -o remount,ro / 2>&1
-  sudo mount -o remount,ro /boot 2>&1
-  
   exit 0
 ;;
 esac
-
 exit 0
