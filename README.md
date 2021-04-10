@@ -2,6 +2,16 @@
 
 ***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos que o pi-star tem, e um deles, é o uso de dg-id por equipamentos DMR em modo cross-over (DMR2YSF).  E vale lembrar que, foi aproveitado esses recursos e outros que surgem os diversos tipos de controle por rádio e aplicativo (app).***
 
+# ***UPDATE 10/04/2021***
+* Opção 1 - Script C4FM - V2.2
+* -> * Foi adicinado uma nova função de declarar DG-ID(S) estático(s) e standby em um servidor YCS.
+* -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
+
+![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
+![Estatico-3](https://user-images.githubusercontent.com/40077152/114287087-8d0aad80-9a3a-11eb-9134-5c2c7d15a3ea.png)
+![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
+
+
 # ***NEW UPDATE: BLUEDV-PISTAR 06/04/2021***
 * Opção 3 - Script C4FM - V2.2
 * Para aqueles que gostam de brincar, divertir e ser feliz que foi adicionado ao conjunto de ferramentas do pi-star suporte para o aplicativo Bluedv.
