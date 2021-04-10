@@ -16,43 +16,98 @@ fi
 VGw=$(grep -m 1 'Startup=' /etc/ysfgateway | awk -F "=" '/Startup/ {print $2}')
 VHost=$(grep -m 1 ';'${VGw}'' /usr/local/etc/YSFHosts.txt | awk -F ";" '/'${VGw}'/ {print $1}'| sed 's/.//4' |  sed 's/.//4')
 SRV="${VHost}"
-
 COM="/usr/local/bin/RemoteCommand 6073"
+beta="/etc/ysfgateway"
 
 if [ -z "$1" ]
 then
-      relink=never
+      relink=""
 else
       relink=${1}
 fi
 
-case ${1} in
+idv=$( echo "$relink" | cut -c 1)
 
+case ${1} in
 
 *off)
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
-  echo "* -> Desconectando."
+  echo -e "RJS-1: \033[00;33m-> Desconectando...\033[00;33m"
   exit 0
 ;;
 
-
 *reset)
   sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &	
-  echo "* -> Retornando as configuracoes do usuario."
+  echo -e "RJS-2: \033[00;33m-> Retornando as configuracoes do usuario.\033[00;33m"
   exit 0
 ;;
 
 *)
-  
-VALOR=$relink
+
+if [ "${idv}" = "*" ]; then 
+
+  resultado=${relink}
+
+  id=$( echo "$resultado" | cut -c 2-99)
+
+  link=${id}
+
+  if [ -f "$beta" ]; then
+
+     if [[ $(egrep -h -i "Options" ${beta} | wc -l) -eq 0 ]]; then
+
+           echo -e "RJS: \033[00;33m'Options' nao consta nas configuracoes do YSFGateway.\033[00;33m"
+           exit 1;
+     fi
+     
+     sudo mount -o remount,rw /
+     sudo chmod 777 ${beta}
+     sudo sed -i "s/Options=.*/Options=${link},"/  ${beta}
+     sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &
+     echo -e "RJS-3: \033[00;33mDG-ID:[${link}]\033[01;33m"
+     sudo mount -o remount,ro /
+     exit 0
+  fi
+  exit 0
+
+
+
+elif [ "${idv}" = "@" ]; then
+
+  if [ -f "$beta" ]; then
+          if [[ $(egrep -h -i "Options" ${beta} | wc -l) -eq 0 ]]; then
+             echo -e "RJS: \033[00;33m'Options' nao consta nas configuracoes do YSFGateway.\033[00;33m"
+             exit 1;
+          fi
+     sudo mount -o remount,rw /
+     sudo chmod 777 ${beta}
+     sudo sed -i "s/Options=.*/Options='00;00;00;'"/  ${beta}
+     sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &
+     echo -e "RJS-4: \033[00;33mDG-ID:[Standby]\033[01;33m"
+     sudo mount -o remount,ro /
+     exit 0
+  fi
+  exit 0
+
+
+elif [ -z ${idv}  ]; then 
+  exit 0
+
+
+else
+  valor=${relink}
+
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
   sleep 1
-  (cd /var/log/pi-star/; sudo ${COM} LinkFCS${SRV}${VALOR}) >/dev/null 2>&1 &
-  
-  RESTD="FCS${SRV}${VALOR}"
+  (cd /var/log/pi-star/; sudo ${COM} LinkFCS${SRV}${valor}) >/dev/null 2>&1 &
+
+  RESTD="FCS${SRV}${valor}"
   NAMESERV=$(grep -m 1 ''${RESTD}';' /usr/local/etc/FCSHosts.txt | awk -F ";" '/'${RESTD}'/ {print $2}')
-  echo "RJS: DG-ID:${VALOR} SRV:${SRV}01 - (${NAMESERV})"
+
+  echo -e "RJS-5: \033[00;33mDG-ID:${valor} SRV:${SRV}01 - (${NAMESERV})\033[00;33m"
   exit 0
+fi
+
 ;;
 esac
 exit 0
