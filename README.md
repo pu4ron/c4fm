@@ -23,13 +23,16 @@
 ![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
 
 
-* -> * A nova forma de selecionar um servidor c4fm via rádio é simples, basta enviar uma portadora como TG com o id do servidor no 'slot 2', se estiver usando DMRGateway acrescente o numero '70' antes do id do servidor. Para falar, use o mesmo id do servidor que foi usado para seleciona-lo. 
+* -> * (***Experimental***) A nova forma de selecionar um servidor c4fm via rádio é simples, basta enviar uma portadora como TG com o id do servidor no 'slot 1/2', se estiver usando DMRGateway acrescente o numero '70' antes do id do servidor. Para falar, use o mesmo id do servidor que foi usado para seleciona-lo. 
+* -> * A forma anterior de seleção permanece ativa.
 
 * ***Após intalação do script o primeiro uso requer 'Reboot'.***
 
-* Exemplo: YCS72401  / Tx 'slot 2'  TG72401 ou TG7072401
-* Exemplo: YSF90558  / Tx 'slot 2'  TG90558 ou TG7090558
-* Exemplo: YSF56691  / Tx 'slot 2'  TG56691 ou TG7056691
+* ***Em algumas variantes da versão do pi-star deve-se usar o 'slot 1' para selecionar os servidores.***
+
+* Exemplo: YCS72401  / Tx: TG72401 ou TG7072401
+* Exemplo: YSF90558  / Tx: TG90558 ou TG7090558
+* Exemplo: YSF56691  / Tx: TG56691 ou TG7056691
 
 
 # ***NEW UPDATE: BLUEDV-PISTAR 06/04/2021***
