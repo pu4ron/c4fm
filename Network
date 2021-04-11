@@ -71,6 +71,9 @@ echo "Id=${idgw}"                             >> ${ygw}
 echo "Daemon=1"                               >> ${ygw}
 echo "WiresXCommandPassthrough=1"             >> ${ygw}
 echo "Debug=0"                                >> ${ygw}
+echo "SaveAMBE=0"                             >> ${ygw}
+echo "AMBECompA=4"                            >> ${ygw}
+echo "AMBECompB=3"                            >> ${ygw}
 echo " "                                      >> ${ygw}
 echo "[Info]"                                 >> ${ygw}
 echo "RXFrequency=${RXf}"                     >> ${ygw}
