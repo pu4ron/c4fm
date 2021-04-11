@@ -10,14 +10,14 @@
 
 * -> * Para seleção estática do(s) dg-id(s) use o caractere especial "estrela (*)" seguido do(s) dg-id(s) e separados por vírgulas.
 *  Exemplo(s): 
-*  dg-id: 72 (sudo c4fm *72)
-*  dg-id(s): 72,96,97,24 (sudo c4fm *72,96,97,24)
+*  dg-id: 72 ( sudo c4fm *72 )
+*  dg-id(s): 72,96,97,24 ( sudo c4fm *72,96,97,24 )
 
 ![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
 
 * -> * No modo standby, as transmiões são mutadas e o servidor fica a espera de alguma portadora para ser ativado por tempo determinado.
 * -> * Para ativar use o símbolo especial "arroba (@)"
-*  Exemplo: sudo c4fm @
+*  Exemplo: ( sudo c4fm  @ )
 
 ![Estatico-3](https://user-images.githubusercontent.com/40077152/114287087-8d0aad80-9a3a-11eb-9134-5c2c7d15a3ea.png)
 ![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
