@@ -71,6 +71,15 @@ echo "LocalAddress=127.0.0.1"                        >> ${dmc}
 echo "LocalPort=3200"                                >> ${dmc}
 echo "Daemon=1"                                      >> ${dmc}
 echo "FCSRooms=/usr/local/etc/FCSHosts.txt"          >> ${dmc}
+echo "RadioID=${IDuser}"                             >> ${dmc}
+echo "FICHCallsign=2"                                >> ${dmc}
+echo "FICHCallMode=0"                                >> ${dmc}
+echo "FICHFrameTotal=6"                              >> ${dmc}
+echo "FICHMessageRoute=0"                            >> ${dmc}
+echo "FICHVOIP=0"                                    >> ${dmc}
+echo "FICHDataType=2"                                >> ${dmc}
+echo "FICHSQLType=0"                                 >> ${dmc}
+echo "FICHSQLCode=0"                                 >> ${dmc}
 echo "DT1=1,34,97,95,43,3,17,0,0,0"                  >> ${dmc}
 echo "DT2=0,0,0,0,108,32,28,32,3,8"                  >> ${dmc}
 echo "Debug=0"                                       >> ${dmc}
@@ -92,7 +101,7 @@ echo "Time=24"                                       >> ${dmc}
 echo ""                                              >> ${dmc}
 echo "[Log]"                                         >> ${dmc}
 echo "DisplayLevel=0"                                >> ${dmc}
-echo "FileLevel=2"                                   >> ${dmc}
+echo "FileLevel=1"                                   >> ${dmc}
 echo "FilePath=/var/log/pi-star"                     >> ${dmc}
 echo "FileRoot=DMR2YSF"                              >> ${dmc}
 echo ""                                              >> ${dmc}
