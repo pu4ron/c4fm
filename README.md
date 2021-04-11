@@ -10,8 +10,8 @@
 
 * -> * Para seleção estática do(s) dg-id(s) use o caractere especial "estrela (*)" seguido do(s) dg-id(s) e separados por vírgulas.
 *  Exemplo(s): 
-*  dg-id: 72 ( sudo c4fm *72 )
-*  dg-id(s): 72,96,97,24 ( sudo c4fm *72,96,97,24 )
+*  dg-id: 72 ( sudo c4fm  *72 )
+*  dg-id(s): 72,96,97,24 ( sudo c4fm  *72,96,97,24 )
 
 ![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
 
