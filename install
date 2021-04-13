@@ -524,9 +524,13 @@ echo ""
 echo ""
 echo -e "\033[01;37m\033[03;36m* Nova reescrita de TG(s) IPSC2 para uso com C4FM *\033[00;37m"
 echo ""
+echo -e "\033[01;37m\033[03;36m* As demais redes permanecem inalteradas...*\033[00;37m"
+echo ""
 echo -e "\033[01;37m\033[03;37m-> Ex: TG 724,   2000724 [7 digitos: 2000+TG]\033[00;37m"
 echo ""
 echo -e "\033[01;37m\033[03;37m-> Ex: TG 72431, 2072431 [7 digitos: 20+TG]\033[00;37m"
+echo ""
+echo ""
 echo ""
 
 read -p "* Continuar? (S/N) " -n 1 -r
@@ -538,30 +542,27 @@ case "$REPLY" in
 esac
 echo ""
 
-GATW="/etc/dmrgateway"
-DIRpat="/home/pi-star/c4fm/rewritten-patch"
-SERv="/usr/local/sbin/dmrgateway.service"
+DIRgw="/etc/dmrgateway"
+DIRpat="/home/pi-star/c4fm/scw/rewritten-patch"
+
  
-if [ -f "$GATW" ]; then
-    
+if [ -f "$DIRgw" ]; then
+
     echo ""
-    echo "* Backup..."
-    sudo cp -p ${GATW}  ${GATW}.$(date +%d%m%Y_%H:%M:%S)
+    echo "* Iniciando..."
     sleep 1
-    echo ""
-    echo "* Estruturando..."
-    sudo rm ${GATW}
-    sleep 1
-    sudo cp ${DIRpat} ${GATW}
-    sleep 1
-    sudo chmod 644 ${GATW}
-    sleep 1
-    echo ""
-    echo "* -> No pi-star configure DMRGateway e clik em aplicar <- *"
+    sudo chmod 777 ${DIRpat}
+    sudo chmod +x  ${DIRpat}
+    sudo ${DIRpat}
+    sleep 2
     echo ""
     echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
     echo ""
+    echo "* -> Configure o DMRGateway e clik em aplicar <- *"
+    echo ""
+
 fi
+
 cd /home/pi-star
 sudo rm -R /home/pi-star/c4fm
 ;;
