@@ -13,6 +13,8 @@ if [ "$(id -u)" != "0" ];then
 	exit 1
 fi
 
+mount -o remount,rw /
+
 COM="/usr/local/bin/RemoteCommand 6073"
 MODE="pistar-mmdvmhost-module Ysf"
 
