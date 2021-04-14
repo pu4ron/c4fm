@@ -13,7 +13,7 @@ if [ "$(id -u)" != "0" ];then
 	exit 1
 fi
 
-mount -o remount,rw /
+sudo mount -o remount,rw /
 
 COM="/usr/local/bin/RemoteCommand 6073"
 MODE="pistar-mmdvmhost-module Ysf"
@@ -30,12 +30,14 @@ case ${1} in
 *lig|Lig|LIG)
   (cd /var/log/pi-star/; sudo ${MODE} Enable) >/dev/null 2>&1 &
   echo "* -> Modalidade: YSF ${REST}"
+  sudo mount -o remount,ro /
   exit 0
 ;;
 
 *desl|Desl|DESL)
   (cd /var/log/pi-star/; sudo ${MODE} Disable) >/dev/null 2>&1 &
   echo "* -> Modalidade: YSF ${REST}"
+  sudo mount -o remount,ro /
   exit 0
 ;;
 
@@ -56,6 +58,9 @@ case ${1} in
   sudo systemctl restart dmr2ysf.service >/dev/null 2>&1 &
 
   (cd /var/log/pi-star/; sudo ${COM} UnLink) >/dev/null 2>&1 &
+  
+  sudo mount -o remount,ro /
+
   exit 0
 ;;
 
@@ -63,6 +68,7 @@ case ${1} in
 *reset)
   sudo systemctl restart ysfgateway.service  >/dev/null 2>&1 &	
   echo "* Retornando as configuracoes definidas pelo usuario."
+  sudo mount -o remount,ro /
   exit 0
 ;;
 
@@ -89,6 +95,9 @@ VALOR=${relink}
   (cd /var/log/pi-star/; sudo ${COM} LinkYSF${VALOR}) >/dev/null 2>&1 &
   
   echo "RJS: (${SERV}) - ID:${VALOR}"
+  
+  sudo mount -o remount,ro /
+
   exit 0
 ;;
 esac
