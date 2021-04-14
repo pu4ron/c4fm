@@ -115,7 +115,7 @@ sleep 2
 
 echo "* Backup..."
 echo ""
-sudo cp -R ${Ap} ${Ap}.$(date +%Y%m%d)
+# sudo cp -R ${Ap} ${Ap}.$(date +%Y%m%d)
 sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
 sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
 sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
@@ -176,7 +176,7 @@ sleep 2
 
 echo "* Estruturando..."
 echo ""
-sudo rm ${Ap}
+#sudo rm ${Ap}
 sudo rm ${Cp}
 sudo rm ${Dp}
 sudo rm ${Ep}
