@@ -11,11 +11,10 @@
 Ap="/etc/pistar-remote"
 call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
 
-echo "1"
+
 
 if [ -f "${Ap}" ]; then
 
-echo "2"
 
    mount -o remount,rw /
 
@@ -204,9 +203,9 @@ echo "2"
    echo "net3ON=4444409"                                 >> ${Ap}
    echo ""                                               >> ${Ap}
 
-   echo "3"
+   sleep 1
    sudo chmod 644 ${Ap}
-   echo "4"
+   sleep 1
 
 fi
 exit 0
