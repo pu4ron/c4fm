@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+if [ "$(id -u)" != "0" ];then
+	echo "Este script deve ser executado como root" 1>&2
+	exit 1
+fi
+
+id=$(grep -m 1 'Id=' /etc/mmdvmhost | tac | tail -1 | awk -F "=" '/Id/ {print $2}')
+gy="/etc/dmrgateway"
+
+if [ -f "${gy}" ]; then
+
+   sudo mount -o remount,rw / 2>&1
+   sudo chmod 777 ${gy}
+
+   if [[ $(grep -c "\[DMR Network 5\]" /etc/dmrgateway) -eq "0" ]]; then
+	
+      echo ""                                         >> ${gy}
+      echo ""                                         >> ${gy}
+      echo "[DMR Network 5]"                          >> ${gy}
+      echo "Enabled=1"                                >> ${gy}
+      echo "Name=BRIDGE_DMR2YSF"                      >> ${gy}
+      echo "Id=${id}"                                 >> ${gy}
+      echo "Address=127.0.0.1"                        >> ${gy}
+      echo "Port=62033"                               >> ${gy}
+      echo "Local=62034"                              >> ${gy}
+      echo "TypeRewrite0=1,7000001,2,1,999998"        >> ${gy}
+      echo "Password=PASSWORD"                        >> ${gy}
+      echo "Location=1"                               >> ${gy}
+      echo "Debug=0"                                  >> ${gy}
+      echo ""                                         >> ${gy}
+
+      sudo chmod 644 ${gy}
+      sudo mount -o remount,rw / 2>&1
+      
+   fi
+fi
+exit 0

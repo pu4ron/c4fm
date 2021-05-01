@@ -1,0 +1,169 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+EndM="/etc/mmdvmhost"
+EndH="/usr/local/etc/YSFHosts.txt"
+
+gy="/etc/dmrgateway"
+id=$(grep -m 1 'Id=' /etc/mmdvmhost | tac | tail -1 | awk -F "=" '/Id/ {print $2}')
+Pwd=$(egrep -nx -A 16  '\[DMR Network 1\]' /etc/dmrgateway | grep "Password=" | cut -c 13-50)
+RXf=$(grep -m 1 'RXFrequency=' ${EndM} | awk -F "=" '/RXFrequency/ {print $2}')
+TXf=$(grep -m 1 'TXFrequency=' ${EndM} | awk -F "=" '/TXFrequency/ {print $2}')
+Pw=$(grep -m 1 'Power=' ${EndM} | awk -F "=" '/Power/ {print $2}')
+LATd=$(grep -m 1 'Latitude=' ${EndM} | awk -F "=" '/Latitude/ {print $2}')
+LONg=$(grep -m 1 'Longitude=' ${EndM} | awk -F "=" '/Longitude/ {print $2}')
+Heig=$(grep -m 1 'Height=' ${EndM} | awk -F "=" '/Height/ {print $2}')
+LOCAL=$(grep -m 1 'Location=' ${EndM} | awk -F "=" '/Location/ {print $2}')
+DESc=$(grep -m 1 'Description=' ${EndM} | awk -F "=" '/Description/ {print $2}')
+SITE=$(grep -m 1 'URL=' ${EndM} | awk -F "=" '/URL/ {print $2}')
+
+if [ -f "${gy}" ]; then
+
+   Pwd=$(egrep -nx -A 16  '\[DMR Network 1\]' /etc/dmrgateway | grep "Password=" | cut -c 13-50)
+   echo ""
+   echo "* Desativando servicos..."
+   echo ""
+   sudo systemctl stop dmrgateway.service > /dev/null 2>&1
+   sleep 2
+   sudo systemctl stop mmdvmhost.service > /dev/null 2>&1
+   sleep 2
+   sudo mount -o remount,rw / 2>&1
+   echo "* Backup..."
+   echo ""
+   sudo cp -p ${gy} ${gy}.bkp-$(date +%d%m%Y_%H:%M:%S)
+   sleep 2
+   echo "* Estruturando..."
+   echo ""
+   sudo rm ${gy}
+   sleep 2
+
+   sudo touch ${gy}
+   sudo chmod 777 ${gy}
+
+   echo "[General]"                                 >> ${gy}
+   echo "RptAddress=127.0.0.1"                      >> ${gy}
+   echo "RptPort=62032"                             >> ${gy}
+   echo "LocalAddress=127.0.0.1"                    >> ${gy}
+   echo "LocalPort=62031"                           >> ${gy}
+   echo "RuleTrace=0"                               >> ${gy}
+   echo "Daemon=1"                                  >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo "RFTimeout=20"                              >> ${gy}
+   echo "NetTimeout=20"                             >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[Log]"                                     >> ${gy}
+   echo "DisplayLevel=0"                            >> ${gy}
+   echo "FileLevel=1"                               >> ${gy}
+   echo "FilePath=/var/log/pi-star"                 >> ${gy}
+   echo "FileRoot=DMRGateway"                       >> ${gy}
+   echo "FileRotate=1"                              >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[Voice]"                                   >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "Language=es_ES"                            >> ${gy}
+   echo "Directory=/usr/local/etc/DMR_Audio"        >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[Info]"                                    >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "RXFrequency=${RXf}"                        >> ${gy}
+   echo "TXFrequency=${TXf}"                        >> ${gy}
+   echo "Power=${Pw}"                               >> ${gy}
+   echo "Latitude=${LATd}"                          >> ${gy}
+   echo "Longitude=${LONg}"                         >> ${gy}
+   echo "Height=${Heig}"                            >> ${gy}
+   echo "Location="${LOCAL}""                       >> ${gy}
+   echo "Description="${DESc}""                     >> ${gy}
+   echo "URL=${SITE}"                               >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[XLX Network]"                             >> ${gy}
+   echo "Startup=000"                               >> ${gy}
+   echo "Enabled=0"                                 >> ${gy}
+   echo "File=/usr/local/etc/XLXHosts.txt"          >> ${gy}
+   echo "Port=62030"                                >> ${gy}
+   echo "Password=passw0rd"                         >> ${gy}
+   echo "ReloadTime=60"                             >> ${gy}
+   echo "Slot=2"                                    >> ${gy}
+   echo "TG=6"                                      >> ${gy}
+   echo "Base=64000"                                >> ${gy}
+   echo "Relink=60"                                 >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo "Id=${id}"                                  >> ${gy}
+   echo "UserControl=1"                             >> ${gy}
+   echo "Module=F"                                  >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[DMR Network 1]"                           >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "Address=7242.master.brandmeister.network"  >> ${gy}
+   echo "Port=62031"                                >> ${gy}
+   echo "TGRewrite0=2,9,2,9,1"                      >> ${gy}
+   echo "PCRewrite0=2,94000,2,4000,1001"            >> ${gy}
+   echo "TypeRewrite0=2,9990,2,9990"                >> ${gy}
+   echo "SrcRewrite0=2,4000,2,9,1001"               >> ${gy}
+   echo "PassAllPC0=1"                              >> ${gy}
+   echo "PassAllTG0=1"                              >> ${gy}
+   echo "PassAllPC1=2"                              >> ${gy}
+   echo "PassAllTG1=2"                              >> ${gy}
+   echo "Password=${Pwd}"                           >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo "Id=${id}"                                  >> ${gy}
+   echo "Name=BM_7242_Brazil"                       >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[DMR Network 2]"                           >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "Address=34.95.198.98"                      >> ${gy}
+   echo "Port=55555"                                >> ${gy}
+   echo "TGRewrite0=1,2000001,1,1,999999"           >> ${gy}
+   echo "TGRewrite1=2,2000001,2,1,999999"           >> ${gy}
+   echo "PCRewrite0=1,2000001,1,1,999999"           >> ${gy}
+   echo "PCRewrite1=2,2000001,2,1,999999"           >> ${gy}
+   echo "Password="PASSWORD""                       >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo "Id=${id}"                                  >> ${gy}
+   echo "Name=DMR+_IPSC2-BRASIL-2"                  >> ${gy} 
+   echo 'Options="TS1_1=724;TS1_2=199;TS2_1=72431;TS2_2=72421;TS2_3=9990"'   >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[DMR Network 3]"                           >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "Name=DMR2YSF_Cross-over"                   >> ${gy}
+   echo "Id=${id}"                                  >> ${gy}
+   echo "Address=127.0.0.1"                         >> ${gy}
+   echo "Port=62033"                                >> ${gy}
+   echo "Local=62034"                               >> ${gy}
+   echo "TGRewrite0=2,7000001,2,1,999998"           >> ${gy}
+   echo "SrcRewrite0=2,1,2,7000001,999998"          >> ${gy}
+   echo "PCRewrite0=2,7000001,2,1,999998"           >> ${gy}
+   echo "Password="PASSWORD""                       >> ${gy}
+   echo "Location=0"                                >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo " "                                         >> ${gy}
+   echo "[DMR Network 5]"                           >> ${gy}
+   echo "Enabled=1"                                 >> ${gy}
+   echo "Name=BRIDGE_Cross-over"                    >> ${gy}
+   echo "Id=${id}"                                  >> ${gy}
+   echo "Address=127.0.0.1"                         >> ${gy}
+   echo "Port=62033"                                >> ${gy} 
+   echo "Local=62034"                               >> ${gy}
+   echo "TypeRewrite0=1,7000001,2,1,999998"         >> ${gy}
+   echo "Password=PASSWORD"                         >> ${gy}
+   echo "Location=1"                                >> ${gy}
+   echo "Debug=0"                                   >> ${gy}
+   echo " "                                         >> ${gy}
+
+   sleep 2
+   sudo chmod 644 ${gy}
+   echo "* Ativando servicos..."
+   echo ""
+   sudo systemctl restart mmdvmhost.service > /dev/null 2>&1
+   sleep 2
+   sudo systemctl  restart dmrgateway.service > /dev/null 2>&1
+   sleep 2
+   sudo mount -o remount,rw / 2>&1
+fi
+exit 0
