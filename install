@@ -22,27 +22,17 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
 echo ""
 
-sudo sed -i "/\[Enabled\]/{n;s/0/1/}" /etc/dmr2ysf
-sleep 2
-
 if [ `sed -n '/\[Enabled\]/{n;p;}' /etc/dmr2ysf | cut -c 9` != 1 ]; then
-        echo ""
-        echo "* [DMR2YSF -> "Desligado"] - Antes de continuar ative."
-        sudo rm -R /home/pi-star/c4fm
-        echo ""
-	exit 0
-fi
+   sudo sed -i "/\[Enabled\]/{n;s/0/1/}" /etc/dmr2ysf
+   sleep 2
+ fi
 
-if [ "$ALDG" = "" ]
-then
-   echo ""
-   echo "* ATENCAO!"
-   echo "* Nenhum servidor c4fm encontrado!"
-   echo "* Selecione (ative) um servidor de conexao c4fm e tente novamente."
-   echo ""
-   sudo rm -R /home/pi-star/c4fm
-   exit 0
-fi
+if [ "$ALDG" = "" ]; then
+   sudo chmod 775 /home/pi-star/c4fm/server
+   sudo chmod +x /home/pi-star/c4fm/server
+   sudo /home/pi-star/c4fm/server
+   sleep 2
+ fi
 
 echo "* Escolha a opcao?" 
 echo ""
