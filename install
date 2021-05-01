@@ -25,6 +25,7 @@ echo ""
 if [ `sed -n '/\[Enabled\]/{n;p;}' /etc/dmr2ysf | cut -c 9` != 1 ]; then
         echo ""
         echo "* [DMR2YSF -> "Desligado"] - Antes de continuar ative."
+        sudo rm -R /home/pi-star/c4fm
         echo ""
 	exit 0
 fi
@@ -36,6 +37,7 @@ then
    echo "* Nenhum servidor c4fm encontrado!"
    echo "* Selecione (ative) um servidor de conexao c4fm e tente novamente."
    echo ""
+   sudo rm -R /home/pi-star/c4fm
    exit 0
 fi
 
