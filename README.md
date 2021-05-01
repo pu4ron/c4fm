@@ -1,6 +1,9 @@
-# Script C4FM - V2.2 
+# Script C4FM - NEW UPDATE V2.3 (30/04/2021)
 
-***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos que o pi-star tem, e um deles, é o uso de dg-id por equipamentos DMR em modo cross-over (DMR2YSF).  E vale lembrar que foi aproveitando esses recursos e outros que surgem os diversos tipos de controle por rádio e aplicativo (app).***
+***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star... e um desses recursos é o uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF). Vale lembrar os diversos tipos de controle por rádio e aplicativo (app) que as ferramentas disponibilizam.***
+
+# ***NEW UPDATE 30/04/2021***
+* Melhorias nos códigos, funções reformuladas, novas funções adicionadas e retirado o suporte para Bluedv.
 
 # ***UPDATE 10/04/2021***
 * Opção 1 - Script C4FM - V2.2
@@ -34,55 +37,36 @@
 * Exemplo: YSF90558  / Tx: TG90558 ou TG7090558
 * Exemplo: YSF56691  / Tx: TG56691 ou TG7056691
 
-
-# ***NEW UPDATE: BLUEDV-PISTAR 06/04/2021***
-* Opção 3 - Script C4FM - V2.2
-* Para aqueles que gostam de brincar, divertir e ser feliz que foi adicionado ao conjunto de ferramentas do pi-star suporte para o aplicativo Bluedv.
-* Algumas informações são importates: Bluedv só trabalha com um slot (simplex) e obrigatoriamente deve está na mesma rede wifi ou cabeada do pi-star. 
-* Estando o bluedv ativo o pi-star fica inativo e o retono normal se dá desligando o bluedv e reiniciando o pi-star/raspberry. 
-* Em alguns casos faz-se necessário desabilitar o bluedv na opção 'Setup' e desmarcar 'enable ser2net' e o inverso para ativar.
-* Em alguns casos faz-se necessário desabilitar todos os serviços do pi-star, se for seu caso, use o comando (sudo stop) ou use o 'app ssh button' com um botão configurado com o comando.
-* Pensamento do dia: "Não queira de graça aquilo que você tem capacidade de adquirir!"  D. Mauro, cp.
-* Download: https://play.google.com/store/apps/details?id=com.pa7lim.BlueDV&hl=pt_BR&gl=US
-
-![Rx-1](https://user-images.githubusercontent.com/40077152/113786152-f6bf4a80-970e-11eb-8f92-917b0893c799.jpeg)
-![Tx-1](https://user-images.githubusercontent.com/40077152/113781542-384bf780-9707-11eb-8368-b9bb31fb2ddf.jpeg)
-![Tx-3](https://user-images.githubusercontent.com/40077152/113785767-2883e180-970e-11eb-96dd-028ad51338bf.jpeg)
-![2](https://user-images.githubusercontent.com/40077152/113781959-d770ef00-9707-11eb-81ab-99e423e60791.jpeg)
-![1](https://user-images.githubusercontent.com/40077152/113781563-426df600-9707-11eb-8267-978ca3fb591b.jpeg)
-![3](https://user-images.githubusercontent.com/40077152/113781584-49950400-9707-11eb-9139-5e9c106ef0f0.jpeg)
-![4](https://user-images.githubusercontent.com/40077152/113781593-4d288b00-9707-11eb-8cfb-8d52e15ea3a6.jpeg)
-![5](https://user-images.githubusercontent.com/40077152/113781608-50bc1200-9707-11eb-96c6-7114e237e999.jpeg)
-
-
-# ***UPDATE 04/04/2021***
-* Opção 1 - Script C4FM - V2.2
-* -> * Foi adiconado a opção de ativar e desativar as "redes digitais" (Network 1,2,3,xlx) via rádio ou celular *
+# ***UPDATE 30/04/2021 - (Reformulado)***
+* Opção 1 - Script C4FM - V2.3
+* -> * Opção de ativar e desativar as "redes digitais" (Network 1-6, xlx e dmr2ysf) via rádio ou celular *
 * -> * Função que só se aplica em DMRGateway *
-
 
 ***(Celular - 'SSH button' ou terminal shell)***
 
-* sudo net0 reset    (retornas as configutações definidas pelo usuário)
-* sudo net0 off      (desativa todas as rede)
+* sudo network reset on     (ativa todas as rede  network)
+* sudo network reset off    (desativa todas as rede  network)
 
-* sudo net1 on       (ativa Network 1)
-* sudo net1 off      (desativa Network 1)
+* sudo network 1 on         (ativa Network 1)
+* sudo network 1 off        (desativa Network 1)
 
-* sudo net2 on       (ativa Network 2)
-* sudo net2 off      (desativa Network 2)
+* sudo network 2 on         (ativa Network 2)
+* sudo network 2 off        (desativa Network 2)
 
-* sudo net3 on       (ativa Network 3)
-* sudo net3 off      (desativa Network 3)
+* sudo network 3 on         (ativa Network 3)
+* sudo network 3 off        (desativa Network 3)
 
-* sudo xlx on        (ativa XLX)
-* sudo xlx off       (desativa XLX)
+* sudo network xlx on       (ativa XLX)
+* sudo network xlx off      (desativa XLX)
+
+* sudo network dmr2ysf on   (ativa dmr2ysf)
+* sudo network dmr2ysf off  (desativa dmr2ysf)
 
 ***(RF - Rádio)***
 * Para ativar ou desativas as redes, envie uma portatora de 3seg como contato privado "CP": 44444+(comando) / Total de 7 digitos.
 
-* CP: 4444400 = (desativa as redes)
-* CP: 4444401 = (reset - retorna as configurações do usuário)
+* CP: 4444400 = (desativa todas as redes)
+* CP: 4444401 = (ativa todas as redes)
 
 * CP: 4444402 = (desativa rede xlx)
 * CP: 4444403 = (ativa rede xlx)
