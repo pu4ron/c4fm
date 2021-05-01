@@ -22,6 +22,9 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
 echo ""
 
+sudo sed -i "/\[Enabled\]/{n;s/0/1/}" /etc/dmr2ysf
+sleep 2
+
 if [ `sed -n '/\[Enabled\]/{n;p;}' /etc/dmr2ysf | cut -c 9` != 1 ]; then
         echo ""
         echo "* [DMR2YSF -> "Desligado"] - Antes de continuar ative."
