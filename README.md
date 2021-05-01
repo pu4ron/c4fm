@@ -1,12 +1,12 @@
 # Script C4FM - NEW UPDATE V2.3 (30/04/2021)
 
-***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star... e um desses recursos é o uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF). Vale lembrar os diversos tipos de controle por rádio e aplicativo (app) que as ferramentas disponibilizam.***
+***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star... e um desses recursos é o uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF). Vale lembrar os diversos tipos de controle via rádio e aplicativo (app) que as ferramentas disponibilizam.***
 
-# ***NEW UPDATE 30/04/2021***
+# ***NEW UPDATE (30/04/2021)***
 * Melhorias nos códigos, funções reformuladas, novas funções adicionadas e retirado o suporte para Bluedv.
 
-# ***UPDATE 10/04/2021***
-* Opção 1 - Script C4FM - V2.2
+# ***UPDATE (10/04/2021)***
+* Opção 1 - Script C4FM - V2.3
 * -> * Foi adicinado uma nova função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID do servidor.
 * -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
 * -> * Para execução dos comandos use o app 'SSH button' ou terminal shell.
@@ -200,7 +200,7 @@
 * Ex: sudo ysf reset (default)
 
 # PATCH DMRGateway (Reescrita de TGs):
-* Opção 2 - Script C4FM - V2.2
+* Opção 2 - Script C4FM - V2.3
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
 
 ***-> Obs: *Após aplicar o patch no seu pi-star as configuraçoes de dmrgateway seram reconfiguradas.***
