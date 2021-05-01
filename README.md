@@ -3,35 +3,35 @@
 ***Nota: O 'script c4fm' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star... e um desses recursos é o uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF). Vale lembrar dos diversos tipos de controle via rádio e aplicativo (app) que as ferramentas disponibilizam.***
 
 # ***NEW UPDATE (30/04/2021)***
-* Melhorias nos códigos, funções reformuladas, novas funções adicionadas e retirado o suporte para Bluedv.
+* Melhorias no código, novas funções, funções reformuladas e fim do suporte ao Bluedv.
 
 # ***UPDATE (10/04/2021)***
 * Opção 1 - Script C4FM - V2.3
-* -> * Foi adicinado uma nova função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID do servidor.
+* -> * Adicinado função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID.
 * -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
-* -> * Para execução dos comandos use o app 'SSH button' ou terminal shell.
+* -> * Para executar os comandos use o app 'SSH button' ou terminal shell.
 
-* -> * Para seleção estática do(s) dg-id(s) use o caractere especial "estrela (*)" seguido do(s) dg-id(s) e separados por vírgulas.
+* -> * Para seleção estática de algum dg-id use o caractere especial "estrela (*)" seguido do dg-id.
 *  Exemplo(s): 
 *  dg-id: 72 ( sudo c4fm  *72 )
 *  dg-id(s): 72,96,97,24 ( sudo c4fm  *72,96,97,24 )
 
 ![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
 
-* -> * No modo standby, as transmiões são mutadas e o servidor fica a espera de alguma portadora para ser ativado por tempo determinado.
-* -> * Para ativar use o símbolo especial "arroba (@)"
+* -> * No modo standby as transmiões são mutadas e o servidor fica aguardando alguma portadora para ser ativo e por tempo determinado.
+* -> * Para ativar o modo standby use o símbolo especial "arroba (@)"
 *  Exemplo: ( sudo c4fm  @ )
 
 ![Estatico-3](https://user-images.githubusercontent.com/40077152/114287087-8d0aad80-9a3a-11eb-9134-5c2c7d15a3ea.png)
 ![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
 
 
-* -> * (***Experimental***) A nova forma de selecionar um servidor c4fm via rádio é simples, basta enviar uma portadora como TG com o id do servidor no 'slot 1/2', se estiver usando DMRGateway acrescente o numero '70' antes do id do servidor. Para falar, use o mesmo id do servidor que foi usado para seleciona-lo. 
-* -> * A forma anterior de seleção permanece ativa.
+* -> * (***Experimental***) A nova forma de selecionar um servidor c4fm via rádio é simples...  basta enviar uma portadora com o id do servidor no 'slot 1 ou 2'. Se estiver usando DMRGateway acrescente o numero '70' antes do id do servidor. Para falar, use o mesmo id do servidor que foi usado para seleciona-lo. 
+* -> * Nota: a forma anntiga de seleção permanece ativa.
 
-* ***Após intalação do script o primeiro uso requer 'Reboot'.***
+* ***Após intalação do script v2.3 requer 'Reboot'.***
 
-* ***Em algumas variantes da versão do pi-star deve-se usar o 'slot 1' para selecionar os servidores.***
+* ***Nota: em algumas variantes do pi-star deve-se usar somente 'slot 1' para selecionar os servidores.***
 
 * Exemplo: YCS72401  / Tx: TG72401 ou TG7072401
 * Exemplo: YSF90558  / Tx: TG90558 ou TG7090558
