@@ -1,4 +1,4 @@
-# Script PIVoiceBr - V2.3
+# Script PIVoiceBr - v2.3
 
 ***Nota: O 'script pivoicebr' é um conjunto de ferramentas cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star... e um desses recursos é o uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF). Vale lembrar dos diversos tipos de controle via rádio e aplicativo (app) que as ferramentas disponibilizam.***
 
