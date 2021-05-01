@@ -80,13 +80,16 @@
 * CP: 4444408 = (desativa network 3)
 * CP: 4444409 = (ativa network 3)
 
+* CP: 4444416 = (desativa cross dmr2ysf)
+* CP: 4444417 = (ativa cross dmr2ysf)
+
 ***Obs: Normalmente as redes no pi-star em DMRGateway são organizadas da seguinte forma: "Network 1=BM", "Network 2=IPSC2" e "Network 3=cros-over/DMR2YSF"***
 
 
 # ***UPDATE 03/04/2021***
-* Opção de ativar e desativar os "modos digitais" via rádio.
+* Ativar e desativar os "modos digitais" via rádio.
 
-* DMR OFF   (3333300) ***(Atenção: o uso desta opção exige a ativaçao manual do modo, pelo terminal ou por aplicativo 'app')***
+* DMR OFF   (3333300) ***(Atenção: o uso desta opção exige a ativaçao manual do modo, seja pelo terminal ou por aplicativo 'app')***
 * DMR ON    (3333301)
 
 * DSTAR OFF (3333302)
