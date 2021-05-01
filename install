@@ -1,0 +1,341 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+ver=$(awk -F "= " '/Version/ {print $2}' /etc/pistar-release) 
+ALDG=`cat /etc/ysfgateway | grep Startup= | cut -f 1`
+
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+
+if [ `sed -n '/\[Enabled\]/{n;p;}' /etc/dmr2ysf | cut -c 9` != 1 ]; then
+        echo ""
+        echo "* [DMR2YSF -> "Desligado"] - Antes de continuar ative."
+        echo ""
+	exit 0
+fi
+
+if [ "$ALDG" = "" ]
+then
+   echo ""
+   echo "* ATENCAO!"
+   echo "* Nenhum servidor c4fm encontrado!"
+   echo "* Selecione (ative) um servidor de conexao c4fm e tente novamente."
+   echo ""
+   exit 0
+fi
+
+echo "* Escolha a opcao?" 
+echo ""
+echo -e " -> [1] \033[01;37m*FERRAMENTAS PI-STAR/C4FM*\033[00;37m"
+echo ""
+echo -e " -> [2] \033[01;37m*PATCH DMRGateway*\033[00;37m"
+echo ""
+
+read -p "* Digite: " -n 1 -r
+case "$REPLY" in
+ 
+1)
+ 
+mount -o remount,rw /
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+read -p "* PI-STAR: Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+mount -o remount,rw /
+
+if [ "$(id -u)" != "0" ];then
+   echo "Este script deve ser executado como root" 1>&2
+   exit 1
+fi
+
+DIR="/home/pi-star/c4fm"
+DIRL="/home/pi-star/c4fm/pistar-remote-etc"
+DIREtc="/etc"
+DIRBin="/usr/local/bin"
+DIRSbin="/usr/local/sbin"
+DIRSCP="/home/pi-star/c4fm/scp"
+DIRSCG="/home/pi-star/c4fm/scg"
+
+Ap="/etc/pistar-remote"
+Bp="/usr/local/bin/c4fm"
+Bpy="/usr/local/bin/ysf"
+Bpo="/usr/local/bin/out"
+Cp="/usr/local/bin/YSFGateway"
+Dp="/usr/local/bin/MMDVMHost"
+Ep="/usr/local/sbin/pistar-remote"
+
+call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
+sudo chattr -i ${DIRBin}/YSFGateway
+sudo chattr -i ${DIRSbin}/pistar-remote
+sleep 1
+
+echo "* Desativando servicos..."
+echo ""
+sudo systemctl stop pistar-watchdog.timer      >/dev/null 2>&1 &
+sudo systemctl stop pistar-watchdog.service    >/dev/null 2>&1 &
+sudo systemctl stop mmdvmhost.timer            >/dev/null 2>&1 &
+sudo systemctl stop mmdvmhost.service          >/dev/null 2>&1 &
+sudo systemctl stop ysfgateway.service         >/dev/null 2>&1 &
+sudo systemctl stop dmr2ysf.service            >/dev/null 2>&1 &
+sleep 3
+sudo killall MMDVMHost                         >/dev/null 2>&1 &
+sleep 2
+
+echo "* Backup..."
+echo ""
+sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
+
+sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
+
+sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
+
+if [ -f "$Bp" ]; then
+   sudo cp ${Bp} ${Bp}.$(date +%Y%m%d)                                    
+ fi
+
+if [ -f "$Bpy" ]; then
+   sudo cp ${Bpy} ${Bpy}.$(date +%Y%m%d)                                  
+ fi
+
+if [ -f "$Bpo" ]; then
+   sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)                                  
+ fi
+
+if [ -f "${DIRBin}/netwk" ]; then
+   sudo cp ${DIRBin}/netwk ${DIRBin}/netwk.$(date +%Y%m%d)                
+ fi 
+
+if [ -f "${DIRBin}/modo" ]; then
+   sudo cp ${DIRBin}/modo  ${DIRBin}/modo.$(date +%Y%m%d)                
+ fi 
+
+if [ -f "${DIRBin}/network" ]; then
+   sudo cp ${DIRBin}/network  ${DIRBin}/network.$(date +%Y%m%d)          
+ fi
+sleep 2
+
+echo "* Estruturando..."
+echo ""
+
+sudo rm ${Cp}                                                       
+
+sudo rm ${Dp}                                                      
+
+sudo rm ${Ep}                                                      
+
+if [ -f "$Bp" ]; then                                          
+   sudo rm ${Bp}
+ fi
+
+if [ -f "$Bpy" ]; then                                           
+   sudo rm ${Bpy}
+ fi 
+
+if [ -f "$Bpo" ]; then                                               
+   sudo rm ${Bpo}
+ fi 
+
+if [ -f "${DIRBin}/netwk" ]; then                                    
+   sudo rm ${DIRBin}/netwk
+ fi
+
+if [ -f "${DIRBin}/modo" ]; then                                     
+   sudo rm ${DIRBin}/modo
+ fi 
+
+if [ -f "${DIRBin}/network" ]; then                                 
+   sudo rm ${DIRBin}/network
+ fi
+sleep 2
+
+sudo chmod 777 /home/pi-star/c4fm/scw/comandos
+sleep 2                       
+sudo chmod 777 /home/pi-star/c4fm/scw/brideg                         
+sleep 2
+
+sudo chmod +x /home/pi-star/c4fm/scw/comandos
+sleep 2                      
+sudo chmod +x /home/pi-star/c4fm/scw/brideg                          
+sleep 2
+
+sudo /home/pi-star/c4fm/scw/comandos                                
+sleep 2
+sudo /home/pi-star/c4fm/scw/brideg                      
+sleep 2
+
+sudo cp ${DIR}/c4fm-bin-oficial     ${DIRBin}/c4fm
+sudo cp ${DIR}/c4fmy-bin-oficial    ${DIRBin}/ysf
+sudo cp ${DIR}/c4fmo-bin-oficial    ${DIRBin}/out
+sudo cp ${DIR}/MMDVMHost-bin        ${DIRBin}/MMDVMHost
+sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
+sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
+sleep 1
+
+sudo cp ${DIRSCP}/modo              ${DIRBin}/modo                 
+sleep 2
+
+sudo cp ${DIRSCG}/network           ${DIRBin}/network              
+sleep 2
+
+sudo chmod 755 ${DIRBin}/modo                                   
+sleep 2
+
+sudo chmod 755 ${DIRBin}/c4fm
+sudo chmod 755 ${DIRBin}/ysf
+sudo chmod 755 ${DIRBin}/out
+sleep 2
+
+sudo chmod 755 ${DIRBin}/network                                   
+sleep 2
+
+sudo chmod +x  ${DIRBin}/modo                        
+sleep 2
+
+sudo chmod +x  ${DIRBin}/c4fm
+sudo chmod +x  ${DIRBin}/ysf
+sudo chmod +x  ${DIRBin}/out
+sleep 2
+
+sudo chmod +x  ${DIRBin}/network                                
+sleep 2
+
+sudo chmod 755 ${DIRBin}/MMDVMHost
+sudo chmod 755 ${DIRBin}/YSFGateway
+sudo chmod 755 ${DIREtc}/pistar-remote
+sudo chmod 755 ${DIRSbin}/pistar-remote
+sleep 2
+
+sudo /usr/local/sbin/HostFilesUpdate.sh      >/dev/null 2>&1 &
+sleep 2
+
+echo "* Adicionando dg-id..."
+echo ""
+sudo cp ${DIR}/Network ${DIRBin}/netwk
+sudo chmod 755 ${DIRBin}/netwk
+sudo chmod +x  ${DIRBin}/netwk
+sudo ${DIRBin}/netwk start
+sleep 2
+
+echo "* Ativando servicos..."
+echo ""
+
+sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
+sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
+sudo systemctl start mmdvmhost.timer         >/dev/null 2>&1 &
+sudo systemctl start mmdvmhost               >/dev/null 2>&1 &
+sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
+sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
+sleep 2
+sudo chattr +i ${DIRBin}/YSFGateway
+sudo chattr +i ${DIRSbin}/pistar-remote
+echo ""
+echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
+echo ""
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+;;
+
+2) 
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+echo -e "\033[01;37m\033[03;36m* Reescrita de TG(s) IPSC2 para uso em DMRGateway*\033[00;37m"
+echo ""
+echo -e "\033[01;37m\033[03;36m* As demais redes permanecem inalteradas...*\033[00;37m"
+echo ""
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 724,   2000724 [7 digitos: 2000+TG]\033[00;37m"
+echo ""
+echo -e "\033[01;37m\033[03;37m-> Ex: TG 72431, 2072431 [7 digitos: 20+TG]\033[00;37m"
+echo ""
+echo ""
+echo ""
+
+read -p "* Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+
+DIRgw="/etc/dmrgateway"
+DIRpat="/home/pi-star/c4fm/scw/rewritten-patch"
+
+if [ -f "$DIRgw" ]; then
+
+    echo ""
+    echo "* Iniciando..."
+    sleep 1
+    sudo chmod 777 ${DIRpat}
+    sudo chmod +x  ${DIRpat}
+    sudo ${DIRpat}
+    sleep 2
+    echo ""
+    echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
+    echo ""
+    echo "* -> Configure o DMRGateway e clik em aplicar <- *"
+    echo ""
+fi
+
+if [ -f "/usr/local/bin/network" ]; then
+   sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
+ fi
+
+if [ -f "/usr/local/bin/network" ]; then                                            
+   sudo rm /usr/local/bin/network
+ fi
+
+if [ -f "/home/pi-star/c4fm/scg/network" ]; then
+   sudo cp /home/pi-star/c4fm/scg/network  /usr/local/bin/network                
+ fi
+
+if [ -f "/usr/local/bin/network" ]; then
+   sudo chmod 755  /usr/local/bin/network                                       
+ fi
+
+if [ -f "/usr/local/bin/network" ]; then
+sudo chmod +x   /usr/local/bin/network                             
+ fi
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+;;
+
+* ) exit 0 ;;   
+esac
