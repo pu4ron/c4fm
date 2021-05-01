@@ -39,7 +39,7 @@
 
 # ***UPDATE 30/04/2021 - (Reformulado)***
 * Opção 1 - Script C4FM - V2.3
-* -> * Opção de ativar e desativar as "redes digitais" (Network 1-6, xlx e dmr2ysf) via rádio ou celular *
+* -> * Opção de ativar e desativar as "redes digitais" (Network 1-3, xlx e dmr2ysf) via rádio ou celular *
 * -> * Função que só se aplica em DMRGateway *
 
 ***(Celular - 'SSH button' ou terminal shell)***
