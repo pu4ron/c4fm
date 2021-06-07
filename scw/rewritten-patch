@@ -117,7 +117,7 @@ if [ -f "${gy}" ]; then
    echo " "                                         >> ${gy}
    echo "[DMR Network 2]"                           >> ${gy}
    echo "Enabled=1"                                 >> ${gy}
-   echo "Address=34.95.198.98"                      >> ${gy}
+   echo "Address=201.62.48.62"                      >> ${gy}
    echo "Port=55555"                                >> ${gy}
    echo "TGRewrite0=1,2000001,1,1,999999"           >> ${gy}
    echo "TGRewrite1=2,2000001,2,1,999999"           >> ${gy}
@@ -126,7 +126,7 @@ if [ -f "${gy}" ]; then
    echo "Password="PASSWORD""                       >> ${gy}
    echo "Debug=0"                                   >> ${gy}
    echo "Id=${id}"                                  >> ${gy}
-   echo "Name=DMR+_IPSC2-BRASIL-2"                  >> ${gy} 
+   echo "Name=DMR+_IPSC2-BRAZIL"                    >> ${gy} 
    echo 'Options="TS1_1=724;TS1_2=199;TS2_1=72431;TS2_2=72421;TS2_3=9990"'   >> ${gy}
    echo " "                                         >> ${gy}
    echo "[DMR Network 3]"                           >> ${gy}
