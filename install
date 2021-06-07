@@ -136,7 +136,36 @@ if [ -f "${DIRBin}/modo" ]; then
 if [ -f "${DIRBin}/network" ]; then
    sudo cp ${DIRBin}/network  ${DIRBin}/network.$(date +%Y%m%d)          
  fi
-sleep 2
+ 
+ //--------------------------------------------------------------
+ 
+if [ -f "/usr/local/bin/DGIdGateway" ]; then
+   sudo cp /usr/local/bin/DGIdGateway  /usr/local/bin/DGIdGateway.$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/bin/M17Gateway" ]; then
+   sudo cp /usr/local/bin/M17Gateway  /usr/local/bin/M17Gateway.$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-hourly.cron" ]; then
+   sudo cp /usr/local/sbin/pistar-hourly.cron  /usr/local/sbin/pistar-hourly.cron.$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-update" ]; then
+   sudo cp /usr/local/sbin/pistar-update  /usr/local/sbin/pistar-update.$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-upgrade" ]; then
+   sudo cp /usr/local/sbin/pistar-upgrade  /usr/local/sbin/pistar-upgrade.$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-upnp.service" ]; then
+   sudo cp /usr/local/sbin/pistar-upnp.service  /usr/local/sbin/pistar-upnp.service.$(date +%Y%m%d)          
+ fi
+ 
+ sleep 2
+ //------------------------------------------------------------
+
 
 echo "* Estruturando..."
 echo ""
@@ -170,7 +199,64 @@ if [ -f "${DIRBin}/modo" ]; then
 if [ -f "${DIRBin}/network" ]; then                                 
    sudo rm ${DIRBin}/network
  fi
+
+//---------------------------------------------------------------------------------------
+if [ -f "/usr/local/bin/DGIdGateway" ]; then                                 
+   sudo rm /usr/local/bin/DGIdGateway
+ fi
+ 
+ if [ -f "/usr/local/bin/M17Gateway" ]; then                                 
+   sudo rm /usr/local/bin/M17Gateway
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-hourly.cron" ]; then                                 
+   sudo rm /usr/local/sbin/pistar-hourly.cron
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-update" ]; then                                 
+   sudo rm /usr/local/sbin/pistar-update
+ fi
+ 
+ if [ -f "/usr/local/sbin/pistar-upgrade" ]; then                                 
+   sudo rm /usr/local/sbin/pistar-upgrade
+ fi
+ 
+  if [ -f "/usr/local/sbin/pistar-upnp.service" ]; then                                 
+   sudo rm /usr/local/sbin/pistar-upnp.service
+ fi
 sleep 2
+//---------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------
+sudo cp /home/pi-star/c4fm/add/DGIdGateway               /usr/local/bin/DGIdGateway
+sudo cp /home/pi-star/c4fm/add/M17Gateway                /usr/local/bin/M17Gateway
+sudo cp /home/pi-star/c4fm/add/pistar-hourly.cron        /usr/local/sbin/pistar-hourly.cron
+sudo cp /home/pi-star/c4fm/add/pistar-update             /usr/local/sbin/pistar-update
+sudo cp /home/pi-star/c4fm/add/pistar-upgrade            /usr/local/sbin/pistar-upgrade
+sudo cp /home/pi-star/c4fm/add/pistar-upnp.service       /usr/local/sbin/pistar-upnp.service
+sleep 2
+//---------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------
+sudo chmod 755  /usr/local/bin/DGIdGateway
+sudo chgrp bin /usr/local/bin/DGIdGateway
+
+sudo chmod 755  /usr/local/bin/M17Gateway
+sudo chgrp bin /usr/local/bin/M17Gateway
+
+sudo chmod 755  /usr/local/sbin/pistar-hourly.cron
+sudo chgrp -R staff /usr/local/sbin/pistar-hourly.cron
+
+sudo chmod 755  /usr/local/sbin/pistar-update
+sudo chgrp -R staff /usr/local/sbin/pistar-update
+
+sudo chmod 755  /usr/local/sbin/pistar-upgrade
+sudo chgrp -R staff /usr/local/sbin/pistar-upgrade
+
+sudo chmod 755  /usr/local/sbin/pistar-upnp.service
+sudo chgrp -R staff /usr/local/sbin/pistar-upnp.service
+sleep 2
+//---------------------------------------------------------------------------------------
 
 sudo chmod 777 /home/pi-star/c4fm/scw/comandos
 sleep 2                       
