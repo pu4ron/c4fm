@@ -107,60 +107,60 @@ sleep 2
 
 echo "* Backup..."
 echo ""
-sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
+# sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
 
-sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
+# sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
 
-sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
+# sudo cp -R ${Ep} ${Ep}.$(date +%Y%m%d)
 
 if [ -f "$Bp" ]; then
-   sudo cp ${Bp} ${Bp}.$(date +%Y%m%d)                                    
+   # sudo cp ${Bp} ${Bp}.$(date +%Y%m%d)                                    
  fi
 
 if [ -f "$Bpy" ]; then
-   sudo cp ${Bpy} ${Bpy}.$(date +%Y%m%d)                                  
+   # sudo cp ${Bpy} ${Bpy}.$(date +%Y%m%d)                                  
  fi
 
 if [ -f "$Bpo" ]; then
-   sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)                                  
+   # sudo cp ${Bpo} ${Bpo}.$(date +%Y%m%d)                                  
  fi
 
 if [ -f "${DIRBin}/netwk" ]; then
-   sudo cp ${DIRBin}/netwk ${DIRBin}/netwk.$(date +%Y%m%d)                
+   # sudo cp ${DIRBin}/netwk ${DIRBin}/netwk.$(date +%Y%m%d)                
  fi 
 
 if [ -f "${DIRBin}/modo" ]; then
-   sudo cp ${DIRBin}/modo  ${DIRBin}/modo.$(date +%Y%m%d)                
+   # sudo cp ${DIRBin}/modo  ${DIRBin}/modo.$(date +%Y%m%d)                
  fi 
 
 if [ -f "${DIRBin}/network" ]; then
-   sudo cp ${DIRBin}/network  ${DIRBin}/network.$(date +%Y%m%d)          
+   # sudo cp ${DIRBin}/network  ${DIRBin}/network.$(date +%Y%m%d)          
  fi
  
  # ------------------------------------------------------------------------------- #
  
 if [ -f "/usr/local/bin/DGIdGateway" ]; then
-   sudo cp /usr/local/bin/DGIdGateway  /usr/local/bin/DGIdGateway.$(date +%Y%m%d)          
+   # sudo cp /usr/local/bin/DGIdGateway  /usr/local/bin/DGIdGateway.$(date +%Y%m%d)          
  fi
  
  if [ -f "/usr/local/bin/M17Gateway" ]; then
-   sudo cp /usr/local/bin/M17Gateway  /usr/local/bin/M17Gateway.$(date +%Y%m%d)          
+   # sudo cp /usr/local/bin/M17Gateway  /usr/local/bin/M17Gateway.$(date +%Y%m%d)          
  fi
  
  if [ -f "/usr/local/sbin/pistar-hourly.cron" ]; then
-   sudo cp /usr/local/sbin/pistar-hourly.cron  /usr/local/sbin/pistar-hourly.cron.$(date +%Y%m%d)          
+   # sudo cp /usr/local/sbin/pistar-hourly.cron  /usr/local/sbin/pistar-hourly.cron.$(date +%Y%m%d)          
  fi
  
  if [ -f "/usr/local/sbin/pistar-update" ]; then
-   sudo cp /usr/local/sbin/pistar-update  /usr/local/sbin/pistar-update.$(date +%Y%m%d)          
+   # sudo cp /usr/local/sbin/pistar-update  /usr/local/sbin/pistar-update.$(date +%Y%m%d)          
  fi
  
  if [ -f "/usr/local/sbin/pistar-upgrade" ]; then
-   sudo cp /usr/local/sbin/pistar-upgrade  /usr/local/sbin/pistar-upgrade.$(date +%Y%m%d)          
+   # sudo cp /usr/local/sbin/pistar-upgrade  /usr/local/sbin/pistar-upgrade.$(date +%Y%m%d)          
  fi
  
  if [ -f "/usr/local/sbin/pistar-upnp.service" ]; then
-   sudo cp /usr/local/sbin/pistar-upnp.service  /usr/local/sbin/pistar-upnp.service.$(date +%Y%m%d)          
+   # sudo cp /usr/local/sbin/pistar-upnp.service  /usr/local/sbin/pistar-upnp.service.$(date +%Y%m%d)          
  fi
  
  sleep 2
@@ -396,7 +396,7 @@ if [ -f "$DIRgw" ]; then
 fi
 
 if [ -f "/usr/local/bin/network" ]; then
-   sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
+   # sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
  fi
 
 if [ -f "/usr/local/bin/network" ]; then                                            
