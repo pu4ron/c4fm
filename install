@@ -119,21 +119,21 @@ echo ""
  sudo chmod 777 -R /usr/local/sbin
  
  if [ -f "/usr/local/bin" ]; then
-   sudo cp /usr/local/bin  /usr/local/bin.BKP-$(date +%Y%m%d)          
- fi
+   sudo cp /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
+  fi
  
  if [ -f "/usr/local/sbin" ]; then
-   sudo cp /usr/local/sbin  /usr/local/sbin.BKP-$(date +%Y%m%d)          
- fi
+   sudo cp /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
+  fi
  sleep 2
  
  if [ -f "/usr/local/bin" ]; then
    sudo cp /home/pi-star/c4fm/bin  /usr/local/bin       
- fi
+  fi
  
  if [ -f "/usr/local/sbin" ]; then
    sudo cp /home/pi-star/c4fm/sbin  /usr/local/sbin         
- fi
+  fi
  sleep 2
  
  sudo chmod 2775 /usr/local/bin
