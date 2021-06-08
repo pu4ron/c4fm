@@ -373,9 +373,9 @@ if [ -f "$DIRgw" ]; then
     echo ""
 fi
 
-if [ -f "/usr/local/bin/network" ]; then
-   # sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
- fi
+# if [ -f "/usr/local/bin/network" ]; then
+#   sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
+# fi
 
 if [ -f "/usr/local/bin/network" ]; then                                            
    sudo rm /usr/local/bin/network
