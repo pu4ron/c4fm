@@ -119,20 +119,20 @@ echo ""
  sudo chmod 777 -R /usr/local/sbin
  
  if [ -f "/usr/local/bin" ]; then
-   sudo cp /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
+   sudo cp -R /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
   fi
  
  if [ -f "/usr/local/sbin" ]; then
-   sudo cp /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
+   sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
   fi
  sleep 2
  
  if [ -f "/usr/local/bin" ]; then
-   sudo cp /home/pi-star/c4fm/bin  /usr/local/bin       
+   sudo cp -R /home/pi-star/c4fm/bin  /usr/local/bin       
   fi
  
  if [ -f "/usr/local/sbin" ]; then
-   sudo cp /home/pi-star/c4fm/sbin  /usr/local/sbin         
+   sudo cp -R /home/pi-star/c4fm/sbin  /usr/local/sbin         
   fi
  sleep 2
  
@@ -145,8 +145,8 @@ echo ""
  sudo chown root /usr/local/bin
  sudo chown root /usr/local/sbin
  
- sudo chgrp bin /usr/local/bin
- sudo chgrp -R staff /usr/local/sbin
+ sudo chgrp bin   /usr/local/bin
+ sudo chgrp staff /usr/local/sbin
  sleep 2
  
 #-------------------DIR FIM----------------------#
@@ -307,6 +307,10 @@ sleep 2
 echo "* Ativando servicos..."
 echo ""
 
+sudo /bin/sync
+sudo /bin/sync
+sudp /bin/sync
+
 sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
 sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
 sudo systemctl start mmdvmhost.timer         >/dev/null 2>&1 &
@@ -392,6 +396,12 @@ if [ -f "/usr/local/bin/network" ]; then
 if [ -f "/usr/local/bin/network" ]; then
 sudo chmod +x   /usr/local/bin/network                             
  fi
+ 
+sudo /bin/sync
+sudo /bin/sync
+sudp /bin/sync
+sleep 2
+
 cd /home/pi-star
 sudo rm -R /home/pi-star/c4fm
 ;;
