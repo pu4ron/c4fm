@@ -108,6 +108,13 @@ sleep 2
 echo "* Backup..."
 echo ""
 
+daystamp(){
+        date +"%d.%m.%y"
+}
+timestamp(){
+        date +"%T"
+}
+
 #-------------------DIR UPDATE-------------------#
 
  sudo chattr -i /usr/local/bin/YSFGateway
@@ -119,8 +126,8 @@ echo ""
  sudo chmod 777 -R /usr/local/bin
  sudo chmod 777 -R /usr/local/sbin
  
- sudo cp -R /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
- sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
+ sudo cp -R /usr/local/bin  /usr/local/bin.BKP-$(daystamp)_$(timestamp)         
+ sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP-$(daystamp)_$(timestamp)         
  sleep 2
  
 sudo rm -R /usr/local/bin/*           
@@ -129,6 +136,7 @@ sleep 2
  
 sudo cp -p -R /home/pi-star/c4fm/bin/*       /usr/local/bin/     
 sudo cp -p -R /home/pi-star/c4fm/bin/.git    /usr/local/bin/  
+
 sudo cp -p -R /home/pi-star/c4fm/sbin/*      /usr/local/sbin/
 sudo cp -p -R /home/pi-star/c4fm/sbin/.git   /usr/local/sbin/
 sleep 2
@@ -151,12 +159,18 @@ sleep 2
 echo "* Estruturando..."
 echo ""
 
-sudo rm ${Cp}                                                       
-
-sudo rm ${Dp}                                                      
-
-sudo rm ${Ep}                                                      
-
+if [ -f "$Cp" ]; then                                          
+   sudo rm ${Cp}
+ fi
+ 
+ if [ -f "$Dp" ]; then                                          
+   sudo rm ${Dp}
+ fi
+ 
+ if [ -f "$Ep" ]; then                                          
+   sudo rm ${Ep}
+ fi
+ 
 if [ -f "$Bp" ]; then                                          
    sudo rm ${Bp}
  fi
@@ -358,6 +372,13 @@ echo ""
 DIRgw="/etc/dmrgateway"
 DIRpat="/home/pi-star/c4fm/scw/rewritten-patch"
 
+daystamp(){
+        date +"%d.%m.%y"
+}
+timestamp(){
+        date +"%T"
+}
+
 if [ -f "$DIRgw" ]; then
 
     echo ""
@@ -375,7 +396,7 @@ if [ -f "$DIRgw" ]; then
 fi
 
 # if [ -f "/usr/local/bin/network" ]; then
-#   sudo cp /usr/local/bin/network  /usr/local/bin/network.$(date +%Y%m%d)          
+#   sudo cp /usr/local/bin/network  /usr/local/bin/network-$(daystamp)_$(timestamp)          
 # fi
 
 if [ -f "/usr/local/bin/network" ]; then                                            
