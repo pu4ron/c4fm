@@ -115,35 +115,23 @@ echo ""
  
  sudo chmod 777 /usr/local/bin
  sudo chmod 777 /usr/local/sbin
+ 
  sudo chmod 777 -R /usr/local/bin
  sudo chmod 777 -R /usr/local/sbin
  
- #if [ -f "/usr/local/bin" ]; then
-   sudo cp -R /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
- #fi
- 
- #if [ -f "/usr/local/sbin" ]; then
-   sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
- #fi
+ sudo cp -R /usr/local/bin  /usr/local/bin.BKP.$(date +%Y%m%d)          
+ sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP.$(date +%Y%m%d)          
  sleep 2
  
-  #if [ -f "/usr/local/bin" ]; then
-   sudo rm -R /usr/local/bin           
-  #fi
+sudo rm -R /usr/local/bin/*           
+sudo rm -R /usr/local/sbin/*          
+sleep 2
  
- #if [ -f "/usr/local/sbin" ]; then
-   sudo rm -R /usr/local/sbin          
- #fi
- sleep 2
- 
- #if [ -f "/usr/local/bin" ]; then
-   sudo cp -R /home/pi-star/c4fm/bin  /usr/local/bin       
- #fi
- 
- #if [ -f "/usr/local/sbin" ]; then
-   sudo cp -R /home/pi-star/c4fm/sbin  /usr/local/sbin         
- #fi
- sleep 2
+sudo cp -p -R /home/pi-star/c4fm/bin/*       /usr/local/bin/     
+sudo cp -p -R /home/pi-star/c4fm/bin/.git    /usr/local/bin/  
+sudo cp -p -R /home/pi-star/c4fm/sbin/*      /usr/local/sbin/
+sudo cp -p -R /home/pi-star/c4fm/sbin/.git   /usr/local/sbin/
+sleep 2
  
  sudo chmod 2775 /usr/local/bin
  sudo chmod 2775 /usr/local/sbin
