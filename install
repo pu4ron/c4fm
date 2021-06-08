@@ -135,10 +135,12 @@ sudo rm -R /usr/local/sbin/*
 sleep 2
  
 sudo cp -p -R /home/pi-star/c4fm/bin/*       /usr/local/bin/     
-sudo cp -p -R /home/pi-star/c4fm/bin/.git    /usr/local/bin/  
+sudo cp -R /usr/local/bin.BKP-*/.git         /usr/local/bin/
+sudo rm -R /usr/local/bin.BKP-*      
 
 sudo cp -p -R /home/pi-star/c4fm/sbin/*      /usr/local/sbin/
-sudo cp -p -R /home/pi-star/c4fm/sbin/.git   /usr/local/sbin/
+sudo cp -R /usr/local/bin.BKP-*/.git         /usr/local/bin/
+sudo cp -R /usr/local/bin.BKP-*
 sleep 2
  
  sudo chmod 2775 /usr/local/bin
