@@ -127,6 +127,15 @@ echo ""
   fi
  sleep 2
  
+  if [ -f "/usr/local/bin" ]; then
+   sudo rm -R /usr/local/bin           
+  fi
+ 
+ if [ -f "/usr/local/sbin" ]; then
+   sudo rm -R /usr/local/sbin          
+  fi
+ sleep 2
+ 
  if [ -f "/usr/local/bin" ]; then
    sudo cp -R /home/pi-star/c4fm/bin  /usr/local/bin       
   fi
@@ -309,7 +318,7 @@ echo ""
 
 sudo /bin/sync
 sudo /bin/sync
-sudp /bin/sync
+sudo /bin/sync
 
 sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
 sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
@@ -399,7 +408,7 @@ sudo chmod +x   /usr/local/bin/network
  
 sudo /bin/sync
 sudo /bin/sync
-sudp /bin/sync
+sudo /bin/sync
 sleep 2
 
 cd /home/pi-star
