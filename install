@@ -107,6 +107,50 @@ sleep 2
 
 echo "* Backup..."
 echo ""
+
+#-------------------DIR UPDATE-------------------#
+
+ sudo chattr -i /usr/local/bin/YSFGateway
+ sudo chattr -i /usr/local/sbin/pistar-remote
+ 
+ sudo chmod 777 /usr/local/bin
+ sudo chmod 777 /usr/local/sbin
+ sudo chmod 777 -R /usr/local/bin
+ sudo chmod 777 -R /usr/local/sbin
+ 
+ if [ -f "/usr/local/bin" ]; then
+   sudo cp /usr/local/bin  /usr/local/bin.BKP-$(date +%Y%m%d)          
+ fi
+ 
+ if [ -f "/usr/local/sbin" ]; then
+   sudo cp /usr/local/sbin  /usr/local/sbin.BKP-$(date +%Y%m%d)          
+ fi
+ sleep 2
+ 
+ if [ -f "/usr/local/bin" ]; then
+   sudo cp /home/pi-star/c4fm/bin  /usr/local/bin       
+ fi
+ 
+ if [ -f "/usr/local/sbin" ]; then
+   sudo cp /home/pi-star/c4fm/sbin  /usr/local/sbin         
+ fi
+ sleep 2
+ 
+ sudo chmod 2775 /usr/local/bin
+ sudo chmod 2775 /usr/local/sbin
+ 
+ sudo chmod 777 -R /usr/local/bin
+ sudo chmod 777 -R /usr/local/sbin
+ 
+ sudo chown root /usr/local/bin
+ sudo chown root /usr/local/sbin
+ 
+ sudo chgrp bin /usr/local/bin
+ sudo chgrp -R staff /usr/local/sbin
+ sleep 2
+ 
+#-------------------DIR FIM----------------------#
+
 # sudo cp -R ${Cp} ${Cp}.$(date +%Y%m%d)
 
 # sudo cp -R ${Dp} ${Dp}.$(date +%Y%m%d)
@@ -137,8 +181,6 @@ if [ -f "${DIRBin}/network" ]; then
    # sudo cp ${DIRBin}/network  ${DIRBin}/network.$(date +%Y%m%d)          
  fi
  
- # ------------------------------------------------------------------------------- #
- 
 if [ -f "/usr/local/bin/DGIdGateway" ]; then
    # sudo cp /usr/local/bin/DGIdGateway  /usr/local/bin/DGIdGateway.$(date +%Y%m%d)          
  fi
@@ -162,10 +204,7 @@ if [ -f "/usr/local/bin/DGIdGateway" ]; then
  if [ -f "/usr/local/sbin/pistar-upnp.service" ]; then
    # sudo cp /usr/local/sbin/pistar-upnp.service  /usr/local/sbin/pistar-upnp.service.$(date +%Y%m%d)          
  fi
- 
  sleep 2
- # -------------------------------------------------------------------------------- #
-
 
 echo "* Estruturando..."
 echo ""
@@ -200,7 +239,6 @@ if [ -f "${DIRBin}/network" ]; then
    sudo rm ${DIRBin}/network
  fi
 
-# --------------------------------------------------------------------------------------- #
 if [ -f "/usr/local/bin/DGIdGateway" ]; then                                 
    sudo rm /usr/local/bin/DGIdGateway
  fi
@@ -225,9 +263,7 @@ if [ -f "/usr/local/bin/DGIdGateway" ]; then
    sudo rm /usr/local/sbin/pistar-upnp.service
  fi
 sleep 2
-# --------------------------------------------------------------------------------------- #
 
-# --------------------------------------------------------------------------------------- #
 sudo cp /home/pi-star/c4fm/add/DGIdGateway               /usr/local/bin/DGIdGateway
 sudo cp /home/pi-star/c4fm/add/M17Gateway                /usr/local/bin/M17Gateway
 sudo cp /home/pi-star/c4fm/add/pistar-hourly.cron        /usr/local/sbin/pistar-hourly.cron
@@ -235,9 +271,7 @@ sudo cp /home/pi-star/c4fm/add/pistar-update             /usr/local/sbin/pistar-
 sudo cp /home/pi-star/c4fm/add/pistar-upgrade            /usr/local/sbin/pistar-upgrade
 sudo cp /home/pi-star/c4fm/add/pistar-upnp.service       /usr/local/sbin/pistar-upnp.service
 sleep 2
-# --------------------------------------------------------------------------------------- #
 
-# --------------------------------------------------------------------------------------- #
 sudo chmod 755  /usr/local/bin/DGIdGateway
 sudo chgrp bin /usr/local/bin/DGIdGateway
 
@@ -256,7 +290,6 @@ sudo chgrp -R staff /usr/local/sbin/pistar-upgrade
 sudo chmod 755  /usr/local/sbin/pistar-upnp.service
 sudo chgrp -R staff /usr/local/sbin/pistar-upnp.service
 sleep 2
-# --------------------------------------------------------------------------------------- #
 
 sudo chmod 777 /home/pi-star/c4fm/scw/comandos
 sleep 2                       
