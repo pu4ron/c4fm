@@ -336,7 +336,7 @@ sudo systemctl start mmdvmhost               >/dev/null 2>&1 &
 sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
 sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
 sleep 2
-sudo chattr +i ${DIRBin}/YSFGateway
+# sudo chattr +i ${DIRBin}/YSFGateway
 sudo chattr +i ${DIRSbin}/pistar-remote
 echo ""
 echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
