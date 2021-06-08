@@ -1,0 +1,186 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+dest="/etc/dmrgateway"
+dest_cross="/etc/dmr2ysf"
+sudo mount -o remount,rw /
+
+if [ -z "$1" ]; then
+  script=$(nome "$0")
+  exit 0
+fi
+
+if [ "$1" ]; then
+  case ${1} in
+
+
+([1])
+    var_a=$(sed -n "/\[DMR Network 1\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_a="DMR Network 1"
+;;
+
+([2])
+    var_b=$(sed -n "/\[DMR Network 2\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_b="DMR Network 2"
+;;
+
+([3])
+    var_c=$(sed -n "/\[DMR Network 3\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_c="DMR Network 3"
+;;
+
+([4])
+    var_d=$(sed -n "/\[DMR Network 4\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_d="DMR Network 4"
+;;
+
+([5])
+    var_e=$(sed -n "/\[DMR Network 5\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_e="DMR Network 5"
+;;
+
+([6])
+    var_f=$(sed -n "/\[DMR Network 6\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_f="DMR Network 6"
+;;
+
+([xX][lL][xX])
+    var_g=$(sed -n "/\[XLX Network\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_g="XLX Network"
+;;
+
+([dD][yY])
+    var_h=$(sed -n "/\[Dynamic TG Control\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_h="Dynamic TG Control"
+;;
+
+([dD][mM][rR][2][yY][sS][fF])
+    var_i=$(sed -n "/\[Enabled\]/{n;p;}" ${dest_cross} | awk -F '=' '{print $2}')
+    alvo_i="Enabled"
+;;
+
+([rR][eE][sS][eE][tT])
+
+    var_a=$(sed -n "/\[DMR Network 1\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_a="DMR Network 1"
+
+    var_b=$(sed -n "/\[DMR Network 2\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_b="DMR Network 2"
+
+    var_c=$(sed -n "/\[DMR Network 3\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_c="DMR Network 3"
+
+    var_d=$(sed -n "/\[DMR Network 4\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_d="DMR Network 4"
+
+    var_e=$(sed -n "/\[DMR Network 5\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_e="DMR Network 5"
+
+    var_f=$(sed -n "/\[DMR Network 6\]/{n;p;}" ${dest}      | awk -F '=' '{print $2}')
+    alvo_f="DMR Network 6"
+
+    var_g=$(sed -n "/\[XLX Network\]/{n;p;}"   ${dest}      | awk -F '=' '{print $2}')
+    alvo_g="XLX Network"
+
+    var_h=$(sed -n "/\[Dynamic TG Control\]/{n;p;}" ${dest} | awk -F '=' '{print $2}')
+    alvo_h="Dynamic TG Control"
+
+    var_i=$(sed -n "/\[Enabled\]/{n;p;}" ${dest_cross}      | awk -F '=' '{print $2}')
+    alvo_i="Enabled"
+
+  ;;
+
+  *)
+    echo "* ??? ${1}"
+    exit 1
+  ;;
+  esac
+fi
+
+if [ "$2" ]; then
+  case ${2} in
+
+  ([oO][nN])
+    on_off_a="1"
+    on_off_b="1"
+    on_off_c="1"
+    on_off_d="1"
+    on_off_e="1"
+    on_off_f="1"
+    on_off_g="1"
+    on_off_h="1"
+    on_off_i="1"
+  ;;
+
+  ([oO][fF][fF])
+    on_off_a="0"
+    on_off_b="0"
+    on_off_c="0"
+    on_off_d="0"
+    on_off_e="0"
+    on_off_f="0"
+    on_off_g="0"
+    on_off_h="0"
+    on_off_i="0"
+  ;;
+
+  *)
+     echo "* ??? ${2}"
+     exit 1
+  ;;
+  esac
+
+else
+  exit 1
+fi
+
+if [ "${var_a}" == "${on_off_a}" ]; then
+  exit 0
+
+elif [ "${var_b}" == "${on_off_b}" ]; then
+  exit 0
+
+elif [ "${var_c}" == "${on_off_c}" ]; then
+  exit 0
+
+elif [ "${var_d}" == "${on_off_d}" ]; then
+  exit 0
+
+elif [ "${var_e}" == "${on_off_e}" ]; then
+  exit 0
+
+elif [ "${var_f}" == "${on_off_f}" ]; then
+  exit 0
+
+elif [ "${var_g}" == "${on_off_g}" ]; then
+  exit 0
+
+elif [ "${var_h}" == "${on_off_h}" ]; then
+  exit 0
+
+elif [ "${var_i}" == "${on_off_i}" ]; then
+  exit 0
+fi
+
+sudo sed -i "/\[${alvo_a}\]/{n;s/${var_a}/${on_off_a}/}" ${dest}
+sudo sed -i "/\[${alvo_b}\]/{n;s/${var_b}/${on_off_b}/}" ${dest}
+sudo sed -i "/\[${alvo_c}\]/{n;s/${var_c}/${on_off_c}/}" ${dest}
+sudo sed -i "/\[${alvo_d}\]/{n;s/${var_d}/${on_off_d}/}" ${dest}
+sudo sed -i "/\[${alvo_e}\]/{n;s/${var_e}/${on_off_e}/}" ${dest}
+sudo sed -i "/\[${alvo_e}\]/{n;s/${var_e}/${on_off_e}/}" ${dest}
+sudo sed -i "/\[${alvo_f}\]/{n;s/${var_f}/${on_off_f}/}" ${dest}
+sudo sed -i "/\[${alvo_g}\]/{n;s/${var_g}/${on_off_g}/}" ${dest}
+sudo sed -i "/\[${alvo_h}\]/{n;s/${var_h}/${on_off_h}/}" ${dest}
+sudo sed -i "/\[${alvo_i}\]/{n;s/${var_i}/${on_off_i}/}" ${dest_cross}
+
+
+sudo systemctl restart mmdvmhost
+sudo systemctl restart dmrgateway
+mount -o remount,ro /

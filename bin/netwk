@@ -1,0 +1,142 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+if [ -f "/etc/ysfgateway" ]
+then
+        VALORDG=`cat /etc/ysfgateway | grep Startup= | cut -f 1`
+	if [ "$VALORDG" = "" ]
+	then
+		   echo ""
+                   echo "* ATENCAO!"
+                   echo "* Nenhum servidor c4fm encontrado."
+                   echo "* Selecione um servidor de conexao c4fm e tente novamente."
+                   echo ""
+                   exit 0
+	fi
+fi
+sleep 2
+
+DGn='" "'
+ygw="/etc/ysfgateway"
+EndM="/etc/mmdvmhost"
+EndH="/usr/local/etc/YSFHosts.txt"
+
+call=$(grep -m 1 'Callsign=' ${EndM} | awk -F "=" '/Callsign/ {print $2}')
+idgw=$(grep -m 1 'Id=' ${EndM} | awk -F "=" '/Id/ {print $2}')
+RXf=$(grep -m 1 'RXFrequency=' ${EndM} | awk -F "=" '/RXFrequency/ {print $2}')
+TXf=$(grep -m 1 'TXFrequency=' ${EndM} | awk -F "=" '/TXFrequency/ {print $2}')
+Pw=$(grep -m 1 'Power=' ${EndM} | awk -F "=" '/Power/ {print $2}')
+LATd=$(grep -m 1 'Latitude=' ${EndM} | awk -F "=" '/Latitude/ {print $2}')
+LONg=$(grep -m 1 'Longitude=' ${EndM} | awk -F "=" '/Longitude/ {print $2}')
+Heig=$(grep -m 1 'Height=' ${EndM} | awk -F "=" '/Height/ {print $2}')
+DESc=$(grep -m 1 'Description=' ${EndM} | awk -F "=" '/Description/ {print $2}')
+YSFhost=$(grep -m 1 '72401;' ${EndH} | awk -F ";" '/72401/ {print $2}')
+LOCAL=$(grep -m 1 'Location=' ${EndM} | awk -F "=" '/Location/ {print $2}')
+SITE=$(grep -m 1 'URL=' ${EndM} | awk -F "=" '/URL/ {print $2}')
+RES=$(grep -m 1 'Slot1=' /etc/mmdvmhost | awk -F "=" '/Slot/ {print $2}')
+
+if [[ ${RES} -eq "1" ]]; then
+
+      RPT="RPT"
+else
+      RPT="ND"	
+fi
+
+if [ -f "$ygw" ]
+ then
+   sudo cp -R ${ygw} ${ygw}.$(date +%Y%m%d)
+   sudo rm -R ${ygw}
+fi 
+sleep 1
+
+touch ${ygw}
+sudo chmod 777 ${ygw}
+
+echo "[General]"                              >> ${ygw}
+echo "Callsign=${call}"                       >> ${ygw}
+echo "Suffix=${RPT}"                          >> ${ygw}
+echo "RptAddress=127.0.0.1"                   >> ${ygw}
+echo "RptPort=3200"                           >> ${ygw}
+echo "LocalAddress=127.0.0.1"                 >> ${ygw}
+echo "LocalPort=4200"                         >> ${ygw}
+echo "WiresXMakeUpper=1"                      >> ${ygw}
+echo "Id=${idgw}"                             >> ${ygw}
+echo "Daemon=1"                               >> ${ygw}
+echo "WiresXCommandPassthrough=1"             >> ${ygw}
+echo "Debug=0"                                >> ${ygw}
+echo "SaveAMBE=0"                             >> ${ygw}
+echo "AMBECompA=4"                            >> ${ygw}
+echo "AMBECompB=3"                            >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[Info]"                                 >> ${ygw}
+echo "RXFrequency=${RXf}"                     >> ${ygw}
+echo "TXFrequency=${TXf}"                     >> ${ygw}
+echo "Power=${Pw}"                            >> ${ygw}
+echo "Latitude=${LATd}"                       >> ${ygw}
+echo "Longitude=${LONg}"                      >> ${ygw}
+echo "Height=${Heig}"                         >> ${ygw}
+echo "Name=${call}_Pi-Star"                   >> ${ygw}
+echo "Description=${DESc}"                    >> ${ygw}
+echo "Location=${LOCAL}"                      >> ${ygw}
+echo "URL=${SITE}"                            >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[Log]"                                  >> ${ygw}
+echo "DisplayLevel=0"                         >> ${ygw}
+echo "FileLevel=1"                            >> ${ygw}
+echo "FilePath=/var/log/pi-star"              >> ${ygw}
+echo "FileRoot=YSFGateway"                    >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[Network]"                              >> ${ygw}
+echo "Startup=${YSFhost}"                     >> ${ygw}
+echo "InactivityTimeout=0"                    >> ${ygw}
+echo "Revert=0"                               >> ${ygw}
+echo "Debug=0"                                >> ${ygw}
+echo "Port=42000"                             >> ${ygw}
+echo "ReloadTime=60"                          >> ${ygw}
+echo "Type=DMR"                               >> ${ygw}
+echo "Jitter=3"                               >> ${ygw}
+echo "NoChange=0"                             >> ${ygw}
+echo "Options=${DGn}"                         >> ${ygw}
+echo ""                                       >> ${ygw}
+echo "[YSF Network]"                          >> ${ygw}
+echo "Enable=1"                               >> ${ygw}
+echo "Port=42000"                             >> ${ygw}
+echo "Hosts=/usr/local/etc/YSFHosts.txt"      >> ${ygw}
+echo "ReloadTime=60"                          >> ${ygw}
+echo "ParrotAddress=127.0.0.1"                >> ${ygw}
+echo "ParrotPort=42012"                       >> ${ygw}
+echo "YSF2DMRAddress=127.0.0.1"               >> ${ygw}
+echo "YSF2DMRPort=42013"                      >> ${ygw}
+echo "YSF2NXDNAddress=127.0.0.1"              >> ${ygw}
+echo "YSF2NXDNPort=42014"                     >> ${ygw}
+echo "YSF2P25Address=127.0.0.1"               >> ${ygw}
+echo "YSF2P25Port=42015"                      >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[FCS Network]"                          >> ${ygw}
+echo "Enable=1"                               >> ${ygw}
+echo "Port=42001"                             >> ${ygw}
+echo "Rooms=/usr/local/etc/FCSHosts.txt"      >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[Remote Commands]"                      >> ${ygw}
+echo "Enable=1"                               >> ${ygw}
+echo "Port=6073"                              >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[GPSD]"                                 >> ${ygw}
+echo "Enable=0"                               >> ${ygw}
+echo "Address=127.0.0.1"                      >> ${ygw}
+echo "Port=2947"                              >> ${ygw}
+echo " "                                      >> ${ygw}
+echo "[APRS]"                                 >> ${ygw}
+echo "Enable=1"                               >> ${ygw}
+echo "Address=127.0.0.1"                      >> ${ygw}
+echo "Port=8673"                              >> ${ygw}
+echo "Description=${call}_Pi-Star_RJS"        >> ${ygw}
+echo "Suffix=Y"                               >> ${ygw}
+echo " "                                      >> ${ygw}
