@@ -117,18 +117,18 @@ timestamp(){
 
 #-------------------DIR UPDATE-------------------#
 
- #sudo chattr -i /usr/local/bin/YSFGateway
- #sudo chattr -i /usr/local/sbin/pistar-remote
+#sudo chattr -i /usr/local/bin/YSFGateway
+#sudo chattr -i /usr/local/sbin/pistar-remote
  
- #sudo chmod 777 /usr/local/bin
- #sudo chmod 777 /usr/local/sbin
+#sudo chmod 777 /usr/local/bin
+#sudo chmod 777 /usr/local/sbin
  
- #sudo chmod 777 -R /usr/local/bin
- #sudo chmod 777 -R /usr/local/sbin
+#sudo chmod 777 -R /usr/local/bin
+#sudo chmod 777 -R /usr/local/sbin
  
- #sudo cp -R /usr/local/bin  /usr/local/bin.BKP-$(daystamp)_$(timestamp)         
- #sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP-$(daystamp)_$(timestamp)         
- #sleep 2
+#sudo cp -R /usr/local/bin  /usr/local/bin.BKP-$(daystamp)_$(timestamp)         
+#sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP-$(daystamp)_$(timestamp)         
+#sleep 2
  
 #sudo rm -R /usr/local/bin/*           
 #sudo rm -R /usr/local/sbin/*          
@@ -138,8 +138,8 @@ timestamp(){
 #sudo cp -p -R /usr/local/bin.BKP-*/.git      /usr/local/bin
 #sudo rm -R /usr/local/bin.BKP-*      
 
-#sudo cp -R /home/pi-star/c4fm/sbin/*          /usr/local/sbin
-#sudo cp -p -R /usr/local/bin.BKP-*/.git       /usr/local/bin
+#sudo cp -R /home/pi-star/c4fm/sbin/*         /usr/local/sbin
+#sudo cp -p -R /usr/local/bin.BKP-*/.git      /usr/local/bin
 #sudo rm -R /usr/local/bin.BKP-*
 #sleep 2
  
