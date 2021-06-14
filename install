@@ -89,8 +89,13 @@ Dp="/usr/local/bin/MMDVMHost"
 Ep="/usr/local/sbin/pistar-remote"
 
 call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
-sudo chattr -i ${DIRBin}/YSFGateway
-sudo chattr -i ${DIRSbin}/pistar-remote
+
+sudo chattr -i  /usr/local/bin/YSFGateway
+sudo chattr -i  /usr/local/bin/DMR2YSF
+sudo chattr -i  /usr/local/bin/MMDVMHost
+sudo chattr -i  /usr/local/bin/DMRGateway
+sudo chattr -i  /usr/local/bin/YSFGateway
+sudo chattr -i  ${DIRSbin}/pistar-remote
 sleep 1
 
 echo "* Desativando servicos..."
@@ -114,49 +119,6 @@ daystamp(){
 timestamp(){
     date +"%T"
 }
-
-#-------------------DIR UPDATE-------------------#
-
-#sudo chattr -i /usr/local/bin/YSFGateway
-#sudo chattr -i /usr/local/sbin/pistar-remote
- 
-#sudo chmod 777 /usr/local/bin
-#sudo chmod 777 /usr/local/sbin
- 
-#sudo chmod 777 -R /usr/local/bin
-#sudo chmod 777 -R /usr/local/sbin
- 
-#sudo cp -R /usr/local/bin  /usr/local/bin.BKP-$(daystamp)_$(timestamp)         
-#sudo cp -R /usr/local/sbin  /usr/local/sbin.BKP-$(daystamp)_$(timestamp)         
-#sleep 2
- 
-#sudo rm -R /usr/local/bin/*           
-#sudo rm -R /usr/local/sbin/*          
-#sleep 2
- 
-#sudo cp -R /home/pi-star/c4fm/bin/*          /usr/local/bin   
-#sudo cp -p -R /usr/local/bin.BKP-*/.git      /usr/local/bin
-#sudo rm -R /usr/local/bin.BKP-*      
-
-#sudo cp -R /home/pi-star/c4fm/sbin/*         /usr/local/sbin
-#sudo cp -p -R /usr/local/bin.BKP-*/.git      /usr/local/bin
-#sudo rm -R /usr/local/bin.BKP-*
-#sleep 2
- 
-#sudo chmod 2775 /usr/local/bin
-#sudo chmod 2775 /usr/local/sbin
- 
-#sudo chmod 777 -R /usr/local/bin
-#sudo chmod 777 -R /usr/local/sbin
- 
-#sudo chown root /usr/local/bin
-#sudo chown root /usr/local/sbin
- 
-#sudo chgrp bin   /usr/local/bin
-#sudo chgrp staff /usr/local/sbin
-#sleep 2
-
-#-------------------DIR FIM----------------------#
 
 echo "* Estruturando..."
 echo ""
@@ -230,19 +192,19 @@ sudo cp /home/pi-star/c4fm/add/pistar-upgrade            /usr/local/sbin/pistar-
 sudo cp /home/pi-star/c4fm/add/pistar-upnp.service       /usr/local/sbin/pistar-upnp.service
 sleep 2
 
-sudo chmod 755  /usr/local/bin/DGIdGateway
+sudo chmod 755 /usr/local/bin/DGIdGateway
 sudo chgrp bin /usr/local/bin/DGIdGateway
 
-sudo chmod 755  /usr/local/bin/M17Gateway
+sudo chmod 755 /usr/local/bin/M17Gateway
 sudo chgrp bin /usr/local/bin/M17Gateway
 
-sudo chmod 755  /usr/local/sbin/pistar-hourly.cron
+sudo chmod 755 /usr/local/sbin/pistar-hourly.cron
 sudo chgrp -R staff /usr/local/sbin/pistar-hourly.cron
 
-sudo chmod 755  /usr/local/sbin/pistar-update
+sudo chmod 755 /usr/local/sbin/pistar-update
 sudo chgrp -R staff /usr/local/sbin/pistar-update
 
-sudo chmod 755  /usr/local/sbin/pistar-upgrade
+sudo chmod 755 /usr/local/sbin/pistar-upgrade
 sudo chgrp -R staff /usr/local/sbin/pistar-upgrade
 
 sudo chmod 755  /usr/local/sbin/pistar-upnp.service
