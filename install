@@ -234,7 +234,7 @@ sudo cp ${DIR}/c4fmy-bin-oficial    ${DIRBin}/ysf
 sudo cp ${DIR}/c4fmo-bin-oficial    ${DIRBin}/out
 sudo cp ${DIR}/MMDVMHost-bin        ${DIRBin}/MMDVMHost
 sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
-sudo cp ${DIR}/scg/Trasf            ${DIRSbin}/pistar-remote
+sudo cp ${DIR}/scg/Transf           ${DIRSbin}/pistar-remote
 sleep 1
 
 sudo cp ${DIRSCP}/modo              ${DIRBin}/modo                 
