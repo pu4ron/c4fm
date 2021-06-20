@@ -30,9 +30,9 @@ fi
 
 case "$1" in
 	start) (
-#		$DAEMON -e $hostVar -a $ipVar 22 22 TCP $timeOut > /dev/null 2>&1
-#		$DAEMON -e $hostVar -a $ipVar 80 80 TCP $timeOut > /dev/null 2>&1
-#		$DAEMON -e $hostVar -a $ipVar 10022 10022 UDP $timeOut > /dev/null 2>&1
+		$DAEMON -e $hostVar -a $ipVar 22 22 TCP $timeOut > /dev/null 2>&1
+		$DAEMON -e $hostVar -a $ipVar 80 80 TCP $timeOut > /dev/null 2>&1
+		$DAEMON -e $hostVar -a $ipVar 10022 10022 UDP $timeOut > /dev/null 2>&1
                 $DAEMON -e $hostVar -a $ipVar 20001 20001 UDP $timeOut > /dev/null 2>&1
                 $DAEMON -e $hostVar -a $ipVar 30001 30001 UDP $timeOut > /dev/null 2>&1
                 $DAEMON -e $hostVar -a $ipVar 30051 30051 UDP $timeOut > /dev/null 2>&1
