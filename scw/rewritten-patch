@@ -143,18 +143,18 @@ if [ -f "${gy}" ]; then
    echo "Location=0"                                >> ${gy}
    echo "Debug=0"                                   >> ${gy}
    echo " "                                         >> ${gy}
-   echo "[DMR Network 5]"                           >> ${gy}
-   echo "Enabled=1"                                 >> ${gy}
-   echo "Name=BRIDGE_Cross-over"                    >> ${gy}
-   echo "Id=${id}"                                  >> ${gy}
-   echo "Address=127.0.0.1"                         >> ${gy}
-   echo "Port=62033"                                >> ${gy} 
-   echo "Local=62034"                               >> ${gy}
-   echo "TypeRewrite0=1,7000001,2,1,999998"         >> ${gy}
-   echo "Password=PASSWORD"                         >> ${gy}
-   echo "Location=1"                                >> ${gy}
-   echo "Debug=0"                                   >> ${gy}
-   echo " "                                         >> ${gy}
+  #echo "[DMR Network 5]"                           >> ${gy}
+  #echo "Enabled=1"                                 >> ${gy}
+  #echo "Name=BRIDGE_Cross-over"                    >> ${gy}
+  #echo "Id=${id}"                                  >> ${gy}
+  #echo "Address=127.0.0.1"                         >> ${gy}
+  #echo "Port=62033"                                >> ${gy} 
+  #echo "Local=62034"                               >> ${gy}
+  #echo "TypeRewrite0=1,7000001,2,1,999998"         >> ${gy}
+  #echo "Password=PASSWORD"                         >> ${gy}
+  #echo "Location=1"                                >> ${gy}
+  #echo "Debug=0"                                   >> ${gy}
+  #echo " "                                         >> ${gy}
 
    sleep 2
    sudo chmod 644 ${gy}
