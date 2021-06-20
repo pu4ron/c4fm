@@ -72,6 +72,9 @@ if [ "$(id -u)" != "0" ];then
    exit 1
 fi
 
+On="chattr +i"
+Off="chattr -i"
+
 DIR="/home/pi-star/c4fm"
 DIRL="/home/pi-star/c4fm/pistar-remote-etc"
 DIREtc="/etc"
@@ -90,12 +93,12 @@ Ep="/usr/local/sbin/pistar-remote"
 
 call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
 
-sudo chattr -i  /usr/local/bin/YSFGateway
-sudo chattr -i  /usr/local/bin/DMR2YSF
-sudo chattr -i  /usr/local/bin/MMDVMHost
-sudo chattr -i  /usr/local/bin/DMRGateway
-sudo chattr -i  /usr/local/bin/YSFGateway
-sudo chattr -i  ${DIRSbin}/pistar-remote
+sudo ${Off}  /usr/local/bin/YSFGateway
+sudo ${Off}  /usr/local/bin/DMR2YSF
+sudo ${Off}  /usr/local/bin/MMDVMHost
+sudo ${Off}  /usr/local/bin/DMRGateway
+sudo ${Off}  /usr/local/bin/YSFGateway
+sudo ${Off}  ${DIRSbin}/pistar-remote
 sleep 1
 
 echo "* Desativando servicos..."
@@ -231,7 +234,7 @@ sudo cp ${DIR}/c4fmy-bin-oficial    ${DIRBin}/ysf
 sudo cp ${DIR}/c4fmo-bin-oficial    ${DIRBin}/out
 sudo cp ${DIR}/MMDVMHost-bin        ${DIRBin}/MMDVMHost
 sudo cp ${DIR}/YSFGateway-bin       ${DIRBin}/YSFGateway
-sudo cp ${DIR}/pistar-remote-sbin   ${DIRSbin}/pistar-remote
+sudo cp ${DIR}/scg/Trasf            ${DIRSbin}/pistar-remote
 sleep 1
 
 sudo cp ${DIRSCP}/modo              ${DIRBin}/modo                 
@@ -294,7 +297,7 @@ sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
 sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
 sleep 2
 # sudo chattr +i ${DIRBin}/YSFGateway
-sudo chattr +i ${DIRSbin}/pistar-remote
+sudo ${On} ${DIRSbin}/pistar-remote
 echo ""
 echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
 echo ""
