@@ -252,8 +252,9 @@ sleep 2
 
 sudo /home/pi-star/c4fm/scw/comandos                                
 sleep 2
-sudo /home/pi-star/c4fm/scw/brideg                      
-sleep 2
+
+#sudo /home/pi-star/c4fm/scw/brideg                      
+#sleep 2
 
 sudo cp ${DIR}/c4fm-bin-oficial     ${DIRBin}/c4fm
 sudo cp ${DIR}/c4fmy-bin-oficial    ${DIRBin}/ysf
