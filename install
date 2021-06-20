@@ -93,6 +93,31 @@ Ep="/usr/local/sbin/pistar-remote"
 
 call=$(grep -m 1 'Callsign=' /etc/mmdvmhost | awk -F "=" '/Callsign/ {print $2}')
 
+service_handle() {
+	
+	doWhat=${1}
+	systemctl ${doWhat} pistar-watchdog.service > /dev/null 2>&1
+	systemctl ${doWhat} pistar-remote.service > /dev/null 2>&1
+	systemctl ${doWhat} dmrgateway.service > /dev/null 2>&1
+	systemctl ${doWhat} dapnetgateway.service > /dev/null 2>&1
+	systemctl ${doWhat} ircddbgateway.service > /dev/null 2>&1
+	systemctl ${doWhat} timeserver.service > /dev/null 2>&1
+	systemctl ${doWhat} ysfgateway.service > /dev/null 2>&1
+	systemctl ${doWhat} ysf2dmr.service > /dev/null 2>&1
+	systemctl ${doWhat} ysf2nxdn.service > /dev/null 2>&1
+	systemctl ${doWhat} ysf2p25.service > /dev/null 2>&1
+	systemctl ${doWhat} ysfparrot.service > /dev/null 2>&1
+	systemctl ${doWhat} dmr2ysf.service > /dev/null 2>&1
+	systemctl ${doWhat} dmr2nxdn.service > /dev/null 2>&1
+	systemctl ${doWhat} p25gateway.service > /dev/null 2>&1
+	systemctl ${doWhat} p25parrot.service > /dev/null 2>&1
+	systemctl ${doWhat} nxdngateway.service > /dev/null 2>&1
+	systemctl ${doWhat} nxdn2dmr.service > /dev/null 2>&1
+	systemctl ${doWhat} nxdnparrot.service > /dev/null 2>&1
+	systemctl ${doWhat} dstarrepeater.service > /dev/null 2>&1
+	systemctl ${doWhat} mmdvmhost.service > /dev/null 2>&1 && sleep 2 > /dev/null 2>&1
+}
+
 sudo ${Off}  /usr/local/bin/YSFGateway
 sudo ${Off}  /usr/local/bin/DMR2YSF
 sudo ${Off}  /usr/local/bin/MMDVMHost
@@ -103,14 +128,15 @@ sleep 1
 
 echo "* Desativando servicos..."
 echo ""
-sudo systemctl stop pistar-watchdog.timer      >/dev/null 2>&1 &
-sudo systemctl stop pistar-watchdog.service    >/dev/null 2>&1 &
-sudo systemctl stop mmdvmhost.timer            >/dev/null 2>&1 &
-sudo systemctl stop mmdvmhost.service          >/dev/null 2>&1 &
-sudo systemctl stop ysfgateway.service         >/dev/null 2>&1 &
-sudo systemctl stop dmr2ysf.service            >/dev/null 2>&1 &
-sleep 3
-sudo killall MMDVMHost                         >/dev/null 2>&1 &
+service_handle stop
+#sudo systemctl stop pistar-watchdog.timer      >/dev/null 2>&1 &
+#sudo systemctl stop pistar-watchdog.service    >/dev/null 2>&1 &
+#sudo systemctl stop mmdvmhost.timer            >/dev/null 2>&1 &
+#sudo systemctl stop mmdvmhost.service          >/dev/null 2>&1 &
+#sudo systemctl stop ysfgateway.service         >/dev/null 2>&1 &
+#sudo systemctl stop dmr2ysf.service            >/dev/null 2>&1 &
+#sleep 3
+#sudo killall MMDVMHost                         >/dev/null 2>&1 &
 sleep 2
 
 echo "* Backup..."
@@ -289,14 +315,14 @@ sudo /bin/sync
 sudo /bin/sync
 sudo /bin/sync
 
-sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
-sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
-sudo systemctl start mmdvmhost.timer         >/dev/null 2>&1 &
-sudo systemctl start mmdvmhost               >/dev/null 2>&1 &
-sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
-sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
+service_handle start
+#sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
+#sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
+#sudo systemctl start mmdvmhost.timer         >/dev/null 2>&1 &
+#sudo systemctl start mmdvmhost               >/dev/null 2>&1 &
+#sudo systemctl start ysfgateway.service      >/dev/null 2>&1 &
+#sudo systemctl start dmr2ysf.service         >/dev/null 2>&1 &
 sleep 2
-# sudo chattr +i ${DIRBin}/YSFGateway
 sudo ${On} ${DIRSbin}/pistar-remote
 echo ""
 echo -e "\033[01;37m*\033[04;32mFIM\033[00;37m*"
