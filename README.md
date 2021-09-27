@@ -1,45 +1,71 @@
 # Script PIVoiceBrasil - v2.3
 
 ***O 'script pivoicebrasil' é um conjunto de ferramentas DMR  e C4FM cuja a função é ativar, automatizar e possibilitar o uso de diversos recursos do pi-star. Por exemplo, uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF), ativar e desativar redes DMR e modos via rádio e tantas outras funções... Vale lembrar também os diversos tipos de controles que as ferramentas disponibilizam aos usuários via rádio e aplicativo (app) para  gerencia do pi-star. A proposta do script não é atender todos os modos, mas somente DMR e C4FM.***
+ 
+# Leia-me: 
 
-# ***NEW UPDATE (30/04/2021)***
-* Melhorias no código, novas funções, funções reformuladas e fim do suporte ao Bluedv.
+* -> 1.0 - Update. Não continue sem atualizar seu pi-star.
+* -> 1.1 - Ative "DMR2YSF".
+* -> 1.2 - Selecione um servidor com suporte DG-ID.
+* -> 1.3 - Faça backup do seu pi-star.
+* -> 1.4 - Ative o SSH.
 
-# ***UPDATE (10/04/2021)***
-* Opção 1 - Script C4FM - V2.3
-* -> * Adicinado função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID.
-* -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
-* -> * Para executar os comandos use o app 'SSH button' ou terminal shell.
+* Script baseado na versão 4 do pi-star.
+* Servidor de referência em cross-mode(DMR2YSF): "YSF72401-BR-C4FM-Brasil-YCS724" (Default). Painel: http://ycs724.amrase.org.br/ycs/
+* Outros servidores podem ser utilizados pelo usuário, com ou sem suporte a dg-id.
+* Suporte a servidores YSF.
 
-* -> * Para seleção estática de algum dg-id use o caractere especial "estrela (*)" seguido do dg-id.
-*  Exemplo(s): 
-*  dg-id: 72 ( sudo c4fm  *72 )
-*  dg-id(s): 72,96,97,24 ( sudo c4fm  *72,96,97,24 )
+* Para uso via celular instale o app ***(SSH button)*** que irá criar os botões para executarem os comandos solicitados... 
+* Lembrando que os mesmos comandos executados no aplicativo também podem ser executados no terminal shell do pi-star.
 
-![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
+# App 'SSH button' - configuração:
 
-* -> * No modo standby as transmiões são mutadas e o servidor fica aguardando alguma portadora para ser ativo e por tempo determinado.
-* -> * Para ativar o modo standby use o símbolo especial "arroba (@)"
-*  Exemplo: ( sudo c4fm  @ )
+* -> Label: nome do comando ou DG-ID.
+* -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
 
-![Estatico-3](https://user-images.githubusercontent.com/40077152/114287087-8d0aad80-9a3a-11eb-9134-5c2c7d15a3ea.png)
-![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
+* Ex: sudo c4fm 72          (DG-ID 72)
+* Ex: sudo c4fm off         (Disconnect) 
+* Ex: sudo c4fm reset       (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options')
+
+* -> SSH hostname: ip da raspberry.
+* -> SSH usurname: usuario do pi-star. (pi-star)
+* -> SSH password: senha do pi-star.
+* -> SSH port: 22
+
+![r2](https://user-images.githubusercontent.com/40077152/112875565-ba4e7780-909a-11eb-9c62-dea9d55db767.jpeg)
 
 
-* -> * (***Experimental***) A nova forma de selecionar um servidor c4fm via rádio é simples...  basta enviar uma portadora com o id do servidor no 'slot 1 ou 2'. Se estiver usando DMRGateway acrescente o numero '70' antes do id do servidor. Para falar, use o mesmo id do servidor que foi usado para seleciona-lo. 
-* -> * Nota: a forma anntiga de seleção permanece ativa.
+# RF + (App 'SSH button' ou terminal shell):
 
-* ***Após intalação do script v2.3 requer 'Reboot'.***
+* Caso queira selecionar os DG-IDs via rádio faz-se necessário o envio de ***"sete digitos"*** como ***"contato privado"*** para o pi-star aceitar o comandos... sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando ***DMRGateway acrescente*** o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
 
-* ***Nota: em algumas variantes do pi-star deve-se usar somente 'slot 1' para selecionar os servidores.***
+* ***-> Contato privado:  88888+(DG-ID)***
 
-* Exemplo: YCS72401  / Tx: TG72401 ou TG7072401
-* Exemplo: YSF90558  / Tx: TG90558 ou TG7090558
-* Exemplo: YSF56691  / Tx: TG56691 ou TG7056691
+* 8888802 (Link dg-id 02) 
+* 8888872 (Link dg-id 72)
+* 8888896 (Link dg-id 96)  
+ 
+* ***Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado no mínimo 3seg.***
 
-# ***UPDATE 30/04/2021 - (Reformulado)***
-* Opção 1 - Script C4FM - V2.3
+* Conselho: ***Slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
+
+# Comandos especiais: app 'SSH button' ou terminal shell.
+
+* Ex: 4444400    (Disconnect)
+* Ex: 5555500    (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options' )
+
+# YSF GW
+* Para dg-id(s) estático(s) declare os dg-id(s) no arquivo de configuração no pi-star.
+* 'Configuração' + 'Expert' + 'YSF GW' e no campo 'Options' declare os dg-id(s).
+
+![Options](https://user-images.githubusercontent.com/40077152/112755822-cbbf5300-8fb8-11eb-8600-a852f1b1a61f.png)
+
+# ***ON/OFF Redes Digitais - UPDATE 30/04/2021 - (Reformulado)***
+* Menu opção 1 - Script C4FM - V2.3
 * -> * Opção de ativar e desativar as "redes digitais" (Network 1-3, xlx e dmr2ysf) via rádio ou celular *
+* -> * Network 1: Brandmeister 
+* -> * Network 2: IPSC2
+* -> * Network 3: Cross-mode (DMR2YSF)
 * -> * Função que só se aplica em DMRGateway *
 
 ***(Celular - 'SSH button' ou terminal shell)***
@@ -85,9 +111,51 @@
 
 ***Obs: Normalmente as redes no pi-star em DMRGateway são organizadas da seguinte forma: "Network 1=BM", "Network 2=IPSC2" e "Network 3=cros-over/DMR2YSF"***
 
+# ***UPDATE (10/04/2021)***
+* Menu opção 1 - Script C4FM - V2.3
+* -> * Foi adicionado uma função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID.
+* -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
+* -> * Para executar os comandos use o app 'SSH button' ou terminal shell.
 
-# ***UPDATE 03/04/2021***
-* Ativar e desativar os "modos digitais" via rádio.
+* -> * Para seleção estática de algum dg-id use o caractere especial "estrela (*)" seguido do dg-id.
+*  Exemplo(s): 
+*  dg-id: 72 ( sudo c4fm  *72 )
+*  dg-id(s): 72,96,97,24 ( sudo c4fm  *72,96,97,24 )
+
+![ESTATICO](https://user-images.githubusercontent.com/40077152/114287077-7e23fb00-9a3a-11eb-9ed6-c1c63c0962c2.png)
+
+* -> * No modo standby as transmiões são mutadas e o servidor fica aguardando alguma portadora para ser ativo e por tempo determinado.
+* -> * Para ativar o modo standby use o símbolo especial "arroba (@)"
+*  Exemplo: ( sudo c4fm  @ )
+
+![Estatico-3](https://user-images.githubusercontent.com/40077152/114287087-8d0aad80-9a3a-11eb-9134-5c2c7d15a3ea.png)
+![Estatico-2](https://user-images.githubusercontent.com/40077152/114287088-9136cb00-9a3a-11eb-8487-97cfb8acc735.png)
+
+
+# Conectando servidores YSF ('SSH button' ou terminal shell):
+
+***(sudo ysf + ID)***
+
+* Ex: sudo ysf 56691
+* Ex: sudo ysf 90558
+
+* Ex: sudo ysf reset
+* Ex: sudo ysf off
+
+# Ativando ou desativando os modos digitais do pi-star (app 'SSH button' ou terminal "shell"):
+***(sudo modo + lig/desl)***
+
+* Ex: sudo dmr lig (ON)
+* Ex: sudo dmr desl (OFF)
+
+* Ex: sudo d-star lig (ON)
+* Ex: sudo d-star desl (OFF)
+
+* Ex: sudo ysf lig (ON)
+* Ex: sudo ysf desl (on)
+* Ex: sudo ysf reset (default)
+
+***Ativar e desativar "modos digitais" via rádio (RF).***
 
 * DMR OFF   (3333300) ***(Atenção: o uso desta opção exige a ativaçao manual do modo, seja pelo terminal ou por aplicativo 'app')***
 * DMR ON    (3333301)
@@ -103,104 +171,6 @@
 
 * P25 OFF   (3333308)
 * P25 ON    (3333309)
-
-# ***UPDATE 01/04/2021***
-* Seleção de servidores C4FM via rádio. (***Somente do brasil***)
-* Para selecionar, envie uma portatora de 3seg como contato privado: 80+ID do servidor  (7 digitos)
-
-* 8072400 (Brasil-Link)
-* 8077777 (Brazilnet)
-* 8072401 (C4FM-Brazil)
-* 8090558 (PU2LRZ)
-* 8095973 (PU4ARR)
-* 8056691 (YSF-BRASIL)
-* 8001466 (YSF-Minas)
-* 8072526 (BRAZIL-724)
-
-* ***Utlilize o 'ID' do servidor que foi selecionado para falar e se estiver usando DMRGateway, adicione o número 70 antes do ID.***
- 
-# Leia-me: 
-
-* -> 1.0 - Update. Não continue sem atualizar seu pi-star.
-* -> 1.1 - Ative "DMR2YSF".
-* -> 1.2 - Selecione um servidor com suporte DG-ID.
-* -> 1.3 - Faça backup do seu pi-star.
-* -> 1.4 - Ative o SSH.
-
-* Script baseado na versão 4.1.4 do pi-star.
-* Servidor de referência: "YSF72401-BR-C4FM-Brasil-YCS724" (Default). 
-* Outros servidores podem ser utilizados pelo usuário, com ou sem suporte a dg-id.
-* Suporte a servidores YSF.
-* Painel: http://ycs724.amrase.org.br/ycs/
-
-* Para uso via celular instale o app ***(SSH button)*** que irá criar botões e executar os comandos solicitados... 
-* Os mesmos comando podem ser executados no terminal shell do pi-star.
-
-# App 'SSH button':
-
-* -> Label: nome do comando ou DG-ID.
-* -> Command: comando a ser executado. => sudo c4fm + (DG-ID)  / sempre dois digitos: 01,02,72,96 etc...  
-
-* Ex: sudo c4fm 72          (DG-ID 72)
-* Ex: sudo c4fm off         (Disconnect) 
-* Ex: sudo c4fm reset       (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options')
-
-* -> SSH hostname: ip da raspberry.
-* -> SSH usurname: usuario do pi-star. (pi-star)
-* -> SSH password: senha do pi-star.
-* -> SSH port: 22
-
-![r2](https://user-images.githubusercontent.com/40077152/112875565-ba4e7780-909a-11eb-9c62-dea9d55db767.jpeg)
-
-
-# RF + (App 'SSH button' ou terminal shell):
-
-* Já para uso via rádio faz-se necessário o envio de ***"sete digitos"*** como ***"contato privado"***, sendo os cinco primeiros uma sequência de numeros "8" e os dois últimos números a identificação do DG-ID, salvo os comandos especiais, "reset" e "disconnect". Uma vez aceito o comando pelo pi-star, use o "ID" do servidor escolhido nas configurações do pi-star. Exemplo: "YSC724" Talkgroup TG72401. Se estiver usando ***DMRGateway acrescente*** o número 70 antes do "ID" do servidor: 70+72401 (7072401). Caso queira mudar o TG de saída e não usar o ID do servidor conexão uso o comando: ***sudo out TG (ex: sudo out 10) - TG10 Rx e Tx. Para retornar (sudo out reset). ATENÇÃO: cuidado para não atribuir TG que já esteja em uso e provocar algum conflito! Uso com cuidado!***
-
-* ***-> Contato privado:  88888+(DG-ID)***
-
-* 8888802 (Link dg-id 02) 
-* 8888872 (Link dg-id 72)
-* 8888896 (Link dg-id 96)  
- 
-* ***Para que o pi-star identifique corretamente o comando mantenha o ptt pressionado por no mínimo 3seg.***
-
-* Conselho: ***Slot 1 para selecionar DG-ID e Slot 2 para QSO(s).***
-
-# Comandos especiais: app 'SSH button' ou terminal shell.
-
-* Ex: 4444400    (Disconnect)
-* Ex: 5555500    (Reset: retorna as configurações definidas pelo usuário em 'Expert, YSF GW, Options' )
-
-# YSF GW
-* Para dg-id estático declare os dg-id(s) no arquivo de configuração no pi-star.
-* 'Configuração' + 'Expert' + 'YSF GW' e no campo 'Options' declare os dg-id(s).
-
-![Options](https://user-images.githubusercontent.com/40077152/112755822-cbbf5300-8fb8-11eb-8600-a852f1b1a61f.png)
-
-
-# Conectando servidores YSF ('SSH button' ou terminal shell):
-
-***(sudo ysf + ID)***
-
-* Ex: sudo ysf 56691
-* Ex: sudo ysf 90558
-
-* Ex: sudo ysf reset
-* Ex: sudo ysf off
-
-# Ativando ou desligando os modos digitais do pi-star (app 'SSH button' ou terminal "shell"):
-***(sudo modo + lig/desl)***
-
-* Ex: sudo dmr lig (ON)
-* Ex: sudo dmr desl (OFF)
-
-* Ex: sudo d-star lig (ON)
-* Ex: sudo d-star desl (OFF)
-
-* Ex: sudo ysf lig (ON)
-* Ex: sudo ysf desl (on)
-* Ex: sudo ysf reset (default)
 
 # PATCH DMRGateway (Reescrita de TGs):
 * Opção 2 - Script C4FM - V2.3
