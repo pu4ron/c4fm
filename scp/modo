@@ -11,6 +11,9 @@
 MODE="pistar-mmdvmhost-module"
 sudo mount -o remount,rw /
 
+chattr -i /usr/local/bin/MMDVMHost
+chattr -i /usr/local/bin/DMRGateway
+
 if [ -z "$1" ]; then
   script=$(nome "$0")
   exit 0
@@ -73,10 +76,42 @@ else
   exit 1
 fi
 
-(cd /var/log/pi-star/; sudo ${MODE} ${alvo_a} ${on_a}) >/dev/null 2>&1 &
-(cd /var/log/pi-star/; sudo ${MODE} ${alvo_b} ${on_b}) >/dev/null 2>&1 &
-(cd /var/log/pi-star/; sudo ${MODE} ${alvo_c} ${on_c}) >/dev/null 2>&1 &
-(cd /var/log/pi-star/; sudo ${MODE} ${alvo_d} ${on_d}) >/dev/null 2>&1 &
-(cd /var/log/pi-star/; sudo ${MODE} ${alvo_e} ${on_e}) >/dev/null 2>&1 &
+if [ "$alvo_a" == "Dmr" ]; then
+
+      sudo /usr/local/bin/salvepw-1
+      (cd /var/log/pi-star/; sudo ${MODE} ${alvo_a} ${on_a}) >/dev/null 2>&1 &
+      sudo /usr/local/bin/salvepw-2 
+fi
+
+if [ "$alvo_b" == "D-star" ]; then
+      sudo /usr/local/bin/salvepw-1
+      (cd /var/log/pi-star/; sudo ${MODE} ${alvo_b} ${on_b}) >/dev/null 2>&1 &
+      sudo /usr/local/bin/salvepw-2
+
+fi
+
+if [ "$alvo_c" == "Ysf" ]; then
+      sudo /usr/local/bin/salvepw-1
+      (cd /var/log/pi-star/; sudo ${MODE} ${alvo_c} ${on_c}) >/dev/null 2>&1 &
+      sudo /usr/local/bin/salvepw-2
+
+fi
+
+if [ "$alvo_d" == "P25" ]; then
+      sudo /usr/local/bin/salvepw-1
+      (cd /var/log/pi-star/; sudo ${MODE} ${alvo_d} ${on_d}) >/dev/null 2>&1 &
+      sudo /usr/local/bin/salvepw-2
+
+fi
+
+if [ "$alvo_e" == "Nxdn" ]; then
+      sudo /usr/local/bin/salvepw-1
+      (cd /var/log/pi-star/; sudo ${MODE} ${alvo_e} ${on_e}) >/dev/null 2>&1 &
+      sudo /usr/local/bin/salvepw-2
+
+fi
+
+chattr +i /usr/local/bin/MMDVMHost
+chattr +i /usr/local/bin/DMRGateway
 
 mount -o remount,ro /
