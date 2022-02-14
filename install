@@ -16,7 +16,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.4    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -36,10 +36,13 @@ if [ "$ALDG" = "" ]; then
 
 echo "* Escolha a opcao?" 
 echo ""
-echo -e " -> [1] \033[01;37m*FERRAMENTAS PI-STAR/C4FM*\033[00;37m"
+echo -e " -> [1] \033[01;37m* FERRAMENTAS PI-STAR/ DG-ID C4FM *\033[00;37m"
 echo ""
-echo -e " -> [2] \033[01;37m*PATCH DMRGateway*\033[00;37m"
+echo -e " -> [2] \033[01;37m* PATCH DMRGateway *\033[00;37m"
 echo ""
+echo -e " -> [3] \033[01;37m* PATCH QRZ/ RadioID *\033[00;37m"
+echo ""
+
 
 read -p "* Digite: " -n 1 -r
 case "$REPLY" in
@@ -52,7 +55,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.4    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -149,7 +152,7 @@ timestamp(){
     date +"%T"
 }
 
-echo "* Estruturando..."
+echo "* Estruturando e adicionando ferramentas..."
 echo ""
 
 if [ -f "$Cp" ]; then                                          
@@ -316,6 +319,29 @@ sudo /bin/sync
 sudo /bin/sync
 sudo /bin/sync
 
+#----------------------------#
+
+if [ -f "/usr/local/bin/salvepw-1" ]; then 
+
+     sudo rm /usr/local/bin/salvepw-1
+fi
+
+
+if [ -f "/usr/local/bin/salvepw-2" ]; then   
+
+     sudo rm /usr/local/bin/salvepw-2
+fi 
+                                          
+sudo cp -p /home/pi-star/c4fm/pwd/salvepw-1  /usr/local/bin/salvepw-1
+sudo chmod 777 /usr/local/bin/salvepw-1
+sudo chmod +x /usr/local/bin/salvepw-1 
+
+sudo cp -p /home/pi-star/c4fm/pwd/salvepw-2  /usr/local/bin/salvepw-2
+sudo chmod 777 /usr/local/bin/salvepw-2
+sudo chmod +x /usr/local/bin/salvepw-2
+
+#----------------------------#
+
 service_handle start
 #sudo systemctl start pistar-watchdog.timer   >/dev/null 2>&1 &
 #sudo systemctl start pistar-watchdog         >/dev/null 2>&1 &
@@ -338,7 +364,7 @@ echo -e "\033[01;37m****************************************\033[00;37m"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
-echo -e "\033[01;37m*                 \033[01;33mv2.3    \033[00;37m             *"
+echo -e "\033[01;37m*                 \033[01;33mv2.4    \033[00;37m             *"
 echo -e "\033[01;37m*                                      *\033[00;37m"
 echo -e "\033[01;37m****************************************\033[00;37m"
 echo ""
@@ -417,6 +443,89 @@ sleep 2
 cd /home/pi-star
 sudo rm -R /home/pi-star/c4fm
 ;;
+
+ 
+3)
+mount -o remount,rw /
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.4    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+read -p "* Add QRZ: Continuar? (S/N) " -n 1 -r
+case "$REPLY" in 
+
+  s|S ) echo "" ;;
+  n|N ) exit 0 ;;
+    * ) exit 0 ;;   
+esac
+echo ""
+mount -o remount,rw /
+
+clear
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*          \033[01;33mRONUALDO - PU4RON\033[00;37m           *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m*                 \033[01;33mv2.4    \033[00;37m             *"
+echo -e "\033[01;37m*                                      *\033[00;37m"
+echo -e "\033[01;37m****************************************\033[00;37m"
+echo ""
+echo ""
+sleep 1
+
+sudo mount -o remount,rw /
+
+daystamp(){
+        date +"%d.%m.%y"
+}
+timestamp(){
+        date +"%T"
+}
+
+dir="/etc/pistar-css.ini"
+
+echo ""
+echo ""
+echo "* Backup..."
+sudo cp  -p /etc/pistar-css.ini    /etc/pistar-css.ini-$(daystamp)_$(timestamp)
+sleep 2
+
+if [ -f "$dir" ]; then 
+
+    echo ""
+    echo "* Add regras..."
+    echo ""
+    sleep 2
+    sudo chmod 777 "$dir"
+    
+    echo " "                   >> "$dir" 
+    echo "[Lookup]"            >> "$dir"
+    echo "Service=QRZ"         >> "$dir"
+    echo "popupWidth=800"      >> "$dir"
+    echo "popupHeight=700"     >> "$dir"
+    echo " "                   >> "$dir"
+
+    echo "* Regras adicionadas."
+    echo ""
+    echo ""
+    sleep 2
+    
+fi
+
+echo -e "* \033[01;32mFim! \033[01;37m"
+sleep 2
+echo ""
+
+cd /home/pi-star
+sudo rm -R /home/pi-star/c4fm
+;;
+
 
 * ) exit 0 ;;   
 esac
