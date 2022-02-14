@@ -1,7 +1,12 @@
-# Script PIVoiceBrasil - v2.3 (PU4RON - RONUALDO)
+# PIVoiceBrasil - v2.4 (PU4RON - RONUALDO)
 
-***O 'script pivoicebrasil' é um conjunto de ferramentas DMR  e C4FM cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star. Por exemplo, uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF), ativar e desativar redes DMR e modos via rádio e tantas outras funções... Vale lembrar também os diversos tipos de controles que as ferramentas disponibilizam aos usuários via rádio e aplicativo (app) para  gerencia do pi-star. A proposta do script não é atender todos os modos, mas somente DMR e C4FM.***
+***O 'pivoicebrasil' é um conjunto de ferramentas DMR e C4FM cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star. Por exemplo, uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF), ativar e desativar redes DMR e modos via rádio e tantas outras funções... Vale lembrar também os diversos tipos de controles que as ferramentas disponibilizam aos usuários via rádio e aplicativo (app) para  gerencia do pi-star. A proposta do script não é atender todos os modos, mas somente DMR e C4FM.***
  
+# Novo!(12.02.2022) Adicionada a ferramenta de escolha entre RadioID ou QRZ.com para consulta no pi-star.
+
+![F1](https://user-images.githubusercontent.com/40077152/153916581-1085a86c-1f10-4cf0-b69f-63b5128bc332.png)
+
+
 # Leia-me: 
 
 * -> 1.0 - Update. Não continue sem atualizar seu pi-star.
@@ -61,7 +66,7 @@
 ![Options](https://user-images.githubusercontent.com/40077152/112755822-cbbf5300-8fb8-11eb-8600-a852f1b1a61f.png)
 
 # ***ON/OFF Redes Digitais - UPDATE 30/04/2021 - (Reformulado)***
-* Menu opção 1 - Script C4FM - V2.3
+* Menu opção 1 - Script C4FM - V2.4
 * -> * Opção de ativar e desativar as "redes digitais" (Network 1-3, xlx e dmr2ysf) via rádio ou celular *
 * -> * Network 1: Brandmeister 
 * -> * Network 2: IPSC2
@@ -112,7 +117,7 @@
 ***Obs: Normalmente as redes no pi-star em DMRGateway são organizadas da seguinte forma: "Network 1=BM", "Network 2=IPSC2" e "Network 3=cros-over/DMR2YSF"***
 
 # ***UPDATE (10/04/2021)***
-* Menu opção 1 - Script C4FM - V2.3
+* Menu opção 1 - Script C4FM - V2.4
 * -> * Foi adicionado uma função que declara DG-ID(S) estático(s), standby e seleção de servidores por ID.
 * -> * Essas opções só funcinam em servidores YCS com suporte a dg-id.
 * -> * Para executar os comandos use o app 'SSH button' ou terminal shell.
@@ -173,7 +178,7 @@
 * P25 ON    (3333309)
 
 # PATCH DMRGateway (Reescrita de TGs):
-* Opção 2 - Script C4FM - V2.3
+* Opção 2 - Script C4FM - V2.4
 *** *Para uso de servidores DMR com modo 'crossover DMR2YSF' faz-se necessario o uso do DMRGateway, configurado e ativo. Já o pi-star com a rede ipsc2, ativa e em dmrgateway, direciona seu fluxo para um único TG (TG 8) que limita o uso de todos os TGs da rede. Pensando nisso que o 'script c4fm' disponibiliza um patch que faz a reescrita de TGs ipsc2 possibilitando o uso de todos os Tgs e demais servidores DMR.*** 
 
 ***-> Obs: *Após aplicar o patch no seu pi-star as configuraçoes de dmrgateway seram reconfiguradas.***
