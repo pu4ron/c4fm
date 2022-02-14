@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+#
+#
+#
+
+DIRgatw="/etc/dmrgateway"
+
+DIRgatw2="/home/pi-star/Gw/dmrgateway.old-2"
+
+DIRbkp="/home/pi-star/Gw/dmrgateway.backup"
+
+DIRold="/home/pi-star/Gw/dmrgateway.old"
+
+arq="/home/pi-star/Gw/passwd"
+
+dir="/home/pi-star/Gw/"
+
+sudo mount -o remount,rw /
+
+
+if [ ! -e "$DIRbkp" ]; then
+
+     sudo cp -p $DIRgatw $DIRbkp
+     sudo chmod 777 $DIRbkp
+
+ fi
+
+
+if [ ! -e "$dir" ]; then
+    
+     sudo mkdir "$dir"
+     sudo chmod 777 "$dir"
+ fi
+
+
+
+if [ -f "$DIRgatw2" ]; then
+
+     sudo chmod 777 $DIRgatw2
+     sudo rm $DIRgatw2
+ fi
+
+
+if [ -f "$DIRgatw" ]; then
+
+
+
+        if [ -f "$DIRold" ]; then
+
+                sudo chmod 777 $DIRold
+                sudo rm  $DIRold
+           fi
+
+
+        sudo cp -p $DIRgatw  $DIRold
+        sudo chmod 777 $DIRold
+
+         
+fi

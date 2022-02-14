@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+################################################
+#                                              #
+#        Por: Ronualdo JSA - PU4RON            #
+#                                              #
+#                Janauba/MG                    #
+#                                              #
+################################################
+#
+#
+#
+#
+
+DIRgatw="/etc/dmrgateway"
+
+DIRgatw2="/home/pi-star/Gw/dmrgateway.old-2"
+
+DIRbkp="/home/pi-star/Gw/dmrgateway.backup"
+
+DIRold="/home/pi-star/Gw/dmrgateway.old"
+
+arq="/home/pi-star/Gw/passwd"
+
+dir="/home/pi-star/Gw/"
+
+sudo mount -o remount,rw /
+
+
+
+if [ -f "$DIRgatw" ]; then
+
+
+        b=$(egrep -A 16  '\[DMR Network 1\]' "$DIRold" | grep "Password=" | cut -c 1-50)
+
+
+        sudo sed "s/$b/$b/g" "$DIRold" > "$DIRgatw2"
+
+
+        if [ -f "$DIRgatw" ]; then
+
+                sudo chmod 777 $DIRgatw2
+
+                sudo rm $DIRgatw
+                sudo cp -p $DIRgatw2  $DIRgatw
+                sudo chmod 777 $DIRgatw
+
+                # sudo rm $DIRold
+                # sudo rm $DIRgatw2
+                
+           fi
+ 
+fi
