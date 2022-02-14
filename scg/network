@@ -12,6 +12,10 @@ dest="/etc/dmrgateway"
 dest_cross="/etc/dmr2ysf"
 sudo mount -o remount,rw /
 
+chattr -i /usr/local/bin/MMDVMHost
+chattr -i /usr/local/bin/DMRGateway
+
+
 if [ -z "$1" ]; then
   script=$(nome "$0")
   exit 0
@@ -19,6 +23,7 @@ fi
 
 if [ "$1" ]; then
   case ${1} in
+
 
 
 ([1])
@@ -169,17 +174,73 @@ elif [ "${var_i}" == "${on_off_i}" ]; then
   exit 0
 fi
 
-sudo sed -i "/\[${alvo_a}\]/{n;s/${var_a}/${on_off_a}/}" ${dest}
-sudo sed -i "/\[${alvo_b}\]/{n;s/${var_b}/${on_off_b}/}" ${dest}
-sudo sed -i "/\[${alvo_c}\]/{n;s/${var_c}/${on_off_c}/}" ${dest}
-sudo sed -i "/\[${alvo_d}\]/{n;s/${var_d}/${on_off_d}/}" ${dest}
-sudo sed -i "/\[${alvo_e}\]/{n;s/${var_e}/${on_off_e}/}" ${dest}
-sudo sed -i "/\[${alvo_e}\]/{n;s/${var_e}/${on_off_e}/}" ${dest}
-sudo sed -i "/\[${alvo_f}\]/{n;s/${var_f}/${on_off_f}/}" ${dest}
-sudo sed -i "/\[${alvo_g}\]/{n;s/${var_g}/${on_off_g}/}" ${dest}
-sudo sed -i "/\[${alvo_h}\]/{n;s/${var_h}/${on_off_h}/}" ${dest}
-sudo sed -i "/\[${alvo_i}\]/{n;s/${var_i}/${on_off_i}/}" ${dest_cross}
 
+if [ "$alvo_a" == "DMR Network 1" ]; then
+
+      sudo sed -i "/\[${alvo_a}\]/{n;s/${var_a}/${on_off_a}/}" ${dest} 
+      sudo /usr/local/bin/salvepw-1
+      sudo /usr/local/bin/salvepw-2 
+
+fi
+
+if [ "$alvo_b" == "DMR Network 2" ]; then
+
+     sudo sed -i "/\[${alvo_b}\]/{n;s/${var_b}/${on_off_b}/}" ${dest} 
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_c" = "DMR Network 3" ]; then
+
+     sudo sed -i "/\[${alvo_c}\]/{n;s/${var_c}/${on_off_c}/}" ${dest}
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_d" = "DMR Network 4" ]; then
+
+     sudo sed -i "/\[${alvo_d}\]/{n;s/${var_d}/${on_off_d}/}" ${dest}
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_e" = "DMR Network 5" ]; then
+
+     sudo sed -i "/\[${alvo_e}\]/{n;s/${var_e}/${on_off_e}/}" ${dest}
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_f" = "DMR Network 6" ]; then
+
+     sudo sed -i "/\[${alvo_f}\]/{n;s/${var_f}/${on_off_f}/}" ${dest}
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_g" = "XLX Network" ]; then
+
+     sudo sed -i "/\[${alvo_g}\]/{n;s/${var_g}/${on_off_g}/}" ${dest}
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+if [ "$alvo_g" = "Dynamic TG Control" ]; then
+
+     sudo sed -i "/\[${alvo_h}\]/{n;s/${var_h}/${on_off_h}/}" ${dest} 
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+  
+if [ "$alvo_i" = "Enabled" ]; then
+
+     sudo sed -i "/\[${alvo_i}\]/{n;s/${var_i}/${on_off_i}/}" ${dest_cross} 
+     sudo /usr/local/bin/salvepw-1
+     sudo /usr/local/bin/salvepw-2
+fi
+
+chattr +i /usr/local/bin/MMDVMHost
+chattr +i /usr/local/bin/DMRGateway
 
 sudo systemctl restart mmdvmhost
 sudo systemctl restart dmrgateway
