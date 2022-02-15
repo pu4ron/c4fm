@@ -2,7 +2,7 @@
 
 ***O 'pivoicebrasil' é um conjunto de ferramentas DMR e C4FM cuja a função é ativar, automatizar e possibilitar o uso dos diversos recursos do pi-star. Por exemplo, uso de dg-id(s) por equipamentos DMR em modo cross-over (DMR2YSF), ativar e desativar redes DMR e modos via rádio e tantas outras funções... Vale lembrar também os diversos tipos de controles que as ferramentas disponibilizam aos usuários via rádio e aplicativo (app) para  gerencia do pi-star.***
  
-# Novo! (12.02.2022) Adicionada a ferramenta de escolha entre RadioID ou QRZ.com para consulta no pi-star. "Expert/Tools:CSS Tool"
+# Novo! (12.02.2022) Lookup para escolha de servidores de consulta: QRZ.com ou RadioID. "Expert/Tools:CSS Tool"
 
 ![F1](https://user-images.githubusercontent.com/40077152/153916581-1085a86c-1f10-4cf0-b69f-63b5128bc332.png)
 
