@@ -11,13 +11,13 @@
 
 * -> 1.0 - Faça backup do seu pi-star.
 * -> 1.1 - Não continue sem atualizar seu pi-star (UPDATE).
-* -> 1.2 - Ative "DMR2YSF".
+* -> 1.2 - Ative o modo "DMR2YSF".
 * -> 1.3 - Em "Configuração do Sistema Yaesu Fusion" Selecione um servidor com suporte DG-ID. (Exemplo: YSF72401-BR-C4FM-Brasil-YCS724).
 * -> 1.4 - Em "Configuração do firewall" ative o SSH.
 
 # Info:
 
-* Prioridade para versões mais atuais do pi-star. 
+* Prioridade para versões atuais do pi-star. 
 * Servidor de referência em cross-mode(DMR2YSF): "YSF72401-BR-C4FM-Brasil-YCS724" (Default). Painel: http://ycs724.amrase.org.br/ycs/
 * Outros servidores podem ser utilizados pelo usuário, com ou sem suporte a dg-id.
 * Suporte a servidores YSF.
